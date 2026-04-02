@@ -52,6 +52,15 @@
     letter-spacing: 0.04em;
     color: var(--white);
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .nav-logo img {
+    height: 24px;
+    width: auto;
+    display: block;
   }
 
   .nav-logo span { color: var(--accent); }
@@ -214,13 +223,11 @@
     aspect-ratio: 16/10;
     object-fit: cover;
     display: block;
-    transition: transform 0.5s ease, filter 0.3s ease;
-    filter: grayscale(20%);
+    transition: transform 0.5s ease;
   }
 
   .work-item:hover img {
     transform: scale(1.03);
-    filter: grayscale(0%);
   }
 
   .work-item-info {
@@ -312,7 +319,7 @@
 
   .case-study-overview p {
     font-size: 1rem;
-    color: rgba(245,243,239,0.75);
+    color: #1f1f1f;
     line-height: 1.8;
   }
 
@@ -435,12 +442,10 @@
     aspect-ratio: 4/3;
     object-fit: cover;
     display: block;
-    filter: grayscale(40%);
-    transition: filter 0.3s, transform 0.4s;
+    transition: transform 0.4s;
   }
 
   .more-item:hover img {
-    filter: grayscale(0%);
     transform: scale(1.04);
   }
 
@@ -697,7 +702,10 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Kevin Todd<span>///</span></a>
+  <a href="#" class="nav-logo">
+    <img src="logo.png" alt="Kevin Todd logo" />
+    Kevin Todd<span>///</span>
+  </a>
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
     <li><a href="#case-study">Case Study</a></li>
@@ -746,14 +754,14 @@
       <span class="work-item-tag">Branding / Print</span>
     </div>
   </a>
-  <div class="work-item reveal reveal-delay-1">
+  <a href="xbox.html" class="work-item reveal reveal-delay-1" style="text-decoration:none; color:inherit;">
     <div class="work-item-overlay"></div>
     <img src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/Xbox_Annimation_2_gif.gif" alt="Xbox Dashboard" />
     <div class="work-item-info">
       <span class="work-item-title">Xbox Dashboard</span>
       <span class="work-item-tag">UX / Motion</span>
     </div>
-  </div>
+  </a>
   <div class="work-item reveal reveal-delay-1">
     <div class="work-item-overlay"></div>
     <img src="https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_710,h_959,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png" alt="Samsung" />
@@ -832,6 +840,9 @@
     <div class="skill-pill">Motion Design</div>
     <div class="skill-pill">Content Strategy</div>
     <div class="skill-pill">HTML / CSS</div>
+    <div class="skill-pill">Vibe Coding</div>
+    <div class="skill-pill">AI</div>
+    <div class="skill-pill">UX / UI Design</div>
     <div class="skill-pill">Figma</div>
     <div class="skill-pill">Adobe CC</div>
     <div class="skill-pill">UX Research</div>
@@ -840,6 +851,9 @@
     <div class="skill-pill">Motion Design</div>
     <div class="skill-pill">Content Strategy</div>
     <div class="skill-pill">HTML / CSS</div>
+    <div class="skill-pill">Vibe Coding</div>
+    <div class="skill-pill">AI</div>
+    <div class="skill-pill">UX / UI Design</div>
   </div>
 </div>
 
