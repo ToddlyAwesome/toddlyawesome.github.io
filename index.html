@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kevin Todd /// Visual Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #ffffff;
+    --white: #1f1f1f;
+    --accent: #1f1f1f;
+    --mid: #f0eeea;
+    --muted: #777;
+    --border: rgba(0,0,0,0.1);
+    --font-sans: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    max-width: 900px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  .hero-scroll {
+    margin-top: 3rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--muted);
+  }
+
+  .hero-grid-line {
+    position: absolute;
+    top: 0; right: 3rem;
+    width: 1px;
+    height: 100%;
+    background: var(--border);
+  }
+
+  /* ABOUT STRIP */
+  .about-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-cell {
+    padding: 3rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .about-cell:last-child { border-right: none; }
+
+  .about-cell-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .about-cell p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 4rem 3rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .section-header .section-count {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* WORK GRID */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .work-item {
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .work-item:nth-child(even) { border-right: none; }
+
+  .work-item img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease, filter 0.3s ease;
+    filter: grayscale(20%);
+  }
+
+  .work-item:hover img {
+    transform: scale(1.03);
+    filter: grayscale(0%);
+  }
+
+  .work-item-info {
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+  }
+
+  .work-item-title {
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .work-item-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* FEATURED CASE STUDY — PS5 */
+  .case-study {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .case-study-header {
+    padding: 5rem 3rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .case-study-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #1f1f1f;
+    background: #e8ff4d;
+    display: inline-block;
+    padding: 4px 10px;
+    margin-bottom: 1.25rem;
+  }
+
+  .case-study-header h2 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  .case-study-header h2 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .case-study-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .meta-item-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .meta-item-value {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .case-study-overview {
+    padding: 3rem;
+    max-width: 680px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .case-study-overview p {
+    font-size: 1rem;
+    color: rgba(245,243,239,0.75);
+    line-height: 1.8;
+  }
+
+  /* PROTOTYPE EMBED */
+  .prototype-wrapper {
+    padding: 3rem;
+    background: #f5f4f0;
+  }
+
+  .prototype-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .prototype-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .prototype-frame-outer {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    background: #000;
+  }
+
+  .prototype-frame-bar {
+    height: 36px;
+    background: #e8e6e1;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 1rem;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #febc2e; }
+  .dot-g { background: #28c840; }
+
+  .prototype-frame-bar-url {
+    flex: 1;
+    margin-left: 0.75rem;
+    height: 22px;
+    background: #d8d5cf;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    padding: 0 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .prototype-frame-outer iframe {
+    display: block;
+    width: 100%;
+    height: 520px;
+    border: none;
+  }
+
+  /* SKILLS STRIP */
+  .skills-strip {
+    display: flex;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .skill-pill {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 1rem 1.5rem;
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .skill-pill:hover {
+    color: #ffffff;
+    background: #1f1f1f;
+  }
+
+  /* MORE PROJECTS */
+  .more-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border);
+  }
+
+  .more-item {
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .more-item:nth-child(3n) { border-right: none; }
+
+  .more-item img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(40%);
+    transition: filter 0.3s, transform 0.4s;
+  }
+
+  .more-item:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.04);
+  }
+
+  .more-item-info {
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .more-item-title {
+    font-size: 0.85rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+  }
+
+  .more-item-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 5rem 3rem 3rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-tagline {
+    font-size: clamp(3rem, 10vw, 9rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+
+  .footer-tagline em {
+    font-style: normal;
+    color: #89c400;
+  }
+
+  .footer-meta {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .footer-right a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+
+  .footer-right a:hover { color: var(--white); }
+
+  .footer-bottom {
+    padding: 1.25rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-bottom p {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+
+  .footer-nav {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-nav a {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-nav a:hover { color: var(--white); }
+
+  /* ── CURSOR ── */
+  .cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.25s ease, height 0.25s ease;
+    mix-blend-mode: normal;
+    background: #1f1f1f;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(31,31,31,0.35);
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+  }
+  .cursor.is-hovering { width: 20px; height: 20px; }
+  .cursor-ring.is-hovering { width: 64px; height: 64px; opacity: 0.4; }
+
+  /* ── KEYFRAMES ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @keyframes accentPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  @keyframes navSlideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes lineGrowX {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+  @keyframes lineGrowY {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+  }
+
+  /* ── NAV ── */
+  nav { animation: navSlideDown 0.6s cubic-bezier(0.22,1,0.36,1) both; }
+
+  /* ── HERO STAGGER ── */
+  .hero-eyebrow {
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;
+  }
+  .hero h1 {
+    opacity: 0;
+    animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.4s forwards;
+  }
+  .hero h1 em { color: #89c400; animation: accentPulse 3.5s ease-in-out 1.6s infinite; }
+  .hero-sub {
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.65s forwards;
+  }
+  .hero-scroll {
+    opacity: 0;
+    animation: fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.85s forwards;
+  }
+  .hero-grid-line {
+    transform: scaleY(0);
+    transform-origin: top;
+    animation: lineGrowY 1.2s cubic-bezier(0.22,1,0.36,1) 0.3s forwards;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ── WORK ITEMS ── */
+  .work-item-overlay {
+    position: absolute;
+    inset: 0 0 57px 0;
+    background: linear-gradient(to top, rgba(31,31,31,0.04) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .work-item:hover .work-item-overlay { opacity: 1; }
+  .work-item-info { transition: background 0.3s ease; }
+  .work-item:hover .work-item-info { background: rgba(31,31,31,0.03); }
+  .work-item:hover .work-item-title { color: var(--accent); transition: color 0.3s; }
+
+  /* ── SECTION HEADER ACCENT LINE ── */
+  .section-header { position: relative; }
+  .section-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0;
+    height: 1px; width: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
+  }
+  .section-header.line-visible::after { transform: scaleX(1); }
+
+  /* ── SKILLS MARQUEE ── */
+  .skills-strip { overflow: hidden; display: block; padding: 0; }
+  .skills-track {
+    display: inline-flex;
+    animation: marquee 20s linear infinite;
+  }
+  .skills-strip:hover .skills-track { animation-play-state: paused; }
+
+  /* ── HOVER ACCENTS ── */
+  .more-item:hover .more-item-title { color: var(--accent); transition: color 0.3s; }
+  .case-study-badge { transition: letter-spacing 0.3s ease; }
+  .case-study-badge:hover { letter-spacing: 0.22em; }
+  .footer-tagline em { animation: accentPulse 4s ease-in-out 1s infinite; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero { padding: 0 1.5rem 4rem; }
+    .about-strip { grid-template-columns: 1fr; }
+    .about-cell { border-right: none; border-bottom: 1px solid var(--border); }
+    .work-grid { grid-template-columns: 1fr; }
+    .work-item { border-right: none; }
+    .case-study-header { grid-template-columns: 1fr; gap: 2rem; }
+    .prototype-wrapper { padding: 1.5rem; }
+    .prototype-frame-outer iframe { height: 280px; }
+    .more-grid { grid-template-columns: 1fr; }
+    .more-item { border-right: none; }
+    .section-header, .case-study-overview, .footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    footer { padding: 3rem 1.5rem 2rem; }
+    .footer-meta { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .footer-right { align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Kevin Todd<span>///</span></a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#case-study">Case Study</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="mailto:kevintoddjohnsonjr@gmail.com">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-line"></div>
+  <p class="hero-eyebrow">Visual Designer &amp; UX — Los Angeles</p>
+  <h1>Hello,<br />I'm Kevin.<br /><em>Let's build.</em></h1>
+  <p class="hero-sub">Award-winning visual designer with 7+ years crafting digital experiences for NASA, Samsung, the NBA, and Xbox. I make beautiful things with a purpose.</p>
+  <div class="hero-scroll">Scroll to explore</div>
+</section>
+
+<!-- ABOUT STRIP -->
+<section class="about-strip" id="about">
+  <div class="about-cell reveal">
+    <p class="about-cell-label">Branding</p>
+    <p>I love to tell stories, and that's exactly what branding is — a story of a company, enterprise, or individual that wants to share their passion with the world. Over 7 years and counting.</p>
+  </div>
+  <div class="about-cell reveal reveal-delay-1">
+    <p class="about-cell-label">UX / UI</p>
+    <p>Having worked on small teams, my role has had to be ubiquitous. I apply UX best practices to make products user-centric. I always ask: "Is this satisfying for anyone to use?"</p>
+  </div>
+  <div class="about-cell reveal reveal-delay-2">
+    <p class="about-cell-label">Content Creation</p>
+    <p>Starting my career in digital marketing gave me a marketer's lens. My designs don't just look beautiful — they're built to perform and engineered for engagement.</p>
+  </div>
+</section>
+
+<!-- WORK -->
+<div class="section-header" id="work">
+  <h2>Selected Work</h2>
+  <span class="section-count">04 Projects</span>
+</div>
+
+<div class="work-grid">
+  <div class="work-item reveal">
+    <div class="work-item-overlay"></div>
+    <img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_980,h_1198,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%208.png" alt="NASA HCOP" />
+    <div class="work-item-info">
+      <span class="work-item-title">NASA HCOP</span>
+      <span class="work-item-tag">Branding / Print</span>
+    </div>
+  </div>
+  <div class="work-item reveal reveal-delay-1">
+    <div class="work-item-overlay"></div>
+    <img src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/Xbox_Annimation_2_gif.gif" alt="Xbox Dashboard" />
+    <div class="work-item-info">
+      <span class="work-item-title">Xbox Dashboard</span>
+      <span class="work-item-tag">UX / Motion</span>
+    </div>
+  </div>
+  <div class="work-item reveal reveal-delay-1">
+    <div class="work-item-overlay"></div>
+    <img src="https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_710,h_959,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png" alt="Samsung" />
+    <div class="work-item-info">
+      <span class="work-item-title">Samsung Visual Design</span>
+      <span class="work-item-tag">UX / Visual</span>
+    </div>
+  </div>
+  <div class="work-item reveal reveal-delay-2">
+    <div class="work-item-overlay"></div>
+    <img src="https://static.wixstatic.com/media/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png" alt="NBA Rebrands" />
+    <div class="work-item-info">
+      <span class="work-item-title">NBA Team Rebrands</span>
+      <span class="work-item-tag">Branding / Identity</span>
+    </div>
+  </div>
+</div>
+
+<!-- PS5 CASE STUDY -->
+<section class="case-study" id="case-study">
+  <div class="case-study-header">
+    <div>
+      <span class="case-study-badge">Featured Case Study</span>
+      <h2>PS5 Dashboard<br /><em>Redesign</em></h2>
+    </div>
+    <div class="case-study-meta">
+      <div>
+        <p class="meta-item-label">Role</p>
+        <p class="meta-item-value">UX Designer / Visual Designer</p>
+      </div>
+      <div>
+        <p class="meta-item-label">Type</p>
+        <p class="meta-item-value">Product Redesign</p>
+      </div>
+      <div>
+        <p class="meta-item-label">Tools</p>
+        <p class="meta-item-value">Figma, Prototyping</p>
+      </div>
+      <div>
+        <p class="meta-item-label">Platform</p>
+        <p class="meta-item-value">PlayStation 5</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-study-overview">
+    <p>A conceptual redesign of the PlayStation 5 dashboard experience — reimagining navigation, game discovery, and UI hierarchy through a lens of performance and immersion. This prototype explores how the PS5 interface could better surface personalized content while preserving the bold visual language Sony established at launch.</p>
+  </div>
+
+  <div class="prototype-wrapper">
+    <div class="prototype-label">Interactive Prototype</div>
+    <div class="prototype-frame-outer">
+      <div class="prototype-frame-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <div class="prototype-frame-bar-url">figma.com — PS5 Dashboard Redesign</div>
+      </div>
+      <iframe
+        src="https://embed.figma.com/proto/2NKRVGqDpSYJLB5FWQWMmC/PS5-Dashboard-Redesign?node-id=301-412&p=f&viewport=1383%2C443%2C0.09&scaling=contain&content-scaling=fixed&starting-point-node-id=301%3A412&page-id=268%3A47&embed-host=share"
+        allowfullscreen
+        title="PS5 Dashboard Redesign Prototype"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS MARQUEE -->
+<div class="skills-strip">
+  <div class="skills-track">
+    <div class="skill-pill">Figma</div>
+    <div class="skill-pill">Adobe CC</div>
+    <div class="skill-pill">UX Research</div>
+    <div class="skill-pill">Prototyping</div>
+    <div class="skill-pill">Brand Identity</div>
+    <div class="skill-pill">Motion Design</div>
+    <div class="skill-pill">Content Strategy</div>
+    <div class="skill-pill">HTML / CSS</div>
+    <div class="skill-pill">Figma</div>
+    <div class="skill-pill">Adobe CC</div>
+    <div class="skill-pill">UX Research</div>
+    <div class="skill-pill">Prototyping</div>
+    <div class="skill-pill">Brand Identity</div>
+    <div class="skill-pill">Motion Design</div>
+    <div class="skill-pill">Content Strategy</div>
+    <div class="skill-pill">HTML / CSS</div>
+  </div>
+</div>
+
+<!-- MORE PROJECTS -->
+<div class="section-header">
+  <h2>More Projects</h2>
+  <span class="section-count">06 Projects</span>
+</div>
+
+<div class="more-grid">
+  <div class="more-item">
+    <img src="https://static.wixstatic.com/media/eb26e1_932f172ce94647d8aa8d32f2cee276ba~mv2.png/v1/fill/w_980,h_653,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Summer%20Strengthening%20Campaign%202022_mockup.png" alt="DPRR" />
+    <div class="more-item-info">
+      <p class="more-item-title">DPRR</p>
+      <p class="more-item-desc">Mental health resources and lifestyle readiness for servicemembers and their families.</p>
+    </div>
+  </div>
+  <div class="more-item">
+    <img src="https://static.wixstatic.com/media/eb26e1_9c203b5aa2534dddb4648d62c11aa7c8~mv2.png/v1/fill/w_980,h_654,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Initiated-cover.png" alt="Passion Projects" />
+    <div class="more-item-info">
+      <p class="more-item-title">Passion Projects</p>
+      <p class="more-item-desc">Apparel design, video production, and personal artwork done in my own time.</p>
+    </div>
+  </div>
+  <div class="more-item">
+    <img src="https://static.wixstatic.com/media/eb26e1_bf31eac011ca455eb6950b5aeb42eacd~mv2.png/v1/fill/w_980,h_551,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/FB_Cover.png" alt="GeekLife" />
+    <div class="more-item-info">
+      <p class="more-item-title">GeekLife</p>
+      <p class="more-item-desc">Live stream and podcast centered around nerd culture. Host, producer, and designer.</p>
+    </div>
+  </div>
+  <div class="more-item">
+    <img src="https://static.wixstatic.com/media/eb26e1_33a71434827f4d38b1a5e2b157b4b324~mv2.png/v1/crop/x_0,y_801,w_10722,h_7473/fill/w_980,h_683,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/CRM%20Cannes-Booth_cropped.png" alt="Unbabel" />
+    <div class="more-item-info">
+      <p class="more-item-title">Unbabel</p>
+      <p class="more-item-desc">Brand and experiential design for an AI-powered translation platform.</p>
+    </div>
+  </div>
+  <div class="more-item">
+    <img src="https://static.wixstatic.com/media/eb26e1_5531ce97f2e74ca38fb3c5a31708fd8b~mv2.png/v1/fill/w_980,h_637,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/FDA-Brand%20Guide_mockup.png" alt="FDA" />
+    <div class="more-item-info">
+      <p class="more-item-title">FDA</p>
+      <p class="more-item-desc">Brand guide and visual system design for a federal regulatory agency.</p>
+    </div>
+  </div>
+  <div class="more-item">
+    <img src="https://static.wixstatic.com/media/eb26e1_41006347467243a48be3a655498510d4~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/NHIGTMS.jpg" alt="Music" />
+    <div class="more-item-info">
+      <p class="more-item-title">Music</p>
+      <p class="more-item-desc">Producer since high school. Most recent project available on Spotify.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-tagline">Just Make It <em>Pop.</em></p>
+  <div class="footer-meta">
+    <p style="font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em;">© 2025 Kevin Todd</p>
+    <div class="footer-right">
+      <a href="mailto:kevintoddjohnsonjr@gmail.com">kevintoddjohnsonjr@gmail.com</a>
+      <a href="tel:3109039016">310.903.9016</a>
+      <a href="https://www.instagram.com/kevintoddjr" target="_blank">Instagram</a>
+      <a href="https://www.linkedin.com/in/kevintoddjohnsonjr" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let cx = window.innerWidth/2, cy = window.innerHeight/2;
+  let rx = cx, ry = cy;
+
+  document.addEventListener('mousemove', e => {
+    cx = e.clientX; cy = e.clientY;
+    cursor.style.left = cx + 'px';
+    cursor.style.top  = cy + 'px';
+  });
+
+  function animateRing() {
+    rx += (cx - rx) * 0.12;
+    ry += (cy - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, .work-item, .more-item, .skill-pill').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.classList.add('is-hovering'); ring.classList.add('is-hovering'); });
+    el.addEventListener('mouseleave', () => { cursor.classList.remove('is-hovering'); ring.classList.remove('is-hovering'); });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const sectionHeaders = document.querySelectorAll('.section-header');
+
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+
+  const lineObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('line-visible'); lineObs.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+
+  revealEls.forEach(el => revealObs.observe(el));
+  sectionHeaders.forEach(el => lineObs.observe(el));
+
+  // Wrap more-items and case study sections in reveal
+  document.querySelectorAll('.more-item, .case-study-header, .case-study-overview, .prototype-wrapper, footer').forEach((el, i) => {
+    el.classList.add('reveal');
+    if (i % 3 === 1) el.classList.add('reveal-delay-1');
+    if (i % 3 === 2) el.classList.add('reveal-delay-2');
+    revealObs.observe(el);
+  });
+</script>
+</body>
+</html>
