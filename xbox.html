@@ -126,12 +126,14 @@
     to   { opacity: 1; transform: scale(1); }
   }
 
-  /* Xbox green glow */
   .hero-glow {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 50% 60%, rgba(16,124,16,0.25) 0%, transparent 70%);
+    background:
+      linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.1) 100%),
+      radial-gradient(ellipse at 50% 60%, rgba(16,124,16,0.2) 0%, transparent 70%);
     pointer-events: none;
+    z-index: 1;
   }
 
   .hero-content {
@@ -141,8 +143,6 @@
     color: #fff;
     padding: 0 2rem;
   }
-
-  .hero-eyebrow {
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.2em;
@@ -190,6 +190,7 @@
     gap: 0.5rem;
     opacity: 0;
     animation: fadeUp 0.6s ease 1.4s forwards;
+    z-index: 2;
   }
 
   .hero-scroll-hint span {
@@ -587,7 +588,7 @@
 <section class="hero" id="hero">
   <img
     class="hero-bg-gif"
-    src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_1450,h_816,q_90,enc_avif,quality_auto/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif"
+    src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_800,h_450,q_90,enc_avif,quality_auto/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif"
     alt="Xbox Dashboard Animation"
   />
   <div class="hero-glow"></div>
@@ -631,7 +632,7 @@
 <div class="story-section">
   <div class="story-sticky">
     <img
-      src="https://static.wixstatic.com/media/eb26e1_c709aa72396740f8a453286432ca3fba~mv2.png/v1/fill/w_1450,h_816,q_90,enc_avif,quality_auto/eb26e1_c709aa72396740f8a453286432ca3fba~mv2.png"
+      src="https://static.wixstatic.com/media/eb26e1_c709aa72396740f8a453286432ca3fba~mv2.png/v1/fill/w_800,h_450,q_90,enc_avif,quality_auto/eb26e1_c709aa72396740f8a453286432ca3fba~mv2.png"
       alt="Xbox Dashboard Research"
     />
   </div>
@@ -646,7 +647,7 @@
 <!-- FULL BLEED -->
 <div class="full-bleed">
   <img
-    src="https://static.wixstatic.com/media/eb26e1_25f84cbd2aa94d4a8c6fdc0795590559~mv2.png/v1/fill/w_1450,h_816,q_90,enc_avif,quality_auto/eb26e1_25f84cbd2aa94d4a8c6fdc0795590559~mv2.png"
+    src="https://static.wixstatic.com/media/eb26e1_25f84cbd2aa94d4a8c6fdc0795590559~mv2.png/v1/fill/w_800,h_450,q_90,enc_avif,quality_auto/eb26e1_25f84cbd2aa94d4a8c6fdc0795590559~mv2.png"
     alt="Xbox Dashboard Full Spread"
   />
 </div>
@@ -655,7 +656,7 @@
 <div class="story-section reverse">
   <div class="story-sticky">
     <img
-      src="https://static.wixstatic.com/media/eb26e1_68dcd571597a49cfa726ab1d3fff6fcd~mv2.gif/v1/fill/w_540,h_304,q_90,enc_avif,quality_auto/eb26e1_68dcd571597a49cfa726ab1d3fff6fcd~mv2.gif"
+      src="https://static.wixstatic.com/media/eb26e1_68dcd571597a49cfa726ab1d3fff6fcd~mv2.gif/v1/fill/w_400,h_225,q_90,enc_avif,quality_auto/eb26e1_68dcd571597a49cfa726ab1d3fff6fcd~mv2.gif"
       alt="Xbox Dashboard Motion"
     />
   </div>
@@ -692,7 +693,7 @@
 <div class="story-section">
   <div class="story-sticky">
     <img
-      src="https://static.wixstatic.com/media/eb26e1_f9f72064251b40fc959aaa7ec3685ad0~mv2.png/v1/fill/w_1450,h_816,q_90,enc_avif,quality_auto/eb26e1_f9f72064251b40fc959aaa7ec3685ad0~mv2.png"
+      src="https://static.wixstatic.com/media/eb26e1_f9f72064251b40fc959aaa7ec3685ad0~mv2.png/v1/fill/w_800,h_450,q_90,enc_avif,quality_auto/eb26e1_f9f72064251b40fc959aaa7ec3685ad0~mv2.png"
       alt="Xbox Dashboard Execution"
     />
   </div>
@@ -729,7 +730,7 @@
 <div class="gif-showcase">
   <div class="gif-item full-width">
     <img
-      src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_1450,h_816,q_90,enc_avif,quality_auto/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif"
+      src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_800,h_450,q_90,enc_avif,quality_auto/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif"
       alt="Xbox Dashboard Final Animation"
     />
   </div>
