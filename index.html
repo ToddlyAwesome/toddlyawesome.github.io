@@ -229,20 +229,18 @@
     background: #f5f4f0;
   }
 
-  .featured-full {
-    grid-column: 1 / -1;
-  }
+  .featured-full { grid-column: 1 / -1; }
 
-  .featured-img-wrap {
-    overflow: hidden;
-  }
+  .featured-img-wrap { overflow: hidden; }
 
   .featured-portrait .featured-img-wrap {
-    aspect-ratio: 4/5;
+    aspect-ratio: 3/4;
+    max-height: 400px;
   }
 
   .featured-landscape .featured-img-wrap {
     aspect-ratio: 16/9;
+    max-height: 260px;
   }
 
   .featured-item .featured-img-wrap img {
@@ -253,9 +251,73 @@
     transition: transform 0.5s ease;
   }
 
-  .featured-item:hover .featured-img-wrap img {
-    transform: scale(1.03);
+  .featured-item:hover .featured-img-wrap img { transform: scale(1.03); }
+
+  /* NBA CAROUSEL */
+  .nba-carousel {
+    position: relative;
+    aspect-ratio: 16/9;
+    max-height: 320px;
+    overflow: hidden;
   }
+
+  .nba-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+  }
+
+  .nba-slide {
+    min-width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+  }
+
+  .nba-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .nba-nav {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+  }
+
+  .nba-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    border: none; padding: 0;
+  }
+
+  .nba-dot.active { background: #c6f91f; transform: scale(1.4); }
+
+  .nba-arrow {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    width: 32px; height: 32px;
+    background: rgba(20,17,21,0.55);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    color: #fff; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 2;
+    transition: background 0.2s, color 0.2s;
+    padding: 0;
+  }
+
+  .nba-arrow:hover { background: #c6f91f; color: #141115; }
+  .nba-arrow-prev { left: 0.75rem; }
+  .nba-arrow-next { right: 0.75rem; }
 
   .work-item-info {
     padding: 1.5rem 2rem;
@@ -384,7 +446,7 @@
     border-radius: 4px;
     overflow: hidden;
     position: relative;
-    background: #000;
+    background: #141115;
   }
 
   .prototype-frame-bar {
@@ -424,7 +486,7 @@
   .prototype-frame-outer iframe {
     display: block;
     width: 100%;
-    height: 520px;
+    height: 640px;
     border: none;
   }
 
@@ -814,11 +876,23 @@
     </div>
   </div>
 
-  <!-- Row 2: NBA landscape full width -->
-  <div class="featured-item featured-landscape featured-full reveal" style="margin-top: 3rem;">
-    <div class="work-item-overlay"></div>
-    <div class="featured-img-wrap">
-      <img src="https://static.wixstatic.com/media/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png" alt="NBA Rebrands" />
+  <!-- Row 2: NBA carousel full width -->
+  <div class="featured-item featured-full reveal" style="margin-top: 1.5rem;">
+    <div class="nba-carousel" id="nbaCarousel">
+      <div class="nba-track" id="nbaTrack">
+        <div class="nba-slide">
+          <img src="https://static.wixstatic.com/media/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png" alt="NBA Rebrands 1" />
+        </div>
+        <div class="nba-slide">
+          <img src="https://static.wixstatic.com/media/eb26e1_25286dc701ee482aa8fb863626734799~mv2.png/v1/fill/w_980,h_1198,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%208.png" alt="NBA Rebrands 2" />
+        </div>
+        <div class="nba-slide">
+          <img src="https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_710,h_959,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png" alt="NBA Rebrands 3" />
+        </div>
+      </div>
+      <button class="nba-arrow nba-arrow-prev" id="nbaPrev">&#8592;</button>
+      <button class="nba-arrow nba-arrow-next" id="nbaNext">&#8594;</button>
+      <div class="nba-nav" id="nbaDots"></div>
     </div>
     <div class="work-item-info">
       <span class="work-item-title">NBA Team Rebrands</span>
@@ -869,7 +943,7 @@
         <div class="prototype-frame-bar-url">figma.com — PS5 Dashboard Redesign</div>
       </div>
       <iframe
-        src="https://embed.figma.com/proto/2NKRVGqDpSYJLB5FWQWMmC/PS5-Dashboard-Redesign?node-id=301-412&p=f&viewport=1383%2C443%2C0.09&scaling=contain&content-scaling=fixed&starting-point-node-id=301%3A412&page-id=268%3A47&embed-host=share"
+        src="https://embed.figma.com/proto/2NKRVGqDpSYJLB5FWQWMmC/PS5-Dashboard-Redesign?node-id=301-412&p=f&viewport=1383%2C443%2C0.09&scaling=scale-down&content-scaling=fixed&starting-point-node-id=301%3A412&page-id=268%3A47&embed-host=share"
         allowfullscreen
         title="PS5 Dashboard Redesign Prototype"
       ></iframe>
@@ -1016,7 +1090,38 @@
   revealEls.forEach(el => revealObs.observe(el));
   sectionHeaders.forEach(el => lineObs.observe(el));
 
-  // Wrap more-items and case study sections in reveal
+  // NBA Carousel
+  const track = document.getElementById('nbaTrack');
+  const dotsContainer = document.getElementById('nbaDots');
+  const slides = document.querySelectorAll('.nba-slide');
+  let current = 0;
+  let autoTimer;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'nba-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(n) {
+    current = (n + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    document.querySelectorAll('.nba-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    resetAuto();
+  }
+
+  function resetAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo(current + 1), 4000);
+  }
+
+  document.getElementById('nbaPrev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nbaNext').addEventListener('click', () => goTo(current + 1));
+  resetAuto();
+
+  document.getElementById('nbaCarousel').addEventListener('mouseenter', () => clearInterval(autoTimer));
+  document.getElementById('nbaCarousel').addEventListener('mouseleave', resetAuto);
   document.querySelectorAll('.more-item, .case-study-header, .case-study-overview, .prototype-wrapper, footer').forEach((el, i) => {
     el.classList.add('reveal');
     if (i % 3 === 1) el.classList.add('reveal-delay-1');
