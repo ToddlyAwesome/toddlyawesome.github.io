@@ -58,7 +58,7 @@
   }
 
   .nav-logo img {
-    height: 18px;
+    height: 24px;
     width: auto;
     display: block;
   }
@@ -202,31 +202,55 @@
     letter-spacing: 0.1em;
   }
 
-  /* WORK GRID */
-  .work-grid {
+  /* FEATURED GRID */
+  .featured-grid {
+    padding: 3rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
   }
 
-  .work-item {
-    border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+  .featured-right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 4rem;
+  }
+
+  .featured-item {
+    border: 1px solid var(--border);
     overflow: hidden;
     position: relative;
     cursor: pointer;
+    background: #f9f8f5;
   }
 
-  .work-item:nth-child(even) { border-right: none; }
+  .featured-full {
+    grid-column: 1 / -1;
+  }
 
-  .work-item img {
+  .featured-img-wrap {
+    overflow: hidden;
+  }
+
+  .featured-portrait .featured-img-wrap {
+    aspect-ratio: 4/5;
+  }
+
+  .featured-landscape .featured-img-wrap {
+    aspect-ratio: 16/9;
+  }
+
+  .featured-item .featured-img-wrap img {
     width: 100%;
-    aspect-ratio: 16/10;
+    height: 100%;
     object-fit: cover;
     display: block;
     transition: transform 0.5s ease;
   }
 
-  .work-item:hover img {
+  .featured-item:hover .featured-img-wrap img {
     transform: scale(1.03);
   }
 
@@ -236,7 +260,11 @@
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid var(--border);
+    transition: background 0.3s ease;
   }
+
+  .featured-item:hover .work-item-info { background: rgba(31,31,31,0.03); }
+  .featured-item:hover .work-item-title { color: var(--accent); transition: color 0.3s; }
 
   .work-item-title {
     font-size: 0.9rem;
@@ -637,7 +665,6 @@
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
 
-  /* ── WORK ITEMS ── */
   .work-item-overlay {
     position: absolute;
     inset: 0 0 57px 0;
@@ -645,11 +672,9 @@
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
+    z-index: 1;
   }
-  .work-item:hover .work-item-overlay { opacity: 1; }
-  .work-item-info { transition: background 0.3s ease; }
-  .work-item:hover .work-item-info { background: rgba(31,31,31,0.03); }
-  .work-item:hover .work-item-title { color: var(--accent); transition: color 0.3s; }
+  .featured-item:hover .work-item-overlay { opacity: 1; }
 
   /* ── SECTION HEADER ACCENT LINE ── */
   .section-header { position: relative; }
@@ -684,8 +709,10 @@
     .hero { padding: 0 1.5rem 4rem; }
     .about-strip { grid-template-columns: 1fr; }
     .about-cell { border-right: none; border-bottom: 1px solid var(--border); }
-    .work-grid { grid-template-columns: 1fr; }
-    .work-item { border-right: none; }
+    .featured-grid { grid-template-columns: 1fr; padding: 1.5rem; }
+    .featured-right-col { padding-top: 0; }
+    .featured-full { grid-column: 1; }
+    .featured-item { margin-top: 0 !important; }
     .case-study-header { grid-template-columns: 1fr; gap: 2rem; }
     .prototype-wrapper { padding: 1.5rem; }
     .prototype-frame-outer iframe { height: 280px; }
@@ -739,45 +766,62 @@
   </div>
 </section>
 
-<!-- WORK -->
+<!-- FEATURED PROJECTS -->
 <div class="section-header" id="work">
-  <h2>Selected Work</h2>
+  <h2>Featured Projects</h2>
   <span class="section-count">04 Projects</span>
 </div>
 
-<div class="work-grid">
-  <a href="nasa-hcop.html" class="work-item reveal" style="text-decoration:none; color:inherit;">
+<div class="featured-grid">
+
+  <!-- Row 1: HCOP portrait left, Xbox landscape top-right -->
+  <a href="nasa-hcop.html" class="featured-item featured-portrait reveal" style="text-decoration:none; color:inherit;">
     <div class="work-item-overlay"></div>
-    <img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_980,h_1198,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%208.png" alt="NASA HCOP" />
+    <div class="featured-img-wrap">
+      <img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_980,h_1198,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%208.png" alt="NASA HCOP" />
+    </div>
     <div class="work-item-info">
       <span class="work-item-title">NASA HCOP</span>
       <span class="work-item-tag">Branding / Print</span>
     </div>
   </a>
-  <a href="xbox.html" class="work-item reveal reveal-delay-1" style="text-decoration:none; color:inherit;">
-    <div class="work-item-overlay"></div>
-    <img src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/Xbox_Annimation_2_gif.gif" alt="Xbox Dashboard" />
-    <div class="work-item-info">
-      <span class="work-item-title">Xbox Dashboard</span>
-      <span class="work-item-tag">UX / Motion</span>
-    </div>
-  </a>
-  <div class="work-item reveal reveal-delay-1">
-    <div class="work-item-overlay"></div>
-    <img src="https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_710,h_959,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png" alt="Samsung" />
-    <div class="work-item-info">
-      <span class="work-item-title">Samsung Visual Design</span>
-      <span class="work-item-tag">UX / Visual</span>
+
+  <div class="featured-right-col">
+    <a href="xbox.html" class="featured-item featured-landscape reveal reveal-delay-1" style="text-decoration:none; color:inherit;">
+      <div class="work-item-overlay"></div>
+      <div class="featured-img-wrap">
+        <img src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/Xbox_Annimation_2_gif.gif" alt="Xbox Dashboard" />
+      </div>
+      <div class="work-item-info">
+        <span class="work-item-title">Xbox Dashboard</span>
+        <span class="work-item-tag">UX / Motion</span>
+      </div>
+    </a>
+
+    <div class="featured-item featured-portrait reveal reveal-delay-2" style="margin-top: 3rem;">
+      <div class="work-item-overlay"></div>
+      <div class="featured-img-wrap">
+        <img src="https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_710,h_959,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png" alt="Samsung" />
+      </div>
+      <div class="work-item-info">
+        <span class="work-item-title">Samsung Visual Design</span>
+        <span class="work-item-tag">UX / Visual</span>
+      </div>
     </div>
   </div>
-  <div class="work-item reveal reveal-delay-2">
+
+  <!-- Row 2: NBA landscape full width -->
+  <div class="featured-item featured-landscape featured-full reveal" style="margin-top: 3rem;">
     <div class="work-item-overlay"></div>
-    <img src="https://static.wixstatic.com/media/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png" alt="NBA Rebrands" />
+    <div class="featured-img-wrap">
+      <img src="https://static.wixstatic.com/media/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png" alt="NBA Rebrands" />
+    </div>
     <div class="work-item-info">
       <span class="work-item-title">NBA Team Rebrands</span>
       <span class="work-item-tag">Branding / Identity</span>
     </div>
   </div>
+
 </div>
 
 <!-- PS5 CASE STUDY -->
