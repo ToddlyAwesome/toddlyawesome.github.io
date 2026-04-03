@@ -205,119 +205,129 @@
     letter-spacing: 0.1em;
   }
 
-  /* FEATURED GRID */
-  .featured-grid {
-    padding: 3rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    align-items: start;
+  /* ── IMAGE MARQUEE ── */
+  @keyframes imgScrollLeft {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @keyframes imgScrollRight {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
   }
 
-  .featured-right-col {
+  .img-marquee-outer {
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    background: #141115;
+    padding: 2rem 0 2.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0;
-    padding-top: 4rem;
+    gap: 1rem;
   }
 
-  .featured-item {
-    border: 1px solid var(--border);
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    background: #f5f4f0;
-  }
+  .img-marquee-outer:hover .img-marquee-track { animation-play-state: paused; }
 
-  .featured-full { grid-column: 1 / -1; }
-
-  .featured-img-wrap { overflow: hidden; }
-
-  .featured-portrait .featured-img-wrap {
-    aspect-ratio: 3/4;
-    max-height: 400px;
-  }
-
-  .featured-landscape .featured-img-wrap {
-    aspect-ratio: 16/9;
-    max-height: 260px;
-  }
-
-  .featured-item .featured-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.5s ease;
-  }
-
-  .featured-item:hover .featured-img-wrap img { transform: scale(1.03); }
-
-  /* NBA CAROUSEL */
-  .nba-carousel {
-    position: relative;
-    aspect-ratio: 16/9;
-    max-height: 320px;
+  .img-marquee-row {
     overflow: hidden;
   }
 
-  .nba-track {
+  .img-marquee-track {
     display: flex;
-    height: 100%;
-    transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    gap: 1rem;
+    width: max-content;
+    animation: imgScrollLeft 35s linear infinite;
   }
 
-  .nba-slide {
-    min-width: 100%;
-    height: 100%;
+  .img-marquee-track.reverse {
+    animation: imgScrollRight 45s linear infinite;
+  }
+
+  .img-marquee-item {
     flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 4px;
+    align-self: flex-end;
   }
 
-  .nba-slide img {
+  .img-marquee-item.tall {
+    height: 260px;
+  }
+
+  .img-marquee-item.wide {
+    height: 180px;
+  }
+
+  .img-marquee-item img {
+    height: 100%;
+    width: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.4s ease, opacity 0.3s ease;
+    opacity: 0.8;
+  }
+
+  .img-marquee-item:hover img { transform: scale(1.05); opacity: 1; }
+
+  /* ── PROJECTS GRID ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+  }
+
+  .project-item {
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  .project-item:nth-child(4n) { border-right: none; }
+
+  .project-img {
+    overflow: hidden;
+    aspect-ratio: 4/3;
+  }
+
+  .project-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.4s ease;
   }
 
-  .nba-nav {
-    position: absolute;
-    bottom: 0.75rem;
-    left: 50%;
-    transform: translateX(-50%);
+  .project-item:hover .project-img img { transform: scale(1.04); }
+
+  .project-info {
+    padding: 1rem 1.25rem;
     display: flex;
-    gap: 6px;
-    z-index: 2;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    transition: background 0.3s;
   }
 
-  .nba-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.35);
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-    border: none; padding: 0;
+  .project-item:hover .project-info { background: rgba(198,249,31,0.05); }
+
+  .project-title {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--white);
+    transition: color 0.3s;
   }
 
-  .nba-dot.active { background: #c6f91f; transform: scale(1.4); }
+  .project-item:hover .project-title { color: #c6f91f; }
 
-  .nba-arrow {
-    position: absolute;
-    top: 50%; transform: translateY(-50%);
-    width: 32px; height: 32px;
-    background: rgba(20,17,21,0.55);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 50%;
-    color: #fff; font-size: 13px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; z-index: 2;
-    transition: background 0.2s, color 0.2s;
-    padding: 0;
+  .project-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
-
-  .nba-arrow:hover { background: #c6f91f; color: #141115; }
-  .nba-arrow-prev { left: 0.75rem; }
-  .nba-arrow-next { right: 0.75rem; }
 
   .work-item-info {
     padding: 1.5rem 2rem;
@@ -516,49 +526,7 @@
     background: #c6f91f;
   }
 
-  /* MORE PROJECTS */
-  .more-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid var(--border);
-  }
 
-  .more-item {
-    border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    overflow: hidden;
-  }
-
-  .more-item:nth-child(3n) { border-right: none; }
-
-  .more-item img {
-    width: 100%;
-    aspect-ratio: 4/3;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s;
-  }
-
-  .more-item:hover img {
-    transform: scale(1.04);
-  }
-
-  .more-item-info {
-    padding: 1.25rem 1.5rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .more-item-title {
-    font-size: 0.85rem;
-    font-weight: 400;
-    margin-bottom: 0.25rem;
-  }
-
-  .more-item-desc {
-    font-size: 0.78rem;
-    color: var(--muted);
-    line-height: 1.5;
-  }
 
   /* FOOTER */
   footer {
@@ -779,11 +747,13 @@
     .featured-right-col { padding-top: 0; }
     .featured-full { grid-column: 1; }
     .featured-item { margin-top: 0 !important; }
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    .project-item:nth-child(4n) { border-right: 1px solid var(--border); }
+    .project-item:nth-child(2n) { border-right: none; }
+    .img-marquee-item { height: 160px; }
     .case-study-header { grid-template-columns: 1fr; gap: 2rem; }
     .prototype-wrapper { padding: 1.5rem; }
     .prototype-frame-outer iframe { height: 280px; }
-    .more-grid { grid-template-columns: 1fr; }
-    .more-item { border-right: none; }
     .section-header, .case-study-overview, .footer { padding-left: 1.5rem; padding-right: 1.5rem; }
     footer { padding: 3rem 1.5rem 2rem; }
     .footer-meta { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
@@ -832,77 +802,141 @@
   </div>
 </section>
 
-<!-- FEATURED PROJECTS -->
+<!-- PROJECTS SECTION -->
 <div class="section-header" id="work">
-  <h2>Featured Projects</h2>
-  <span class="section-count">04 Projects</span>
+  <h2>Projects</h2>
+  <span class="section-count">10 Projects</span>
 </div>
 
-<div class="featured-grid">
-
-  <!-- Row 1: HCOP portrait left, Xbox landscape top-right -->
-  <a href="nasa-hcop.html" class="featured-item featured-portrait reveal" style="text-decoration:none; color:inherit;">
-    <div class="work-item-overlay"></div>
-    <div class="featured-img-wrap">
-      <img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_980,h_1198,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%208.png" alt="NASA HCOP" />
+<div class="img-marquee-outer">
+  <!-- Row 1: scrolls left, taller images -->
+  <div class="img-marquee-row">
+    <div class="img-marquee-track">
+      <div class="img-marquee-item tall"><img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_600,h_800,al_c,q_90,enc_avif,quality_auto/Artboard%208.png" alt="NASA HCOP" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/Xbox_Annimation_2_gif.gif" alt="Xbox" /></div>
+      <div class="img-marquee-item tall"><img src="https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_600,h_800,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png" alt="Samsung" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png" alt="NBA" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_932f172ce94647d8aa8d32f2cee276ba~mv2.png/v1/fill/w_600,h_400,q_90,enc_avif,quality_auto/Summer%20Strengthening%20Campaign%202022_mockup.png" alt="DPRR" /></div>
+      <div class="img-marquee-item tall"><img src="https://static.wixstatic.com/media/eb26e1_9c203b5aa2534dddb4648d62c11aa7c8~mv2.png/v1/fill/w_600,h_400,q_90,enc_avif,quality_auto/Initiated-cover.png" alt="Passion Projects" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_bf31eac011ca455eb6950b5aeb42eacd~mv2.png/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/FB_Cover.png" alt="GeekLife" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_5531ce97f2e74ca38fb3c5a31708fd8b~mv2.png/v1/fill/w_600,h_390,q_90,enc_avif,quality_auto/FDA-Brand%20Guide_mockup.png" alt="FDA" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_41006347467243a48be3a655498510d4~mv2.jpg/v1/fill/w_600,h_600,q_85,enc_avif,quality_auto/NHIGTMS.jpg" alt="Music" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_33a71434827f4d38b1a5e2b157b4b324~mv2.png/v1/crop/x_0,y_801,w_10722,h_7473/fill/w_600,h_418,q_90,enc_avif,quality_auto/CRM%20Cannes-Booth_cropped.png" alt="Unbabel" /></div>
+      <!-- dupe for loop -->
+      <div class="img-marquee-item tall"><img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_600,h_800,al_c,q_90,enc_avif,quality_auto/Artboard%208.png" alt="NASA HCOP" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/Xbox_Annimation_2_gif.gif" alt="Xbox" /></div>
+      <div class="img-marquee-item tall"><img src="https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_600,h_800,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png" alt="Samsung" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png" alt="NBA" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_932f172ce94647d8aa8d32f2cee276ba~mv2.png/v1/fill/w_600,h_400,q_90,enc_avif,quality_auto/Summer%20Strengthening%20Campaign%202022_mockup.png" alt="DPRR" /></div>
+      <div class="img-marquee-item tall"><img src="https://static.wixstatic.com/media/eb26e1_9c203b5aa2534dddb4648d62c11aa7c8~mv2.png/v1/fill/w_600,h_400,q_90,enc_avif,quality_auto/Initiated-cover.png" alt="Passion Projects" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_bf31eac011ca455eb6950b5aeb42eacd~mv2.png/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/FB_Cover.png" alt="GeekLife" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_5531ce97f2e74ca38fb3c5a31708fd8b~mv2.png/v1/fill/w_600,h_390,q_90,enc_avif,quality_auto/FDA-Brand%20Guide_mockup.png" alt="FDA" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_41006347467243a48be3a655498510d4~mv2.jpg/v1/fill/w_600,h_600,q_85,enc_avif,quality_auto/NHIGTMS.jpg" alt="Music" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_33a71434827f4d38b1a5e2b157b4b324~mv2.png/v1/crop/x_0,y_801,w_10722,h_7473/fill/w_600,h_418,q_90,enc_avif,quality_auto/CRM%20Cannes-Booth_cropped.png" alt="Unbabel" /></div>
     </div>
-    <div class="work-item-info">
-      <span class="work-item-title">NASA HCOP</span>
-      <span class="work-item-tag">Branding / Print</span>
+  </div>
+
+  <!-- Row 2: scrolls right, offset start, different speed -->
+  <div class="img-marquee-row">
+    <div class="img-marquee-track reverse">
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_5531ce97f2e74ca38fb3c5a31708fd8b~mv2.png/v1/fill/w_600,h_390,q_90,enc_avif,quality_auto/FDA-Brand%20Guide_mockup.png" alt="FDA" /></div>
+      <div class="img-marquee-item tall"><img src="https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_600,h_800,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png" alt="Samsung" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_bf31eac011ca455eb6950b5aeb42eacd~mv2.png/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/FB_Cover.png" alt="GeekLife" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_41006347467243a48be3a655498510d4~mv2.jpg/v1/fill/w_600,h_600,q_85,enc_avif,quality_auto/NHIGTMS.jpg" alt="Music" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png" alt="NBA" /></div>
+      <div class="img-marquee-item tall"><img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_600,h_800,al_c,q_90,enc_avif,quality_auto/Artboard%208.png" alt="NASA HCOP" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_932f172ce94647d8aa8d32f2cee276ba~mv2.png/v1/fill/w_600,h_400,q_90,enc_avif,quality_auto/Summer%20Strengthening%20Campaign%202022_mockup.png" alt="DPRR" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_33a71434827f4d38b1a5e2b157b4b324~mv2.png/v1/crop/x_0,y_801,w_10722,h_7473/fill/w_600,h_418,q_90,enc_avif,quality_auto/CRM%20Cannes-Booth_cropped.png" alt="Unbabel" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_9c203b5aa2534dddb4648d62c11aa7c8~mv2.png/v1/fill/w_600,h_400,q_90,enc_avif,quality_auto/Initiated-cover.png" alt="Passion Projects" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/Xbox_Annimation_2_gif.gif" alt="Xbox" /></div>
+      <!-- dupe -->
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_5531ce97f2e74ca38fb3c5a31708fd8b~mv2.png/v1/fill/w_600,h_390,q_90,enc_avif,quality_auto/FDA-Brand%20Guide_mockup.png" alt="FDA" /></div>
+      <div class="img-marquee-item tall"><img src="https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_600,h_800,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png" alt="Samsung" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_bf31eac011ca455eb6950b5aeb42eacd~mv2.png/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/FB_Cover.png" alt="GeekLife" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_41006347467243a48be3a655498510d4~mv2.jpg/v1/fill/w_600,h_600,q_85,enc_avif,quality_auto/NHIGTMS.jpg" alt="Music" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png" alt="NBA" /></div>
+      <div class="img-marquee-item tall"><img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_600,h_800,al_c,q_90,enc_avif,quality_auto/Artboard%208.png" alt="NASA HCOP" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_932f172ce94647d8aa8d32f2cee276ba~mv2.png/v1/fill/w_600,h_400,q_90,enc_avif,quality_auto/Summer%20Strengthening%20Campaign%202022_mockup.png" alt="DPRR" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_33a71434827f4d38b1a5e2b157b4b324~mv2.png/v1/crop/x_0,y_801,w_10722,h_7473/fill/w_600,h_418,q_90,enc_avif,quality_auto/CRM%20Cannes-Booth_cropped.png" alt="Unbabel" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_9c203b5aa2534dddb4648d62c11aa7c8~mv2.png/v1/fill/w_600,h_400,q_90,enc_avif,quality_auto/Initiated-cover.png" alt="Passion Projects" /></div>
+      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/Xbox_Annimation_2_gif.gif" alt="Xbox" /></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS GRID -->
+<div class="projects-grid">
+  <a href="nasa-hcop.html" class="project-item reveal" style="text-decoration:none; color:inherit;">
+    <div class="project-img"><img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_600,h_800,al_c,q_90,enc_avif,quality_auto/Artboard%208.png" alt="NASA HCOP" /></div>
+    <div class="project-info">
+      <span class="project-title">NASA HCOP</span>
+      <span class="project-tag">Branding / Print</span>
     </div>
   </a>
-
-  <div class="featured-right-col">
-    <a href="xbox.html" class="featured-item featured-landscape reveal reveal-delay-1" style="text-decoration:none; color:inherit;">
-      <div class="work-item-overlay"></div>
-      <div class="featured-img-wrap">
-        <img src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/Xbox_Annimation_2_gif.gif" alt="Xbox Dashboard" />
-      </div>
-      <div class="work-item-info">
-        <span class="work-item-title">Xbox Dashboard</span>
-        <span class="work-item-tag">UX / Motion</span>
-      </div>
-    </a>
-
-    <div class="featured-item featured-portrait reveal reveal-delay-2" style="margin-top: 3rem;">
-      <div class="work-item-overlay"></div>
-      <div class="featured-img-wrap">
-        <img src="https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_710,h_959,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png" alt="Samsung" />
-      </div>
-      <div class="work-item-info">
-        <span class="work-item-title">Samsung Visual Design</span>
-        <span class="work-item-tag">UX / Visual</span>
-      </div>
+  <a href="xbox.html" class="project-item reveal reveal-delay-1" style="text-decoration:none; color:inherit;">
+    <div class="project-img"><img src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/Xbox_Annimation_2_gif.gif" alt="Xbox Dashboard" /></div>
+    <div class="project-info">
+      <span class="project-title">Xbox Dashboard</span>
+      <span class="project-tag">UX / Motion</span>
+    </div>
+  </a>
+  <div class="project-item reveal reveal-delay-2">
+    <div class="project-img"><img src="https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_600,h_800,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png" alt="Samsung" /></div>
+    <div class="project-info">
+      <span class="project-title">Samsung Visual Design</span>
+      <span class="project-tag">UX / Visual</span>
     </div>
   </div>
-
-  <!-- Row 2: NBA carousel full width -->
-  <div class="featured-item featured-full reveal" style="margin-top: 1.5rem;">
-    <div class="nba-carousel" id="nbaCarousel">
-      <div class="nba-track" id="nbaTrack">
-        <div class="nba-slide">
-          <img src="https://static.wixstatic.com/media/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png" alt="NBA Rebrands 1" />
-        </div>
-        <div class="nba-slide">
-          <img src="https://static.wixstatic.com/media/eb26e1_25286dc701ee482aa8fb863626734799~mv2.png/v1/fill/w_980,h_1198,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%208.png" alt="NBA Rebrands 2" />
-        </div>
-        <div class="nba-slide">
-          <img src="https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_710,h_959,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png" alt="NBA Rebrands 3" />
-        </div>
-      </div>
-      <button class="nba-arrow nba-arrow-prev" id="nbaPrev">&#8592;</button>
-      <button class="nba-arrow nba-arrow-next" id="nbaNext">&#8594;</button>
-      <div class="nba-nav" id="nbaDots"></div>
-    </div>
-    <div class="work-item-info">
-      <span class="work-item-title">NBA Team Rebrands</span>
-      <span class="work-item-tag">Branding / Identity</span>
+  <div class="project-item reveal">
+    <div class="project-img"><img src="https://static.wixstatic.com/media/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png" alt="NBA Rebrands" /></div>
+    <div class="project-info">
+      <span class="project-title">NBA Team Rebrands</span>
+      <span class="project-tag">Branding / Identity</span>
     </div>
   </div>
-
+  <div class="project-item reveal reveal-delay-1">
+    <div class="project-img"><img src="https://static.wixstatic.com/media/eb26e1_932f172ce94647d8aa8d32f2cee276ba~mv2.png/v1/fill/w_600,h_400,q_90,enc_avif,quality_auto/Summer%20Strengthening%20Campaign%202022_mockup.png" alt="DPRR" /></div>
+    <div class="project-info">
+      <span class="project-title">DPRR</span>
+      <span class="project-tag">Campaign / Brand</span>
+    </div>
+  </div>
+  <div class="project-item reveal reveal-delay-2">
+    <div class="project-img"><img src="https://static.wixstatic.com/media/eb26e1_9c203b5aa2534dddb4648d62c11aa7c8~mv2.png/v1/fill/w_600,h_400,q_90,enc_avif,quality_auto/Initiated-cover.png" alt="Passion Projects" /></div>
+    <div class="project-info">
+      <span class="project-title">Passion Projects</span>
+      <span class="project-tag">Apparel / Art</span>
+    </div>
+  </div>
+  <div class="project-item reveal">
+    <div class="project-img"><img src="https://static.wixstatic.com/media/eb26e1_bf31eac011ca455eb6950b5aeb42eacd~mv2.png/v1/fill/w_600,h_338,q_90,enc_avif,quality_auto/FB_Cover.png" alt="GeekLife" /></div>
+    <div class="project-info">
+      <span class="project-title">GeekLife</span>
+      <span class="project-tag">Brand / Content</span>
+    </div>
+  </div>
+  <div class="project-item reveal reveal-delay-1">
+    <div class="project-img"><img src="https://static.wixstatic.com/media/eb26e1_33a71434827f4d38b1a5e2b157b4b324~mv2.png/v1/crop/x_0,y_801,w_10722,h_7473/fill/w_600,h_418,q_90,enc_avif,quality_auto/CRM%20Cannes-Booth_cropped.png" alt="Unbabel" /></div>
+    <div class="project-info">
+      <span class="project-title">Unbabel</span>
+      <span class="project-tag">Brand / Experiential</span>
+    </div>
+  </div>
+  <div class="project-item reveal reveal-delay-2">
+    <div class="project-img"><img src="https://static.wixstatic.com/media/eb26e1_5531ce97f2e74ca38fb3c5a31708fd8b~mv2.png/v1/fill/w_600,h_390,q_90,enc_avif,quality_auto/FDA-Brand%20Guide_mockup.png" alt="FDA" /></div>
+    <div class="project-info">
+      <span class="project-title">FDA</span>
+      <span class="project-tag">Brand / Print</span>
+    </div>
+  </div>
+  <div class="project-item reveal">
+    <div class="project-img"><img src="https://static.wixstatic.com/media/eb26e1_41006347467243a48be3a655498510d4~mv2.jpg/v1/fill/w_600,h_600,q_85,enc_avif,quality_auto/NHIGTMS.jpg" alt="Music" /></div>
+    <div class="project-info">
+      <span class="project-title">Music</span>
+      <span class="project-tag">Production / Art</span>
+    </div>
+  </div>
 </div>
-
-<!-- PS5 CASE STUDY -->
 <section class="case-study" id="case-study">
   <div class="case-study-header">
     <div>
@@ -979,57 +1013,6 @@
   </div>
 </div>
 
-<!-- MORE PROJECTS -->
-<div class="section-header">
-  <h2>More Projects</h2>
-  <span class="section-count">06 Projects</span>
-</div>
-
-<div class="more-grid">
-  <div class="more-item">
-    <img src="https://static.wixstatic.com/media/eb26e1_932f172ce94647d8aa8d32f2cee276ba~mv2.png/v1/fill/w_980,h_653,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Summer%20Strengthening%20Campaign%202022_mockup.png" alt="DPRR" />
-    <div class="more-item-info">
-      <p class="more-item-title">DPRR</p>
-      <p class="more-item-desc">Mental health resources and lifestyle readiness for servicemembers and their families.</p>
-    </div>
-  </div>
-  <div class="more-item">
-    <img src="https://static.wixstatic.com/media/eb26e1_9c203b5aa2534dddb4648d62c11aa7c8~mv2.png/v1/fill/w_980,h_654,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Initiated-cover.png" alt="Passion Projects" />
-    <div class="more-item-info">
-      <p class="more-item-title">Passion Projects</p>
-      <p class="more-item-desc">Apparel design, video production, and personal artwork done in my own time.</p>
-    </div>
-  </div>
-  <div class="more-item">
-    <img src="https://static.wixstatic.com/media/eb26e1_bf31eac011ca455eb6950b5aeb42eacd~mv2.png/v1/fill/w_980,h_551,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/FB_Cover.png" alt="GeekLife" />
-    <div class="more-item-info">
-      <p class="more-item-title">GeekLife</p>
-      <p class="more-item-desc">Live stream and podcast centered around nerd culture. Host, producer, and designer.</p>
-    </div>
-  </div>
-  <div class="more-item">
-    <img src="https://static.wixstatic.com/media/eb26e1_33a71434827f4d38b1a5e2b157b4b324~mv2.png/v1/crop/x_0,y_801,w_10722,h_7473/fill/w_980,h_683,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/CRM%20Cannes-Booth_cropped.png" alt="Unbabel" />
-    <div class="more-item-info">
-      <p class="more-item-title">Unbabel</p>
-      <p class="more-item-desc">Brand and experiential design for an AI-powered translation platform.</p>
-    </div>
-  </div>
-  <div class="more-item">
-    <img src="https://static.wixstatic.com/media/eb26e1_5531ce97f2e74ca38fb3c5a31708fd8b~mv2.png/v1/fill/w_980,h_637,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/FDA-Brand%20Guide_mockup.png" alt="FDA" />
-    <div class="more-item-info">
-      <p class="more-item-title">FDA</p>
-      <p class="more-item-desc">Brand guide and visual system design for a federal regulatory agency.</p>
-    </div>
-  </div>
-  <div class="more-item">
-    <img src="https://static.wixstatic.com/media/eb26e1_41006347467243a48be3a655498510d4~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/NHIGTMS.jpg" alt="Music" />
-    <div class="more-item-info">
-      <p class="more-item-title">Music</p>
-      <p class="more-item-desc">Producer since high school. Most recent project available on Spotify.</p>
-    </div>
-  </div>
-</div>
-
 <!-- FOOTER -->
 <footer>
   <p class="footer-tagline">Just Make It <em>Pop.</em></p>
@@ -1070,7 +1053,7 @@
   }
   animateRing();
 
-  document.querySelectorAll('a, .work-item, .more-item, .skill-pill').forEach(el => {
+  document.querySelectorAll('a, .project-item, .img-marquee-item, .skill-pill').forEach(el => {
     el.addEventListener('mouseenter', () => { cursor.classList.add('is-hovering'); ring.classList.add('is-hovering'); });
     el.addEventListener('mouseleave', () => { cursor.classList.remove('is-hovering'); ring.classList.remove('is-hovering'); });
   });
@@ -1090,39 +1073,7 @@
   revealEls.forEach(el => revealObs.observe(el));
   sectionHeaders.forEach(el => lineObs.observe(el));
 
-  // NBA Carousel
-  const track = document.getElementById('nbaTrack');
-  const dotsContainer = document.getElementById('nbaDots');
-  const slides = document.querySelectorAll('.nba-slide');
-  let current = 0;
-  let autoTimer;
-
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'nba-dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => goTo(i));
-    dotsContainer.appendChild(dot);
-  });
-
-  function goTo(n) {
-    current = (n + slides.length) % slides.length;
-    track.style.transform = `translateX(-${current * 100}%)`;
-    document.querySelectorAll('.nba-dot').forEach((d, i) => d.classList.toggle('active', i === current));
-    resetAuto();
-  }
-
-  function resetAuto() {
-    clearInterval(autoTimer);
-    autoTimer = setInterval(() => goTo(current + 1), 4000);
-  }
-
-  document.getElementById('nbaPrev').addEventListener('click', () => goTo(current - 1));
-  document.getElementById('nbaNext').addEventListener('click', () => goTo(current + 1));
-  resetAuto();
-
-  document.getElementById('nbaCarousel').addEventListener('mouseenter', () => clearInterval(autoTimer));
-  document.getElementById('nbaCarousel').addEventListener('mouseleave', resetAuto);
-  document.querySelectorAll('.more-item, .case-study-header, .case-study-overview, .prototype-wrapper, footer').forEach((el, i) => {
+  document.querySelectorAll('.case-study-header, .case-study-overview, .prototype-wrapper, footer').forEach((el, i) => {
     el.classList.add('reveal');
     if (i % 3 === 1) el.classList.add('reveal-delay-1');
     if (i % 3 === 2) el.classList.add('reveal-delay-2');
