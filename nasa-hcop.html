@@ -47,8 +47,8 @@
 
   /* SCROLL SECTIONS */
   .scroll-section { position: relative; }
-  .sticky-media { position: sticky; top: 0; height: 100vh; overflow: hidden; }
-  .sticky-media img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  .sticky-media { position: sticky; top: 0; height: 100vh; overflow: hidden; background: #f5f4f0; }
+  .sticky-media img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
   .sticky-media-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(255,255,255,0.1) 0%, transparent 60%); }
   .copy-panels { position: relative; margin-top: -100vh; }
   .copy-panel { min-height: 100vh; display: flex; align-items: center; padding: 6rem 3rem; }
@@ -77,11 +77,11 @@
   .divider h2 em { font-style: normal; color: var(--green); }
   .divider-meta p { font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em; line-height: 2.2; text-align: right; }
 
-  /* SPLIT */
-  .split { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; }
-  .split-image { overflow: hidden; }
-  .split-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
-  .split-image:hover img { transform: scale(1.03); }
+  /* SPLIT — image shows at natural ratio, no forced height */
+  .split { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); }
+  .split-image { overflow: hidden; background: #f5f4f0; }
+  .split-image img { width: 100%; height: auto; display: block; transition: transform 0.6s ease; }
+  .split-image:hover img { transform: scale(1.02); }
   .split-copy { display: flex; flex-direction: column; justify-content: center; padding: 5rem 4rem; border-left: 1px solid var(--border); }
   .split-copy h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1.5rem; margin-top: 1.5rem; }
   .split-copy p { font-size: 0.95rem; color: #555; line-height: 1.85; }
@@ -94,16 +94,16 @@
   .chapter-line { width: 36px; height: 1px; background: var(--green); }
   .chapter-title { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
 
-  /* GALLERY */
-  .gallery-strip { display: grid; grid-template-columns: 2fr 1fr; border-top: 1px solid var(--border); }
-  .gallery-strip-main { overflow: hidden; border-right: 1px solid var(--border); }
-  .gallery-strip-main img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
-  .gallery-strip-main:hover img { transform: scale(1.03); }
-  .gallery-strip-side { display: flex; flex-direction: column; }
-  .gallery-strip-side-item { flex: 1; overflow: hidden; border-bottom: 1px solid var(--border); }
-  .gallery-strip-side-item:last-child { border-bottom: none; }
-  .gallery-strip-side-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
-  .gallery-strip-side-item:hover img { transform: scale(1.04); }
+  /* GALLERY — natural ratio stacked images, no cropping */
+  .gallery-full { border-top: 1px solid var(--border); }
+  .gallery-full-item { overflow: hidden; border-bottom: 1px solid var(--border); background: #f5f4f0; }
+  .gallery-full-item img { width: 100%; height: auto; display: block; opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .gallery-full-item.visible img { opacity: 1; transform: translateY(0); }
+
+  .gallery-two { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); gap: 1px; background: var(--border); }
+  .gallery-two-item { overflow: hidden; background: #f5f4f0; }
+  .gallery-two-item img { width: 100%; height: auto; display: block; opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .gallery-two-item.visible img { opacity: 1; transform: translateY(0); }
 
   /* IMPACT */
   .impact { background: var(--ink); color: #fff; padding: 9rem 3rem; text-align: center; position: relative; overflow: hidden; }
@@ -308,17 +308,18 @@
 </section>
 
 <!-- GALLERY -->
-<div class="gallery-strip">
-  <div class="gallery-strip-main">
+<div class="gallery-two">
+  <div class="gallery-two-item">
     <img src="https://static.wixstatic.com/media/eb26e1_176355cdc2d840f7b50dc5d0d86939fc~mv2.png/v1/fill/w_800,h_525,q_90,enc_avif,quality_auto/eb26e1_176355cdc2d840f7b50dc5d0d86939fc~mv2.png" alt="HCOP Final Spread" />
   </div>
-  <div class="gallery-strip-side">
-    <div class="gallery-strip-side-item">
-      <img src="https://static.wixstatic.com/media/eb26e1_bd85b5ff2e3a4609b485ee6ad1f9cc81~mv2.png/v1/fill/w_800,h_553,q_90,enc_avif,quality_auto/eb26e1_bd85b5ff2e3a4609b485ee6ad1f9cc81~mv2.png" alt="HCOP Detail" />
-    </div>
-    <div class="gallery-strip-side-item">
-      <img src="https://static.wixstatic.com/media/eb26e1_7e26af6fd888484ca0789d3ab22fe352~mv2.png/v1/fill/w_800,h_306,q_90,enc_avif,quality_auto/eb26e1_7e26af6fd888484ca0789d3ab22fe352~mv2.png" alt="HCOP Detail 2" />
-    </div>
+  <div class="gallery-two-item">
+    <img src="https://static.wixstatic.com/media/eb26e1_bd85b5ff2e3a4609b485ee6ad1f9cc81~mv2.png/v1/fill/w_800,h_553,q_90,enc_avif,quality_auto/eb26e1_bd85b5ff2e3a4609b485ee6ad1f9cc81~mv2.png" alt="HCOP Detail" />
+  </div>
+</div>
+
+<div class="gallery-full">
+  <div class="gallery-full-item">
+    <img src="https://static.wixstatic.com/media/eb26e1_7e26af6fd888484ca0789d3ab22fe352~mv2.png/v1/fill/w_1200,h_460,q_90,enc_avif,quality_auto/eb26e1_7e26af6fd888484ca0789d3ab22fe352~mv2.png" alt="HCOP Spread" />
   </div>
 </div>
 
@@ -390,7 +391,7 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, { threshold: 0.15 });
 
-  document.querySelectorAll('.copy-card, .stat-cell, .fade-in').forEach(el => obs.observe(el));
+  document.querySelectorAll('.copy-card, .stat-cell, .fade-in, .gallery-full-item, .gallery-two-item').forEach(el => obs.observe(el));
 
   // Hero parallax
   const heroBg = document.querySelector('.hero-bg');

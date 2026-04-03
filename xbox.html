@@ -289,14 +289,17 @@
     height: 100vh;
     overflow: hidden;
     background: #080808;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .story-sticky img,
-  .story-sticky video {
+  .story-sticky img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    max-height: 100%;
     display: block;
+    object-fit: contain;
   }
 
   .story-content {
@@ -373,16 +376,19 @@
     width: 100%;
     overflow: hidden;
     background: #080808;
+    padding: 0;
   }
 
   .full-bleed img {
     width: 100%;
+    height: auto;
     display: block;
-    transform: scale(1.04);
-    transition: transform 1s ease;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
   }
 
-  .full-bleed.in-view img { transform: scale(1); }
+  .full-bleed.in-view img { opacity: 1; transform: translateY(0); }
 
   /* ── DARK STATEMENT ── */
   .dark-statement {
@@ -433,27 +439,27 @@
     color: var(--xbox-green);
   }
 
-  /* ── GIF SHOWCASE ── */
   .gif-showcase {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    background: #111;
+    background: #080808;
+    padding: 4rem 3rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
 
   .gif-item {
     overflow: hidden;
-    background: #080808;
   }
 
   .gif-item img {
     width: 100%;
+    height: auto;
     display: block;
-    transform: scale(1.04);
-    transition: transform 0.8s cubic-bezier(0.22,1,0.36,1);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
   }
 
-  .gif-item.in-view img { transform: scale(1); }
+  .gif-item.in-view img { opacity: 1; transform: translateY(0); }
 
   .gif-item.full-width {
     grid-column: 1 / -1;
@@ -810,7 +816,7 @@
 
   const scaleObs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); scaleObs.unobserve(e.target); } });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.1 });
 
   document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
   document.querySelectorAll('.full-bleed, .gif-item').forEach(el => scaleObs.observe(el));
