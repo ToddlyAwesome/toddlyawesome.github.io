@@ -29,9 +29,11 @@
   .nav-links a { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--ink); }
 
-  .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 5rem; position: relative; overflow: hidden; background: #0a0a0a; }
-  .hero-bg { position: absolute; inset: 0; background-image: url('https://static.wixstatic.com/media/eb26e1_da7faf1e0028468d952f0b35a2783746~mv2.gif/v1/fill/w_960,h_540,al_c,pstr/Untitled%20design%20(3)_gif.gif'); background-size: cover; background-position: center; opacity: 0.6; animation: heroZoom 8s ease forwards; transform: scale(1.06); }
-  .hero-gradient { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.1) 100%); z-index: 1; }
+  .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 0; position: relative; overflow: hidden; background: #050810; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 40%, #0d1f4a 0%, #050810 70%); }
+  .hero-logo { position: relative; z-index: 2; width: min(480px, 70vw); opacity: 0; animation: fadeUp 1.2s cubic-bezier(0.22,1,0.36,1) 0.4s forwards; margin-bottom: 3rem; }
+  .hero-stars { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px); background-size: 60px 60px; opacity: 0.12; z-index: 1; }
+  .hero-gradient { display: none; }
   @keyframes heroZoom { to { transform: scale(1); } }
   .hero-content { position: relative; z-index: 2; text-align: center; opacity: 0; animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.5s forwards; background: rgba(0,0,0,0.35); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; padding: 3rem 4rem; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
@@ -166,6 +168,32 @@
     .impact { padding: 5rem 1.5rem; }
     footer { flex-direction: column; gap: 1.5rem; align-items: flex-start; padding: 2rem 1.5rem; }
   }
+
+  /* ── ASSET ROW ── */
+  .asset-row { display: grid; grid-template-columns: 2fr 1fr; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .asset-item { overflow: hidden; border-right: 1px solid var(--border); position: relative; }
+  .asset-item:last-child { border-right: none; }
+  .asset-item img { width: 100%; height: 300px; object-fit: cover; object-position: center top; display: block; transition: transform 0.4s ease; }
+  .asset-item:hover img { transform: scale(1.03); }
+  .asset-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 0.75rem 1.25rem; border-top: 1px solid var(--border); }
+  .asset-label.light { color: rgba(255,255,255,0.5); }
+
+  /* ── BRAND GRID ── */
+  .brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); }
+  .brand-grid-item { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2.5rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; transition: transform 0.3s ease; }
+  .brand-grid-item:nth-child(3n) { border-right: none; }
+  .brand-grid-item:hover { transform: scale(1.02); }
+  .brand-grid-item.dark { background: #050810; }
+  .brand-grid-item.light { background: #f5f4f0; }
+  .brand-grid-item img { max-width: 60%; max-height: 60%; object-fit: contain; display: block; }
+  .brand-grid-item .asset-label { margin-top: 1rem; padding: 0; border: none; text-align: center; }
+
+  @media (max-width: 768px) {
+    .asset-row { grid-template-columns: 1fr; }
+    .brand-grid { grid-template-columns: repeat(2, 1fr); }
+    .brand-grid-item:nth-child(3n) { border-right: 1px solid var(--border); }
+    .brand-grid-item:nth-child(2n) { border-right: none; }
+  }
 </style>
 </head>
 <body>
@@ -210,7 +238,7 @@
 <!-- 01: CHALLENGE — sticky scroll -->
 <section class="scroll-section">
   <div class="sticky-media">
-    <img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_800,h_1036,q_90,enc_avif,quality_auto/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png" alt="NASA HCOP Cover" />
+    <img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_980,h_1198,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%208.png" alt="NASA HCOP Cover" />
     <div class="sticky-media-overlay"></div>
   </div>
   <div class="copy-panels">
@@ -248,6 +276,22 @@
   </div>
 </div>
 
+
+<!-- MOODBOARD & LOGO HISTORY -->
+<div class="asset-row">
+  <div class="asset-item wide">
+    <img src="images/Moodboard.pdf" alt="NASA Moodboard" onerror="this.style.display='none'" />
+    <div class="asset-item-inner">
+      <img src="images/NASA-Logo-history 1.png" alt="NASA Logo History 1" />
+    </div>
+    <p class="asset-label">Logo Research &amp; History</p>
+  </div>
+  <div class="asset-item">
+    <img src="images/NASA-Logo-history 2.png" alt="NASA Logo History 2" />
+    <p class="asset-label">NASA Worm Evolution</p>
+  </div>
+</div>
+
 <!-- 02: ROLE & PROCESS -->
 <div class="divider fade-in">
   <h2>My role &amp;<br /><em>process.</em></h2>
@@ -260,7 +304,7 @@
 
 <div class="split">
   <div class="split-image">
-    <img src="https://static.wixstatic.com/media/eb26e1_7e26af6fd888484ca0789d3ab22fe352~mv2.png/v1/fill/w_800,h_306,q_90,enc_avif,quality_auto/eb26e1_7e26af6fd888484ca0789d3ab22fe352~mv2.png" alt="NASA HCOP Spread" />
+    <img src="https://static.wixstatic.com/media/eb26e1_7e26af6fd888484ca0789d3ab22fe352~mv2.png/v1/fill/w_1200,h_460,q_90,enc_avif,quality_auto/eb26e1_7e26af6fd888484ca0789d3ab22fe352~mv2.png" alt="NASA HCOP Spread" />
   </div>
   <div class="split-copy fade-in">
     <div class="chapter">
@@ -271,6 +315,35 @@
     <h2>Design thinking meets mission-critical communication.</h2>
     <p>I began by immersing myself in NASA's visual identity — studying their existing brand standards, past publications, and the tone they use across agency communications.</p>
     <p>From there, I developed a systematic approach: a cover that commands attention, graphic elements that make complex data digestible, and a template architecture that scales across every section.</p>
+  </div>
+</div>
+
+
+<!-- BRAND ELEMENTS -->
+<div class="brand-grid">
+  <div class="brand-grid-item dark">
+    <img src="images/HCOP-white.svg" alt="HCOP Logo" />
+    <p class="asset-label light">HCOP Logo Mark</p>
+  </div>
+  <div class="brand-grid-item light">
+    <img src="images/Astronaut.png" alt="Astronaut" />
+    <p class="asset-label">Astronaut Illustration</p>
+  </div>
+  <div class="brand-grid-item light">
+    <img src="images/Planet 1.svg" alt="Planet" />
+    <p class="asset-label">Planet Element</p>
+  </div>
+  <div class="brand-grid-item dark">
+    <img src="images/Star.svg" alt="Star" />
+    <p class="asset-label light">Star Accent</p>
+  </div>
+  <div class="brand-grid-item light">
+    <img src="images/Satelite.svg" alt="Satellite" />
+    <p class="asset-label">Satellite Element</p>
+  </div>
+  <div class="brand-grid-item dark">
+    <img src="images/Asteroid.png" alt="Asteroid" />
+    <p class="asset-label light">Asteroid Detail</p>
   </div>
 </div>
 
@@ -326,7 +399,7 @@
 <!-- 04: FINAL DELIVERABLES -->
 <div class="split reverse">
   <div class="split-image">
-    <img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_800,h_1036,q_90,enc_avif,quality_auto/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png" alt="HCOP Final" />
+    <img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_980,h_1198,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%208.png" alt="HCOP Final" />
   </div>
   <div class="split-copy fade-in">
     <div class="chapter">
