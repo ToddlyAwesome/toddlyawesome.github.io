@@ -458,6 +458,32 @@
 
   .case-study-cta:hover { color: #c6f91f; border-color: #c6f91f; }
 
+  .case-study-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding: 0.85rem 2rem;
+    background: #c6f91f;
+    color: #141115;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+
+  .case-study-btn::after { content: ' →'; }
+
+  .case-study-btn:hover {
+    background: #ddf45b;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(198,249,31,0.25);
+  }
+
   /* PROTOTYPE EMBED */
   .prototype-wrapper {
     padding: 3rem;
@@ -939,13 +965,13 @@
       <span class="project-tag">Branding / Identity</span>
     </div>
   </div>
-  <div class="project-item reveal reveal-delay-1">
+  <a href="dprr.html" class="project-item reveal reveal-delay-1" style="text-decoration:none;color:inherit;">
     <div class="project-img"><img src="https://static.wixstatic.com/media/eb26e1_932f172ce94647d8aa8d32f2cee276ba~mv2.png/v1/fill/w_980,h_653,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Summer%20Strengthening%20Campaign%202022_mockup.png" alt="DPRR" /></div>
     <div class="project-info">
       <span class="project-title">DPRR</span>
       <span class="project-tag">Campaign / Brand</span>
     </div>
-  </div>
+  </a>
   <div class="project-item reveal reveal-delay-2">
     <div class="project-img"><img src="https://static.wixstatic.com/media/eb26e1_9c203b5aa2534dddb4648d62c11aa7c8~mv2.png/v1/fill/w_980,h_654,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Initiated-cover.png" alt="Passion Projects" /></div>
     <div class="project-info">
@@ -1012,7 +1038,7 @@
 
   <div class="case-study-overview">
     <p>A conceptual redesign of the PlayStation 5 dashboard experience — reimagining navigation, game discovery, and UI hierarchy through a lens of performance and immersion. This prototype explores how the PS5 interface could better surface personalized content while preserving the bold visual language Sony established at launch.</p>
-    <a href="ps5.html" class="case-study-cta">View Full Case Study →</a>
+    <a href="ps5.html" class="case-study-btn">Explore</a>
   </div>
 
   <div class="prototype-wrapper">
