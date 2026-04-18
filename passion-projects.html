@@ -69,9 +69,10 @@
   .graphic-art-item.wide-short { grid-column: span 2; border-right: none; }
   .graphic-art-item.wide-short img { aspect-ratio: 16/6; object-fit: contain; background: #fff; padding: 1.5rem; }
   .graphic-art-item.sq img { aspect-ratio: 1; }
-  .graphic-art-item.port { border-right: none; border-bottom: none; }
-  .graphic-art-item.port img { aspect-ratio: 3/4; object-fit: cover; object-position: center top; }
+  .graphic-art-item.port { border-right: none; border-bottom: none; background: #f5f3f0; }
+  .graphic-art-item.port img { aspect-ratio: unset; height: 100%; min-height: 500px; width: 100%; object-fit: contain; object-position: center; padding: 1rem; }
   .section-div.dark { background: #141115; border-color: rgba(255,255,255,0.07); }
+  .section-div { padding: 4rem 4rem 3rem; border-top: 1px solid var(--border); display: flex; align-items: flex-end; justify-content: space-between; }
   .section-div-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
   .section-div-heading { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.0; }
   .section-div-heading.white { color: #fff; }
