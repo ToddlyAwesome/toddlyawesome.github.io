@@ -133,33 +133,55 @@
     justify-content: center;
     overflow: hidden;
     padding: 120px 40px 80px;
+    isolation: isolate;
   }
 
-  /* Decorative gradient glow */
+  /* Background image */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.35;
+    filter: saturate(0.9) contrast(1.05);
+    transform: scale(1.02);
+  }
+
+  /* Dark gradient overlay to keep text legible */
   .hero::before {
     content: "";
     position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 900px;
-    height: 900px;
-    background: radial-gradient(circle, rgba(42, 75, 214, 0.35) 0%, rgba(20, 40, 160, 0) 60%);
-    filter: blur(40px);
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(
+        105deg,
+        rgba(10, 12, 24, 0.92) 0%,
+        rgba(10, 12, 24, 0.75) 40%,
+        rgba(10, 12, 24, 0.5) 70%,
+        rgba(10, 12, 24, 0.7) 100%
+      );
     pointer-events: none;
   }
 
-  /* Subtle grid backdrop */
+  /* Subtle grid backdrop on top of everything */
   .hero::after {
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 1;
     background-image:
-      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
     background-size: 80px 80px;
-    mask-image: radial-gradient(circle at center, black 30%, transparent 75%);
-    -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 75%);
+    mask-image: radial-gradient(circle at center, black 20%, transparent 70%);
+    -webkit-mask-image: radial-gradient(circle at center, black 20%, transparent 70%);
     pointer-events: none;
   }
 
@@ -505,16 +527,19 @@
 
 <!-- Hero -->
 <section class="hero" id="hero">
+  <div class="hero-bg">
+    <img src="https://static.wixstatic.com/media/eb26e1_0412208dd8954a82b50a86933a239276~mv2.png/v1/fit/w_1920,h_1081,q_90,enc_avif,quality_auto/eb26e1_0412208dd8954a82b50a86933a239276~mv2.png" alt="" />
+  </div>
   <div class="hero-inner">
     <div class="eyebrow">
-      Case Study <span class="sep">/</span> Product UI <span class="sep">/</span> 2023
+      Case Study <span class="sep">/</span> Visual Design <span class="sep">/</span> Internal Branding
     </div>
     <h1 class="hero-title">
-      Samsung <span class="italic">refined</span>,<br />
-      pixel by pixel.
+      Samsung, <span class="italic">from</span> the<br />
+      inside out.
     </h1>
     <p class="hero-sub">
-      [PLACEHOLDER SUB] One-sentence intro to the Samsung work — what product, what surface, what was at stake. Keep it tight and declarative.
+      Visual design, brand development, and SharePoint&nbsp;/&nbsp;ShortPoint work for Samsung &mdash; enhancing the company's internal communication and branding through a wide range of design projects.
     </p>
 
     <div class="hero-meta">
@@ -528,110 +553,107 @@
       </div>
       <div>
         <div class="meta-label">Scope</div>
-        <div class="meta-value">Product UI · Visual Design</div>
+        <div class="meta-value">Visual Design · Branding · SharePoint</div>
       </div>
       <div>
-        <div class="meta-label">Year</div>
-        <div class="meta-value">2023</div>
+        <div class="meta-label">Focus</div>
+        <div class="meta-value">Internal Communication</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Chapter 1: Challenge -->
+<!-- Overview -->
 <section class="section">
   <div class="reveal">
-    <div class="chapter-label">01 · The Challenge</div>
+    <div class="chapter-label">Overview</div>
     <h2 class="chapter-title">
-      A platform used by millions, asking for a <span class="italic">quieter</span> kind of clarity.
+      UI, brand, and graphic design that <span class="italic">moves</span> internal work forward.
     </h2>
     <p class="chapter-lede">
-      [PLACEHOLDER] Two to three sentences setting up the problem. What was broken, noisy, confusing, or outdated. What Samsung needed, and why visual design was the lever that would move it.
+      This role allowed me to leverage my expertise in UI design, brand development, and graphic design &mdash; delivering impactful solutions that supported Samsung's internal branding and communication goals. As a Visual Designer at Samsung, I was responsible for enhancing the company's internal communication and branding through a wide range of design projects.
     </p>
   </div>
 </section>
 
-<!-- Chapter 2: Research (sticky story) -->
+<!-- Chapter 1: Graphic Design Projects -->
 <section class="section-alt">
   <div class="section-inner section" style="max-width: 1400px; padding-top: 140px; padding-bottom: 140px;">
     <div class="reveal">
-      <div class="chapter-label">02 · Research & Audit</div>
-      <h2 class="chapter-title">Understanding the system before redrawing it.</h2>
+      <div class="chapter-label">01 · Graphic Design Projects</div>
+      <h2 class="chapter-title">
+        Assets, templates, and identity &mdash; <span class="italic">built to scale</span> across teams.
+      </h2>
     </div>
 
     <div class="story">
       <div class="story-media">
-        <div class="placeholder">Research Imagery</div>
+        <img src="https://static.wixstatic.com/media/eb26e1_1ee46fcb31eb485d8f3be752073d982c~mv2.png/v1/fit/w_1920,h_1081,q_90,enc_avif,quality_auto/eb26e1_1ee46fcb31eb485d8f3be752073d982c~mv2.png" alt="Caregivers logo design, initial mockup designs" style="width:100%;height:100%;object-fit:cover;" />
       </div>
       <div class="story-copy">
         <div class="copy-card reveal">
           <span class="num">01</span>
-          <h3>Existing UI audit</h3>
-          <p>[PLACEHOLDER] What surfaces were reviewed, what inconsistencies surfaced, and how the audit shaped scope.</p>
+          <h3>A variety of design assets</h3>
+          <p>Delivered a variety of graphic design assets &mdash; logos, documents, and presentations &mdash; tailored to support Samsung's internal initiatives and campaigns.</p>
         </div>
         <div class="copy-card reveal">
           <span class="num">02</span>
-          <h3>Competitive landscape</h3>
-          <p>[PLACEHOLDER] Who Samsung was up against in this surface, what good looked like in-category, what to avoid.</p>
+          <h3>Brand consistency at scale</h3>
+          <p>Maintained brand consistency across all materials, adhering to Samsung's global design guidelines so every asset felt like it belonged to the same company.</p>
         </div>
         <div class="copy-card reveal">
           <span class="num">03</span>
-          <h3>User &amp; stakeholder input</h3>
-          <p>[PLACEHOLDER] Short note on how user research and stakeholder priorities shaped the design constraints.</p>
+          <h3>Templates teams could actually use</h3>
+          <p>Created polished templates for reports and presentations, enabling teams to produce professional-looking deliverables efficiently &mdash; without needing a designer in the room every time.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Chapter 3: Design System -->
+<!-- Gallery: Caregivers logo + Glassdoor deck -->
 <section class="section">
   <div class="reveal">
-    <div class="chapter-label">03 · Design System</div>
-    <h2 class="chapter-title">
-      Color, type, and spacing built for <span class="italic">scale</span>.
-    </h2>
-    <p class="chapter-lede">
-      [PLACEHOLDER] A short paragraph on the design system work — tokens, components, grids — and how consistency became a product feature, not a deliverable.
-    </p>
+    <div class="chapter-label">Selected Work</div>
+    <h2 class="chapter-title">From <span class="italic">logo mark</span> to strategy deck.</h2>
   </div>
 
   <div class="gallery">
-    <div class="gallery-item span-8 reveal"><div class="placeholder">System Overview</div></div>
-    <div class="gallery-item span-4 reveal"><div class="placeholder">Color Tokens</div></div>
-    <div class="gallery-item span-4 reveal"><div class="placeholder">Typography</div></div>
-    <div class="gallery-item span-4 reveal"><div class="placeholder">Components</div></div>
-    <div class="gallery-item span-4 reveal"><div class="placeholder">Grid / Layout</div></div>
+    <div class="gallery-item span-8 reveal"><img src="https://static.wixstatic.com/media/eb26e1_1ee46fcb31eb485d8f3be752073d982c~mv2.png/v1/fit/w_1920,h_1081,q_90,enc_avif,quality_auto/eb26e1_1ee46fcb31eb485d8f3be752073d982c~mv2.png" alt="Caregivers logo design, initial mockup designs" style="width:100%;height:100%;object-fit:cover;" /></div>
+    <div class="gallery-item span-4 reveal" style="aspect-ratio: 16/9;"><img src="https://static.wixstatic.com/media/eb26e1_beca658ee18e4e7689ec37592e018655~mv2.png/v1/fit/w_1920,h_416,q_90,enc_avif,quality_auto/eb26e1_beca658ee18e4e7689ec37592e018655~mv2.png" alt="Caregivers logo design, final design approved by client" style="width:100%;height:100%;object-fit:contain;background:#f5f3f0;padding:20px;" /></div>
+    <div class="gallery-item span-12 reveal" style="grid-column: span 12; aspect-ratio: 21/9;"><img src="https://static.wixstatic.com/media/eb26e1_7d395878869d49c58cbba9b9b1562423~mv2.jpg/v1/fit/w_1074,h_605,q_90,enc_avif,quality_auto/eb26e1_7d395878869d49c58cbba9b9b1562423~mv2.jpg" alt="Background asset" style="width:100%;height:100%;object-fit:cover;" /></div>
   </div>
 </section>
 
-<!-- Chapter 4: Execution -->
+<!-- Chapter 2: SharePoint Design with ShortPoint -->
 <section class="section-alt">
   <div class="section-inner section" style="max-width: 1400px; padding-top: 140px; padding-bottom: 140px;">
     <div class="reveal">
-      <div class="chapter-label">04 · Execution</div>
-      <h2 class="chapter-title">Shipping the details that users never notice — and always feel.</h2>
+      <div class="chapter-label">02 · SharePoint Design with ShortPoint</div>
+      <h2 class="chapter-title">
+        An intranet that actually felt <span class="italic">designed</span>.
+      </h2>
     </div>
 
     <div class="story">
       <div class="story-media">
-        <div class="placeholder">Final UI Screens</div>
+        <img src="https://static.wixstatic.com/media/eb26e1_42bd555f8c9b494bb3e377167a53ccaef003.jpg/v1/fit/w_1920,h_938,q_90,enc_avif,quality_auto/eb26e1_42bd555f8c9b494bb3e377167a53ccaef003.jpg" alt="Samsung internal SharePoint site, designed with ShortPoint" style="width:100%;height:100%;object-fit:cover;" />
       </div>
       <div class="story-copy">
         <div class="copy-card reveal">
           <span class="num">01</span>
-          <h3>Key screen</h3>
-          <p>[PLACEHOLDER] Walk through the hero screen and what design decisions were made to improve clarity, hierarchy, or trust.</p>
+          <h3>A platform worth visiting</h3>
+          <p>Designed and customized Samsung's internal SharePoint site using ShortPoint, creating a visually engaging and user-friendly platform that teams wanted to use.</p>
         </div>
         <div class="copy-card reveal">
           <span class="num">02</span>
-          <h3>States &amp; edge cases</h3>
-          <p>[PLACEHOLDER] A quick note on how the system handles empty states, errors, loading — the parts of UI most designers skip.</p>
+          <h3>Layouts, nav, and interaction</h3>
+          <p>Developed layouts, navigation structures, and interactive components to improve the site's functionality and align it with Samsung's branding &mdash; clarity over clutter, every time.</p>
         </div>
         <div class="copy-card reveal">
           <span class="num">03</span>
-          <h3>Handoff &amp; collaboration</h3>
-          <p>[PLACEHOLDER] How the work got from Figma to engineering — tokens, documentation, working sessions.</p>
+          <h3>Designed with the team, not at them</h3>
+          <p>Collaborated with internal stakeholders to ensure the site met organizational needs while maintaining a consistent visual identity across the experience.</p>
         </div>
       </div>
     </div>
@@ -641,30 +663,35 @@
 <!-- Pull quote -->
 <section class="callout">
   <p class="callout-quote">
-    Good product UI is <span class="hl">invisible</span>.<br />
-    It just makes the next tap feel inevitable.
+    Internal tools deserve the <span class="hl">same design care</span><br />
+    as the ones we build for customers.
   </p>
 </section>
 
-<!-- Chapter 5: Impact -->
+<!-- Chapter 3: Cross-Functional Collaboration -->
 <section class="section">
   <div class="reveal">
-    <div class="chapter-label">05 · Impact</div>
-    <h2 class="chapter-title">What the work <span class="italic">did</span> once it shipped.</h2>
+    <div class="chapter-label">03 · Cross-Functional Collaboration</div>
+    <h2 class="chapter-title">
+      Design happens <span class="italic">with</span> people, not at them.
+    </h2>
+    <p class="chapter-lede">
+      The design work above didn't happen in a vacuum &mdash; it came out of constant back-and-forth with the teams who would actually use and own it.
+    </p>
   </div>
 
   <div class="stats">
     <div class="stat reveal">
-      <div class="stat-num">+<span class="italic">XX</span>%</div>
-      <div class="stat-label">[PLACEHOLDER] Engagement, conversion, or adoption lift tied to the redesign.</div>
+      <div class="stat-num"><span class="italic">01</span></div>
+      <div class="stat-label">Partnered with teams across departments to gather requirements and incorporate feedback, ensuring designs met the needs of diverse audiences.</div>
     </div>
     <div class="stat reveal">
-      <div class="stat-num">XX<span class="italic">M</span></div>
-      <div class="stat-label">[PLACEHOLDER] Users reached or surfaces touched by the shipped system.</div>
+      <div class="stat-num"><span class="italic">02</span></div>
+      <div class="stat-label">Presented concepts and design iterations to stakeholders, demonstrating the impact of thoughtful visual design on communication and engagement.</div>
     </div>
     <div class="stat reveal">
-      <div class="stat-num">XX<span class="italic">+</span></div>
-      <div class="stat-label">[PLACEHOLDER] Components, screens, or tokens delivered into production.</div>
+      <div class="stat-num"><span class="italic">03</span></div>
+      <div class="stat-label">Shipped design systems and templates that outlived the project &mdash; internal teams continued to build on the work well after handoff.</div>
     </div>
   </div>
 </section>
