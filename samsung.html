@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Samsung — Visual Design · Kevin Todd</title>
+<meta name="description" content="Samsung product UI and visual design work by Kevin Todd." />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+  /* ---------- Tokens ---------- */
+  :root {
+    --bg: #ffffff;
+    --bg-off: #f5f3f0;
+    --bg-dark: #141115;
+    --text: #141115;
+    --text-inv: #ffffff;
+    --muted: rgba(20, 17, 21, 0.6);
+    --border: rgba(20, 17, 21, 0.1);
+    --border-inv: rgba(255, 255, 255, 0.12);
+    --lime: #c6f91f;
+    --yellow: #ddf45b;
+    --wine: #4c2b36;
+    --brown: #8d6346;
+    /* Samsung-specific accent — deep blue for a hardware/tech feel */
+    --samsung-blue: #1428a0;
+    --samsung-blue-soft: #2a4bd6;
+    --samsung-ink: #0a0c18;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .mono { font-family: "Space Mono", monospace; }
+
+  /* ---------- Custom cursor ---------- */
+  .cursor-dot,
+  .cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+  }
+  .cursor-dot {
+    width: 6px; height: 6px;
+    background: #fff;
+    transition: transform 0.08s ease-out;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.6);
+    transition: transform 0.25s ease-out, width 0.2s ease, height 0.2s ease;
+  }
+  .cursor-ring.hover {
+    width: 64px; height: 64px;
+    border-color: var(--lime);
+  }
+  @media (hover: none) {
+    body { cursor: auto; }
+    .cursor-dot, .cursor-ring { display: none; }
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 40px;
+    background: rgba(20, 17, 21, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.4s ease, color 0.4s ease, border 0.4s ease;
+    border-bottom: 1px solid transparent;
+    color: var(--text-inv);
+  }
+  .nav.light {
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: "Space Mono", monospace;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo .dot { color: var(--lime); }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .nav-links a {
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    min-height: 100vh;
+    background: var(--samsung-ink);
+    color: var(--text-inv);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 120px 40px 80px;
+  }
+
+  /* Decorative gradient glow */
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle, rgba(42, 75, 214, 0.35) 0%, rgba(20, 40, 160, 0) 60%);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+
+  /* Subtle grid backdrop */
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(circle at center, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 75%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .eyebrow {
+    font-family: "Space Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: rise 0.9s ease 0.1s forwards;
+  }
+  .eyebrow .sep { color: rgba(255,255,255,0.3); margin: 0 12px; }
+
+  .hero-title {
+    font-size: clamp(56px, 10vw, 148px);
+    font-weight: 500;
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: rise 0.9s ease 0.25s forwards;
+  }
+  .hero-title .italic {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--samsung-blue-soft);
+  }
+
+  .hero-sub {
+    font-size: clamp(17px, 1.6vw, 20px);
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 620px;
+    color: rgba(255,255,255,0.72);
+    opacity: 0;
+    animation: rise 0.9s ease 0.4s forwards;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-inv);
+    opacity: 0;
+    animation: rise 0.9s ease 0.55s forwards;
+  }
+  .hero-meta .meta-label {
+    font-family: "Space Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 10px;
+  }
+  .hero-meta .meta-value {
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.95);
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---------- Section scaffolding ---------- */
+  .section {
+    padding: 140px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-alt { background: var(--bg-off); max-width: none; padding-left: 0; padding-right: 0; }
+  .section-alt .section-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .chapter-label {
+    font-family: "Space Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--samsung-blue);
+    margin-bottom: 24px;
+  }
+  .chapter-title {
+    font-size: clamp(40px, 5.5vw, 76px);
+    font-weight: 500;
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    max-width: 900px;
+  }
+  .chapter-title .italic { font-style: italic; font-weight: 300; color: var(--wine); }
+
+  .chapter-lede {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 680px;
+    margin-top: 32px;
+  }
+
+  /* ---------- Apple-style sticky storytelling ---------- */
+  .story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 100px;
+  }
+  .story-media {
+    position: sticky;
+    top: 120px;
+    height: calc(100vh - 160px);
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--bg-off);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .story-media .placeholder {
+    width: 100%;
+    height: 100%;
+    background:
+      linear-gradient(135deg, var(--samsung-blue) 0%, var(--samsung-blue-soft) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.4);
+    font-family: "Space Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .story-copy { display: flex; flex-direction: column; gap: 180px; padding: 20px 0 200px; }
+
+  .copy-card {
+    padding: 40px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
+  }
+  .copy-card h3 {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+  .copy-card p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+  .copy-card .num {
+    font-family: "Space Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--samsung-blue);
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  /* ---------- Gallery grid ---------- */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+    margin-top: 80px;
+  }
+  .gallery-item {
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-off);
+    aspect-ratio: 4 / 3;
+    position: relative;
+    transition: transform 0.5s ease;
+  }
+  .gallery-item:hover { transform: translateY(-4px); }
+  .gallery-item.span-6 { grid-column: span 6; }
+  .gallery-item.span-4 { grid-column: span 4; }
+  .gallery-item.span-8 { grid-column: span 8; aspect-ratio: 16 / 9; }
+  .gallery-item .placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(145deg, #2a2f4a 0%, #1428a0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.35);
+    font-family: "Space Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- Callout ---------- */
+  .callout {
+    background: var(--bg-dark);
+    color: var(--text-inv);
+    padding: 160px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .callout::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(198, 249, 31, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .callout-quote {
+    font-size: clamp(32px, 5vw, 64px);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .callout-quote .hl { color: var(--lime); font-style: italic; font-weight: 400; }
+
+  /* ---------- Impact stats ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    margin-top: 100px;
+    padding-top: 60px;
+    border-top: 1px solid var(--border);
+  }
+  .stat .stat-num {
+    font-size: clamp(48px, 6vw, 88px);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .stat .stat-num .italic { font-style: italic; font-weight: 300; color: var(--wine); }
+  .stat .stat-label {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 280px;
+  }
+
+  /* ---------- Project nav ---------- */
+  .project-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .project-nav a {
+    padding: 60px 40px;
+    display: block;
+    transition: background 0.3s ease;
+    position: relative;
+  }
+  .project-nav a:first-child { border-right: 1px solid var(--border); }
+  .project-nav a:hover { background: var(--bg-off); }
+  .project-nav .pn-label {
+    font-family: "Space Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .project-nav .pn-title {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .project-nav a.next { text-align: right; }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .footer-links { display: flex; gap: 24px; }
+
+  /* ---------- Reveal animation ---------- */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.9s ease, transform 0.9s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .nav { padding: 18px 20px; }
+    .nav-links { display: none; }
+    .section { padding: 80px 20px; }
+    .section-alt .section-inner { padding: 0 20px; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-meta { grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 50px; padding-top: 28px; }
+    .story { grid-template-columns: 1fr; gap: 40px; }
+    .story-media { position: relative; top: 0; height: 60vh; }
+    .story-copy { gap: 40px; padding: 0; }
+    .gallery-item.span-6, .gallery-item.span-4, .gallery-item.span-8 { grid-column: span 12; }
+    .stats { grid-template-columns: 1fr; gap: 40px; }
+    .project-nav { grid-template-columns: 1fr; }
+    .project-nav a:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+    .project-nav a.next { text-align: left; }
+    .callout { padding: 100px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">todd<span class="dot">.</span>ly</a>
+  <div class="nav-links">
+    <a href="index.html">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">
+      Case Study <span class="sep">/</span> Product UI <span class="sep">/</span> 2023
+    </div>
+    <h1 class="hero-title">
+      Samsung <span class="italic">refined</span>,<br />
+      pixel by pixel.
+    </h1>
+    <p class="hero-sub">
+      [PLACEHOLDER SUB] One-sentence intro to the Samsung work — what product, what surface, what was at stake. Keep it tight and declarative.
+    </p>
+
+    <div class="hero-meta">
+      <div>
+        <div class="meta-label">Client</div>
+        <div class="meta-value">Samsung</div>
+      </div>
+      <div>
+        <div class="meta-label">Role</div>
+        <div class="meta-value">Visual Designer</div>
+      </div>
+      <div>
+        <div class="meta-label">Scope</div>
+        <div class="meta-value">Product UI · Visual Design</div>
+      </div>
+      <div>
+        <div class="meta-label">Year</div>
+        <div class="meta-value">2023</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Chapter 1: Challenge -->
+<section class="section">
+  <div class="reveal">
+    <div class="chapter-label">01 · The Challenge</div>
+    <h2 class="chapter-title">
+      A platform used by millions, asking for a <span class="italic">quieter</span> kind of clarity.
+    </h2>
+    <p class="chapter-lede">
+      [PLACEHOLDER] Two to three sentences setting up the problem. What was broken, noisy, confusing, or outdated. What Samsung needed, and why visual design was the lever that would move it.
+    </p>
+  </div>
+</section>
+
+<!-- Chapter 2: Research (sticky story) -->
+<section class="section-alt">
+  <div class="section-inner section" style="max-width: 1400px; padding-top: 140px; padding-bottom: 140px;">
+    <div class="reveal">
+      <div class="chapter-label">02 · Research & Audit</div>
+      <h2 class="chapter-title">Understanding the system before redrawing it.</h2>
+    </div>
+
+    <div class="story">
+      <div class="story-media">
+        <div class="placeholder">Research Imagery</div>
+      </div>
+      <div class="story-copy">
+        <div class="copy-card reveal">
+          <span class="num">01</span>
+          <h3>Existing UI audit</h3>
+          <p>[PLACEHOLDER] What surfaces were reviewed, what inconsistencies surfaced, and how the audit shaped scope.</p>
+        </div>
+        <div class="copy-card reveal">
+          <span class="num">02</span>
+          <h3>Competitive landscape</h3>
+          <p>[PLACEHOLDER] Who Samsung was up against in this surface, what good looked like in-category, what to avoid.</p>
+        </div>
+        <div class="copy-card reveal">
+          <span class="num">03</span>
+          <h3>User &amp; stakeholder input</h3>
+          <p>[PLACEHOLDER] Short note on how user research and stakeholder priorities shaped the design constraints.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Chapter 3: Design System -->
+<section class="section">
+  <div class="reveal">
+    <div class="chapter-label">03 · Design System</div>
+    <h2 class="chapter-title">
+      Color, type, and spacing built for <span class="italic">scale</span>.
+    </h2>
+    <p class="chapter-lede">
+      [PLACEHOLDER] A short paragraph on the design system work — tokens, components, grids — and how consistency became a product feature, not a deliverable.
+    </p>
+  </div>
+
+  <div class="gallery">
+    <div class="gallery-item span-8 reveal"><div class="placeholder">System Overview</div></div>
+    <div class="gallery-item span-4 reveal"><div class="placeholder">Color Tokens</div></div>
+    <div class="gallery-item span-4 reveal"><div class="placeholder">Typography</div></div>
+    <div class="gallery-item span-4 reveal"><div class="placeholder">Components</div></div>
+    <div class="gallery-item span-4 reveal"><div class="placeholder">Grid / Layout</div></div>
+  </div>
+</section>
+
+<!-- Chapter 4: Execution -->
+<section class="section-alt">
+  <div class="section-inner section" style="max-width: 1400px; padding-top: 140px; padding-bottom: 140px;">
+    <div class="reveal">
+      <div class="chapter-label">04 · Execution</div>
+      <h2 class="chapter-title">Shipping the details that users never notice — and always feel.</h2>
+    </div>
+
+    <div class="story">
+      <div class="story-media">
+        <div class="placeholder">Final UI Screens</div>
+      </div>
+      <div class="story-copy">
+        <div class="copy-card reveal">
+          <span class="num">01</span>
+          <h3>Key screen</h3>
+          <p>[PLACEHOLDER] Walk through the hero screen and what design decisions were made to improve clarity, hierarchy, or trust.</p>
+        </div>
+        <div class="copy-card reveal">
+          <span class="num">02</span>
+          <h3>States &amp; edge cases</h3>
+          <p>[PLACEHOLDER] A quick note on how the system handles empty states, errors, loading — the parts of UI most designers skip.</p>
+        </div>
+        <div class="copy-card reveal">
+          <span class="num">03</span>
+          <h3>Handoff &amp; collaboration</h3>
+          <p>[PLACEHOLDER] How the work got from Figma to engineering — tokens, documentation, working sessions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pull quote -->
+<section class="callout">
+  <p class="callout-quote">
+    Good product UI is <span class="hl">invisible</span>.<br />
+    It just makes the next tap feel inevitable.
+  </p>
+</section>
+
+<!-- Chapter 5: Impact -->
+<section class="section">
+  <div class="reveal">
+    <div class="chapter-label">05 · Impact</div>
+    <h2 class="chapter-title">What the work <span class="italic">did</span> once it shipped.</h2>
+  </div>
+
+  <div class="stats">
+    <div class="stat reveal">
+      <div class="stat-num">+<span class="italic">XX</span>%</div>
+      <div class="stat-label">[PLACEHOLDER] Engagement, conversion, or adoption lift tied to the redesign.</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num">XX<span class="italic">M</span></div>
+      <div class="stat-label">[PLACEHOLDER] Users reached or surfaces touched by the shipped system.</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num">XX<span class="italic">+</span></div>
+      <div class="stat-label">[PLACEHOLDER] Components, screens, or tokens delivered into production.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Project nav -->
+<div class="project-nav">
+  <a href="nba.html">
+    <div class="pn-label">← Previous</div>
+    <div class="pn-title">NBA Team Rebrands</div>
+  </a>
+  <a href="passion-projects.html" class="next">
+    <div class="pn-label">Next Project →</div>
+    <div class="pn-title">Passion Projects</div>
+  </a>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div>© 2026 Kevin Todd</div>
+  <div class="footer-links">
+    <a href="mailto:hello@kevintoddjr.com">Email</a>
+    <a href="https://github.com/toddlyawesome" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const dot = document.querySelector('.cursor-dot');
+  const ring = document.querySelector('.cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  window.addEventListener('mousemove', (e) => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.18;
+    ry += (my - ry) * 0.18;
+    ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, .copy-card, .gallery-item').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+  });
+
+  // Nav theme switch on scroll past hero
+  const nav = document.getElementById('nav');
+  const hero = document.getElementById('hero');
+  const navObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        nav.classList.toggle('light', !entry.isIntersecting);
+      });
+    },
+    { threshold: 0, rootMargin: '-80px 0px 0px 0px' }
+  );
+  navObserver.observe(hero);
+
+  // Reveal on scroll
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+</script>
+</body>
+</html>
