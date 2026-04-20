@@ -93,7 +93,22 @@
     padding: 0 3rem 5rem;
     position: relative;
     background: #141115;
+    overflow: hidden;
   }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('images/Y2K-icons.png');
+    background-size: cover;
+    background-position: center;
+    filter: invert(1) brightness(0.06);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero > * { position: relative; z-index: 1; }
 
   .hero-eyebrow {
     font-family: var(--font-mono);
