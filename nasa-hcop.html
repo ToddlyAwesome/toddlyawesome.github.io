@@ -170,6 +170,32 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
   .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
 
+  /* NASA IDENTITY ELEMENTS */
+  .hero-meatball {
+    position: absolute; top: 2rem; right: 3rem; z-index: 3;
+    height: 68px; width: auto;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.4s forwards;
+  }
+
+  .worm-mark {
+    display: flex; align-items: center; justify-content: center;
+    padding: 5rem 4rem;
+    background: var(--nasa-dark);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .worm-mark svg { height: 60px; width: auto; fill: var(--nasa-red); opacity: 0.95; transition: transform 0.4s ease; }
+  .worm-mark:hover svg { transform: scale(1.05); }
+
+  /* FLOATING DECORATIVE ICONS */
+  .float-icon { position: absolute; pointer-events: none; opacity: 0.1; z-index: 0; }
+  .float-icon img { width: 100%; height: 100%; object-fit: contain; filter: brightness(0) invert(1); }
+
+  .intro { position: relative; }
+  .intro .float-icon { opacity: 0.08; }
+  .intro .float-icon img { filter: none; opacity: 0.4; }
+
   /* CURSOR */
   .cursor { position: fixed; width: 10px; height: 10px; border-radius: 50%; background: #141115; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width 0.25s, height 0.25s, background 0.2s; }
   .cursor-ring { position: fixed; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(20,17,21,0.3); pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width 0.3s, height 0.3s, opacity 0.3s; }
@@ -215,6 +241,16 @@
   <div class="hero-bg"></div>
   <div class="hero-stars"></div>
   <div class="hero-gradient"></div>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg" alt="NASA" class="hero-meatball" />
+  <div class="float-icon" style="top: 25%; right: 12%; width: 140px; height: 140px; opacity: 0.18;">
+    <img src="images/Astronaut.svg" alt="" />
+  </div>
+  <div class="float-icon" style="bottom: 40%; left: 8%; width: 80px; height: 80px; opacity: 0.15;">
+    <img src="images/Star.svg" alt="" />
+  </div>
+  <div class="float-icon" style="top: 55%; right: 25%; width: 60px; height: 60px; opacity: 0.12;">
+    <img src="images/Satelite.svg" alt="" />
+  </div>
   <div class="hero-content">
     <p class="hero-eyebrow">Brand / Identity / Print</p>
     <h1 class="hero-title">NASA<br /><em>HCOP</em></h1>
@@ -228,6 +264,9 @@
 
 <!-- INTRO -->
 <div class="intro reveal">
+  <div class="float-icon" style="top: 30%; right: 8%; width: 180px; height: 180px; opacity: 0.35;">
+    <img src="images/Planet 1.svg" alt="" />
+  </div>
   <p>For one of NASA's most important outreach programs, I developed a <em>refreshed visual identity</em> — anchored in space iconography and a modernized logo — to reintroduce HCOP to a new generation of scholars, educators, and stakeholders.</p>
 </div>
 
@@ -252,7 +291,10 @@
 </div>
 
 <!-- CHAPTER 01 -->
-<div class="chapter-divider reveal">
+<div class="chapter-divider reveal" style="position: relative; overflow: hidden;">
+  <div class="float-icon" style="top: 50%; right: 15%; width: 120px; height: 120px; opacity: 0.3; transform: translateY(-50%);">
+    <img src="images/Asteroid.svg" alt="" />
+  </div>
   <div>
     <p class="chapter-label">Chapter 01</p>
     <h2 class="chapter-heading">The Challenge</h2>
@@ -273,7 +315,10 @@
 </div>
 
 <!-- CHAPTER 02 -->
-<div class="chapter-divider reveal">
+<div class="chapter-divider reveal" style="position: relative; overflow: hidden;">
+  <div class="float-icon" style="top: 50%; right: 18%; width: 140px; height: 140px; opacity: 0.3; transform: translateY(-50%);">
+    <img src="images/Planet 2.svg" alt="" />
+  </div>
   <div>
     <p class="chapter-label">Chapter 02</p>
     <h2 class="chapter-heading">Logo Evolution</h2>
@@ -323,7 +368,10 @@
 </div>
 
 <!-- CHAPTER 03 -->
-<div class="chapter-divider reveal">
+<div class="chapter-divider reveal" style="position: relative; overflow: hidden;">
+  <div class="float-icon" style="top: 40%; right: 20%; width: 130px; height: 130px; opacity: 0.3;">
+    <img src="images/Satelite.svg" alt="" />
+  </div>
   <div>
     <p class="chapter-label">Chapter 03</p>
     <h2 class="chapter-heading">The System<br />in Action</h2>
@@ -352,6 +400,11 @@
 <div class="callout">
   <p class="callout-label reveal">Takeaway</p>
   <p class="callout-quote reveal d1">A great rebrand doesn't reinvent a program — it helps <em>more people see it clearly</em>. For HCOP, that meant a mark and system scholars could rally around and stakeholders could trust.</p>
+</div>
+
+<!-- WORM LOGO -->
+<div class="worm-mark">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/NASA_Worm_logo.svg" alt="NASA Worm logo" style="height:60px; width:auto; filter: brightness(0) saturate(100%) invert(36%) sepia(83%) saturate(4700%) hue-rotate(355deg) brightness(100%) contrast(99%);" />
 </div>
 
 <!-- PROJECT NAV -->
