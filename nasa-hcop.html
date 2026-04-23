@@ -146,7 +146,7 @@
 
   /* CALLOUT */
   .callout { background: var(--nasa-dark); padding: 8rem 4rem; position: relative; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.06); }
-  .callout-worm-bg { position: absolute; top: 50%; right: -5%; transform: translateY(-50%); width: 65%; max-width: 1100px; opacity: 0.12; pointer-events: none; fill: var(--nasa-red); }
+  .callout-worm-bg { position: absolute; top: 50%; right: -5%; transform: translateY(-50%); width: 65%; max-width: 1100px; opacity: 0.15; pointer-events: none; filter: brightness(0) saturate(100%) invert(36%) sepia(83%) saturate(4700%) hue-rotate(355deg) brightness(100%) contrast(99%); }
   .callout-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nasa-red); margin-bottom: 2rem; position: relative; z-index: 1; }
   .callout-quote { font-size: clamp(1.5rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.45; max-width: 820px; color: #fff; position: relative; z-index: 1; }
   .callout-quote em { font-style: italic; color: var(--nasa-red); }
@@ -411,12 +411,7 @@
 
 <!-- CALLOUT -->
 <div class="callout">
-  <svg class="callout-worm-bg" viewBox="0 0 1000 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M10 190 L10 20 L80 20 L170 140 C172 118 172 98 172 80 C172 60 170 42 165 20 L230 20 L230 190 L160 190 L75 70 C72 92 72 112 72 130 C72 150 75 170 80 190 Z"/>
-    <path d="M260 190 L340 20 L410 20 L490 190 L420 190 L408 160 L342 160 L330 190 Z M360 110 L390 110 L375 70 Z"/>
-    <path d="M520 140 C520 170 550 200 605 200 C665 200 705 175 705 140 C705 110 680 95 625 85 L605 82 C585 78 575 72 575 62 C575 50 588 42 608 42 C628 42 640 52 643 68 L705 68 C703 32 672 10 608 10 C548 10 515 35 515 70 C515 100 540 118 595 128 L615 132 C640 137 650 142 650 155 C650 167 635 175 612 175 C585 175 568 165 566 148 Z"/>
-    <path d="M735 190 L815 20 L885 20 L965 190 L895 190 L883 160 L817 160 L805 190 Z M835 110 L865 110 L850 70 Z"/>
-  </svg>
+  <img src="images/NASA Worm.png" alt="" class="callout-worm-bg" />
   <p class="callout-label reveal">Takeaway</p>
   <p class="callout-quote reveal d1">A great rebrand doesn't reinvent a program — it helps <em>more people see it clearly</em>. For HCOP, that meant a mark and system scholars could rally around and stakeholders could trust.</p>
 </div>
