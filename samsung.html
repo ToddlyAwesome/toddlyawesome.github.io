@@ -62,9 +62,9 @@
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background-image: url('https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_710,h_959,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png');
-    background-size: cover; background-position: center top;
-    filter: brightness(0.35) saturate(1.1);
+    background-image: url('https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_2400,h_1600,q_95,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png');
+    background-size: cover; background-position: center center;
+    filter: brightness(0.45) saturate(1.15);
     opacity: 0; animation: heroIn 1.4s ease 0.3s forwards;
   }
   .hero-gradient {
@@ -88,7 +88,7 @@
     50% { transform: translateY(calc(-50% - 10px)) translateX(-6px); }
   }
 
-  .hero-content { position: relative; z-index: 2; padding: 0 4rem; max-width: 55%; }
+  .hero-content { position: relative; z-index: 2; padding: 0 4rem; max-width: 900px; }
   .hero-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--samsung-bright); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.7s ease 0.8s forwards; }
   .hero-title { font-size: clamp(3.5rem, 9vw, 8rem); font-weight: 700; line-height: 0.92; letter-spacing: -0.04em; color: #fff; opacity: 0; animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 1s forwards; }
   .hero-title em { font-style: normal; color: var(--samsung-bright); display: block; }
@@ -205,7 +205,6 @@
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
   <div class="hero-gradient"></div>
-  <img src="images/Samsung logo-white.png" alt="Samsung" class="hero-samsung-logo" />
   <div class="hero-content">
     <p class="hero-eyebrow">UX / Visual Design / Brand</p>
     <h1 class="hero-title">Samsung<br /><em>Visual Design</em></h1>
