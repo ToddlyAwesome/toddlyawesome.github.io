@@ -13,12 +13,13 @@
   :root {
     --bg: #ffffff;
     --text: #141115;
-    --muted: #8d6346;
+    --muted: #777;
     --border: rgba(20,17,21,0.1);
     --accent: #c6f91f;
-    --yellow: #ddf45b;
-    --ps-blue: #003087;
-    --ps-light: #00439c;
+    --ps-blue: #003791;
+    --ps-blue-bright: #0070d1;
+    --ps-dark: #0a0e1a;
+    --ps-soft: #eef2fa;
     --font-sans: 'DM Sans', sans-serif;
     --font-mono: 'Space Mono', monospace;
   }
@@ -26,12 +27,11 @@
   html { scroll-behavior: smooth; }
   body { background: var(--bg); color: var(--text); font-family: var(--font-sans); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
 
-  /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 200;
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.25rem 3rem;
-    background: rgba(20,17,21,0.92);
+    background: rgba(10,14,26,0.9);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255,255,255,0.07);
     animation: navIn 0.6s cubic-bezier(0.22,1,0.36,1) both;
@@ -40,10 +40,12 @@
   nav.light { background: rgba(255,255,255,0.92); border-bottom: 1px solid var(--border); }
   nav.light .nav-logo { color: var(--text); }
   nav.light .nav-logo img { filter: none; }
+  nav.light .nav-logo span { color: var(--ps-blue); }
   nav.light .nav-links a { color: var(--muted); }
   nav.light .nav-links a:hover { color: var(--text); }
 
   @keyframes navIn { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
 
   .nav-logo { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.75rem; }
   .nav-logo img { height: 24px; width: auto; display: block; filter: invert(1); }
@@ -52,173 +54,152 @@
   .nav-links a { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: #fff; }
 
-  /* ── HERO ── */
   .hero {
     position: relative; height: 100vh;
-    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-    overflow: hidden; padding-bottom: 5rem; background: #000814;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    overflow: hidden; padding-bottom: 5rem;
+    background: var(--ps-dark);
   }
-
   .hero-bg {
     position: absolute; inset: 0;
     background-image: url('images/PS.png');
     background-size: cover; background-position: center top;
-    opacity: 0; animation: heroIn 1.4s ease 0.3s forwards; filter: brightness(0.5);
+    filter: brightness(0.4) saturate(1.1);
+    opacity: 0; animation: heroIn 1.4s ease 0.3s forwards;
   }
-
   .hero-gradient {
     position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(to top, rgba(0,8,20,0.92) 0%, rgba(0,8,20,0.4) 45%, rgba(0,8,20,0.05) 100%);
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(0,55,145,0.35) 0%, transparent 70%),
+      linear-gradient(to top, rgba(10,14,26,0.97) 0%, rgba(10,14,26,0.35) 55%, rgba(10,14,26,0.1) 100%);
+  }
+  @keyframes heroIn { from { opacity: 0; transform: scale(1.05); } to { opacity: 1; transform: scale(1); } }
+
+  .hero-ps-logo {
+    position: absolute; top: 50%; right: 4rem; z-index: 3;
+    transform: translateY(-50%);
+    height: min(380px, 50vh); width: auto;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 1.2s forwards, psFloat 7s ease-in-out 2.4s infinite;
+    filter: drop-shadow(0 0 40px rgba(0,112,209,0.5));
+  }
+  @keyframes psFloat {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50% { transform: translateY(calc(-50% - 10px)) translateX(-6px); }
   }
 
-  @keyframes heroIn { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: scale(1); } }
+  .hero-content { position: relative; z-index: 2; padding: 0 4rem; max-width: 55%; }
+  .hero-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ps-blue-bright); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.7s ease 0.8s forwards; }
+  .hero-title { font-size: clamp(3.5rem, 9vw, 8rem); font-weight: 700; line-height: 0.92; letter-spacing: -0.04em; color: #fff; opacity: 0; animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 1s forwards; }
+  .hero-title em { font-style: normal; color: var(--ps-blue-bright); display: block; }
+  .hero-sub { margin-top: 1.75rem; font-size: 1rem; color: rgba(255,255,255,0.5); max-width: 540px; line-height: 1.7; opacity: 0; animation: fadeUp 0.7s ease 1.2s forwards; }
 
-  .hero-content { position: relative; z-index: 2; text-align: center; color: #fff; padding: 0 2rem; }
-  .hero-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.7s ease 0.7s forwards; }
-  .hero-title { font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.03em; opacity: 0; animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.9s forwards; }
-  .hero-title em { font-style: normal; color: var(--accent); }
-  .hero-sub { margin-top: 1.5rem; font-size: 1.1rem; font-weight: 300; color: rgba(255,255,255,0.65); max-width: 560px; margin-left: auto; margin-right: auto; opacity: 0; animation: fadeUp 0.7s ease 1.1s forwards; }
+  .hero-scroll-hint { position: absolute; bottom: 2.5rem; right: 4rem; display: flex; align-items: center; gap: 0.75rem; z-index: 2; opacity: 0; animation: fadeUp 0.6s ease 1.5s forwards; }
+  .hero-scroll-hint span { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+  .scroll-line { width: 40px; height: 1px; background: linear-gradient(to right, rgba(0,112,209,0.6), transparent); }
 
-  .hero-scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0; animation: fadeUp 0.6s ease 1.4s forwards; z-index: 2; }
-  .hero-scroll-hint span { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
-  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(198,249,31,0.6), transparent); animation: scrollPulse 2s ease-in-out 1.6s infinite; }
-  @keyframes scrollPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  .intro { padding: 7rem 4rem; max-width: 880px; position: relative; }
+  .intro p { font-size: clamp(1.25rem, 2.2vw, 1.8rem); font-weight: 300; line-height: 1.55; }
+  .intro p em { font-style: italic; color: var(--ps-blue); }
 
-  /* ── INTRO ── */
-  .intro-section { padding: 8rem 3rem; max-width: 900px; margin: 0 auto; text-align: center; }
-  .intro-section p { font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 300; line-height: 1.5; }
-  .intro-section p em { font-style: italic; color: var(--accent); }
-
-  /* ── META ROW ── */
-  .meta-row { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .meta-row { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; }
   .meta-cell { padding: 2.5rem 3rem; border-right: 1px solid var(--border); }
   .meta-cell:last-child { border-right: none; }
-  .meta-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
-  .meta-value { font-size: 0.9rem; font-weight: 500; color: var(--text); }
+  .meta-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ps-blue); margin-bottom: 0.5rem; }
+  .meta-value { font-size: 0.9rem; font-weight: 500; }
 
-  /* ── STORY SECTIONS ── */
-  .story-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; border-bottom: 1px solid var(--border); }
-  .story-section.reverse { direction: rtl; }
-  .story-section.reverse > * { direction: ltr; }
+  .chapter-divider { padding: 5rem 4rem 3rem; border-top: 1px solid var(--border); display: flex; align-items: flex-end; justify-content: space-between; position: relative; overflow: hidden; }
+  .chapter-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ps-blue); margin-bottom: 0.75rem; }
+  .chapter-heading { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.0; }
+  .chapter-num { font-family: var(--font-mono); font-size: clamp(4rem, 8vw, 7rem); font-weight: 700; color: rgba(0,55,145,0.1); line-height: 1; letter-spacing: -0.05em; }
 
-  .story-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-  .story-sticky.dark { background: #000814; }
-  .story-sticky.light { background: #f5f3f0; }
-  .story-sticky img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 2rem; }
-
-  .story-content { padding: 8rem 5rem; display: flex; flex-direction: column; justify-content: center; }
-  .story-chapter { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
-  .story-heading { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
-  .story-body { font-size: 1rem; color: rgba(20,17,21,0.72); line-height: 1.8; max-width: 440px; }
+  .story { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; border-bottom: 1px solid var(--border); position: relative; }
+  .story.flip { direction: rtl; }
+  .story.flip > * { direction: ltr; }
+  .story-media { position: sticky; top: 0; height: 100vh; overflow: hidden; background: var(--ps-soft); display: flex; align-items: center; justify-content: center; padding: 2rem; }
+  .story-media img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .story-media.dark { background: var(--ps-dark); }
+  .story-copy { padding: 8rem 4rem; display: flex; flex-direction: column; justify-content: center; }
+  .story-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ps-blue); margin-bottom: 1.5rem; }
+  .story-heading { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .story-body { font-size: 1rem; color: rgba(20,17,21,0.7); line-height: 1.8; max-width: 420px; }
   .story-body + .story-body { margin-top: 1rem; }
 
-  /* ── FEATURE LIST ── */
-  .feature-list { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
-  .feature-item { display: flex; gap: 1.25rem; align-items: flex-start; }
-  .feature-num { font-family: var(--font-mono); font-size: 11px; color: var(--accent); font-weight: 700; padding-top: 3px; min-width: 24px; }
-  .feature-text strong { display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.25rem; }
-  .feature-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+  .process-list { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .process-item { display: flex; gap: 1rem; align-items: flex-start; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
+  .process-item:last-child { border-bottom: none; }
+  .process-num { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--ps-blue); flex-shrink: 0; min-width: 26px; padding-top: 2px; }
+  .process-text { font-size: 0.9rem; color: rgba(20,17,21,0.72); line-height: 1.6; }
+  .process-text strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 0.2rem; }
 
-  /* ── WIREFRAME GALLERY ── */
-  .wf-section { background: #f5f3f0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 5rem 3rem; }
-  .wf-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
-  .wf-heading { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 3rem; }
-  .wf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .wf-item { overflow: hidden; border-radius: 6px; border: 1px solid var(--border); background: #fff; opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .wf-item.visible { opacity: 1; transform: translateY(0); }
-  .wf-item:nth-child(2) { transition-delay: 0.1s; }
-  .wf-item:nth-child(3) { transition-delay: 0.2s; }
-  .wf-item:nth-child(4) { transition-delay: 0.15s; }
-  .wf-item:nth-child(5) { transition-delay: 0.25s; }
-  .wf-item img { width: 100%; height: auto; display: block; transition: transform 0.4s ease; }
-  .wf-item:hover img { transform: scale(1.02); }
-  .wf-item-label { padding: 0.75rem 1rem; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--border); }
+  .gallery-4 { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); background: var(--ps-soft); }
+  .gallery-item { overflow: hidden; border-right: 1px solid var(--border); padding: 1.5rem; display: flex; align-items: center; justify-content: center; }
+  .gallery-item:last-child { border-right: none; }
+  .gallery-item img { max-width: 100%; height: auto; display: block; transition: transform 0.4s ease; }
+  .gallery-item:hover img { transform: scale(1.04); }
 
-  /* ── HIFI SHOWCASE ── */
-  .hifi-section { padding: 5rem 3rem; background: #000814; }
-  .hifi-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
-  .hifi-heading { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; color: #fff; margin-bottom: 3rem; }
+  .proto-section { padding: 6rem 4rem; background: var(--ps-dark); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .proto-header { text-align: center; margin-bottom: 3rem; }
+  .proto-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ps-blue-bright); margin-bottom: 1rem; }
+  .proto-heading { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+  .proto-embed { max-width: 1400px; margin: 0 auto; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.4); }
+  .proto-embed iframe { width: 100%; height: 100%; border: none; display: block; }
+  .proto-footer { text-align: center; margin-top: 2rem; font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; }
 
-  .hifi-hero { overflow: hidden; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.08); opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .hifi-hero.visible { opacity: 1; transform: translateY(0); }
-  .hifi-hero img { width: 100%; height: auto; display: block; }
+  .img-full { overflow: hidden; border-bottom: 1px solid var(--border); background: var(--ps-soft); display: flex; align-items: center; justify-content: center; padding: 3rem; }
+  .img-full img { max-width: 100%; width: auto; height: auto; display: block; transition: transform 0.6s ease; }
+  .img-full:hover img { transform: scale(1.01); }
 
-  .hifi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  .hifi-item { overflow: hidden; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .hifi-item.visible { opacity: 1; transform: translateY(0); }
-  .hifi-item:nth-child(2) { transition-delay: 0.1s; }
-  .hifi-item:nth-child(3) { transition-delay: 0.2s; }
-  .hifi-item:nth-child(4) { transition-delay: 0.1s; }
-  .hifi-item:nth-child(5) { transition-delay: 0.2s; }
-  .hifi-item:nth-child(6) { transition-delay: 0.3s; }
-  .hifi-item img { width: 100%; height: auto; display: block; transition: transform 0.4s ease; opacity: 0.9; }
-  .hifi-item:hover img { transform: scale(1.03); opacity: 1; }
+  .callout { background: var(--ps-dark); padding: 8rem 4rem; position: relative; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.06); }
+  .callout-ps-bg {
+    position: absolute; top: 50%; right: -5%; transform: translateY(-50%);
+    width: 50%; max-width: 800px; opacity: 0.1; pointer-events: none;
+    filter: brightness(0) saturate(100%) invert(35%) sepia(95%) saturate(1800%) hue-rotate(195deg) brightness(95%) contrast(100%);
+  }
+  .callout-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ps-blue-bright); margin-bottom: 2rem; position: relative; z-index: 1; }
+  .callout-quote { font-size: clamp(1.5rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.45; max-width: 820px; color: #fff; position: relative; z-index: 1; }
+  .callout-quote em { font-style: italic; color: var(--ps-blue-bright); }
 
-  /* ── PROTOTYPE SECTION ── */
-  .proto-section { padding: 5rem 3rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .proto-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
-  .proto-heading { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
-  .proto-sub { font-size: 1rem; color: var(--muted); max-width: 560px; margin-bottom: 2.5rem; }
-
-  .proto-frame { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
-  .proto-bar { height: 36px; background: #ece9e4; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; padding: 0 1rem; }
-  .dot { width: 10px; height: 10px; border-radius: 50%; }
-  .dot-r { background: #ff5f57; } .dot-y { background: #febc2e; } .dot-g { background: #28c840; }
-  .proto-url { flex: 1; margin-left: 0.75rem; height: 22px; background: #d8d5cf; border-radius: 3px; display: flex; align-items: center; padding: 0 0.75rem; font-family: var(--font-mono); font-size: 10px; color: #777; }
-  .proto-frame iframe { display: block; width: 100%; height: 620px; border: none; background: #000814; }
-
-  /* ── IMPACT ── */
-  .impact-section { background: #141115; color: #fff; padding: 10rem 3rem; text-align: center; position: relative; overflow: hidden; }
-  .impact-section::before { content: 'PS5'; position: absolute; font-size: 22vw; font-weight: 700; color: rgba(255,255,255,0.03); top: 50%; left: 50%; transform: translate(-50%,-50%); letter-spacing: -0.05em; white-space: nowrap; pointer-events: none; }
-  .impact-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; position: relative; z-index: 1; }
-  .impact-quote { font-size: clamp(1.5rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.4; max-width: 820px; margin: 0 auto; position: relative; z-index: 1; }
-  .impact-quote em { font-style: italic; color: var(--accent); }
-
-  /* ── PROJECT NAV ── */
   .project-nav { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); }
-  .project-nav-item { padding: 3rem; text-decoration: none; color: var(--text); border-right: 1px solid var(--border); transition: background 0.3s ease; display: flex; flex-direction: column; gap: 0.5rem; }
+  .project-nav-item { padding: 3rem; text-decoration: none; color: var(--text); border-right: 1px solid var(--border); transition: background 0.3s; display: flex; flex-direction: column; gap: 0.5rem; }
   .project-nav-item:last-child { border-right: none; text-align: right; }
-  .project-nav-item:hover { background: #f5f3f0; }
+  .project-nav-item:hover { background: var(--ps-soft); }
   .project-nav-dir { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
   .project-nav-title { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em; transition: color 0.3s; }
-  .project-nav-item:hover .project-nav-title { color: var(--accent); }
+  .project-nav-item:hover .project-nav-title { color: var(--ps-blue); }
 
-  /* ── FOOTER MINI ── */
   .footer-mini { padding: 2rem 3rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
   .footer-mini a { font-family: var(--font-mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
   .footer-mini a:hover { color: var(--text); }
 
-  /* ── SCROLL REVEAL ── */
-  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
   .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.15s; }
-  .reveal-delay-2 { transition-delay: 0.3s; }
-  .reveal-delay-3 { transition-delay: 0.45s; }
+  .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
 
-  /* ── CURSOR ── */
-  .cursor { position: fixed; width: 10px; height: 10px; border-radius: 50%; background: #141115; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width 0.25s, height 0.25s; }
+  .cursor { position: fixed; width: 10px; height: 10px; border-radius: 50%; background: #141115; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width 0.25s, height 0.25s, background 0.2s; }
   .cursor-ring { position: fixed; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(20,17,21,0.3); pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width 0.3s, height 0.3s, opacity 0.3s; }
-  .cursor.is-hovering { width: 18px; height: 18px; }
-  .cursor-ring.is-hovering { width: 60px; height: 60px; opacity: 0.35; }
+  .cursor.hovering { width: 18px; height: 18px; background: var(--ps-blue); }
+  .cursor-ring.hovering { width: 60px; height: 60px; opacity: 0.3; }
 
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
-    .hero-title { font-size: 3rem; }
-    .intro-section { padding: 5rem 1.5rem; }
+    .hero-content, .intro, .chapter-divider, .callout, .proto-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero-content { max-width: 100%; }
+    .hero-ps-logo { height: 200px; right: 1rem; top: auto; bottom: 32%; opacity: 0.4; }
+    .hero-scroll-hint { right: 1.5rem; }
     .meta-row { grid-template-columns: 1fr 1fr; }
     .meta-cell { padding: 1.5rem; border-bottom: 1px solid var(--border); }
-    .story-section { grid-template-columns: 1fr; min-height: auto; }
-    .story-section.reverse { direction: ltr; }
-    .story-sticky { position: relative; height: 60vw; }
-    .story-content { padding: 3rem 1.5rem; }
-    .wf-section, .hifi-section, .proto-section { padding: 3rem 1.5rem; }
-    .wf-grid { grid-template-columns: 1fr; }
-    .hifi-grid { grid-template-columns: 1fr; }
+    .story { grid-template-columns: 1fr; min-height: auto; }
+    .story.flip { direction: ltr; }
+    .story-media { position: relative; height: 60vw; }
+    .story-copy { padding: 3rem 1.5rem; }
+    .gallery-4 { grid-template-columns: 1fr 1fr; }
+    .gallery-item { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .gallery-item:nth-child(2n) { border-right: none; }
     .project-nav { grid-template-columns: 1fr; }
     .project-nav-item { border-right: none; border-bottom: 1px solid var(--border); }
     .project-nav-item:last-child { text-align: left; }
-    .footer-mini { padding: 1.5rem; flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .footer-mini { flex-direction: column; gap: 1rem; align-items: flex-start; padding: 1.5rem; }
   }
 </style>
 </head>
@@ -227,10 +208,9 @@
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- NAV -->
 <nav id="mainNav">
   <a href="index.html" class="nav-logo">
-    <img src="logo.png" alt="Kevin Todd logo" />
+    <img src="logo.png" alt="Kevin Todd" />
     Kevin Todd<span>///</span>
   </a>
   <ul class="nav-links">
@@ -240,14 +220,14 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
   <div class="hero-gradient"></div>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg" alt="PlayStation" class="hero-ps-logo" />
   <div class="hero-content">
-    <p class="hero-eyebrow">Case Study — UX Design / Prototyping</p>
-    <h1 class="hero-title">PS5 Dashboard<br /><em>Redesign</em></h1>
-    <p class="hero-sub">Reimagining PlayStation's home experience — from lo-fi wireframes to a fully interactive prototype.</p>
+    <p class="hero-eyebrow">UX / Product / Gaming</p>
+    <h1 class="hero-title">PS5<br /><em>Dashboard</em></h1>
+    <p class="hero-sub">A concept redesign of the PlayStation 5 home experience — rethinking how players browse, launch, and discover content across the console's signature interface.</p>
   </div>
   <div class="hero-scroll-hint">
     <span>Scroll</span>
@@ -255,73 +235,94 @@
   </div>
 </section>
 
-<!-- INTRO -->
-<section class="intro-section reveal">
-  <p>The PS5 dashboard is powerful — but <em>cluttered</em>. This redesign challenged every assumption about how players navigate their console, starting from scratch with research and ending with a prototype that puts games first.</p>
-</section>
+<div class="intro reveal">
+  <p>PS5's dashboard is a beautifully cinematic interface — but under the surface, small friction points add up. I explored how the home experience could become <em>faster, clearer, and more expressive</em> without losing what makes it feel distinctly PlayStation.</p>
+</div>
 
-<!-- META -->
 <div class="meta-row">
   <div class="meta-cell reveal">
-    <p class="meta-label">Client</p>
-    <p class="meta-value">PlayStation / Sony</p>
+    <p class="meta-label">Project</p>
+    <p class="meta-value">PS5 Dashboard Concept</p>
   </div>
-  <div class="meta-cell reveal reveal-delay-1">
+  <div class="meta-cell reveal d1">
     <p class="meta-label">Role</p>
-    <p class="meta-value">UX Designer / Visual Designer</p>
+    <p class="meta-value">UX / UI Designer</p>
   </div>
-  <div class="meta-cell reveal reveal-delay-2">
-    <p class="meta-label">Deliverables</p>
-    <p class="meta-value">Wireframes, Hi-fi, Prototype</p>
+  <div class="meta-cell reveal d2">
+    <p class="meta-label">Scope</p>
+    <p class="meta-value">Research / Wireframes / Prototype</p>
   </div>
-  <div class="meta-cell reveal reveal-delay-3">
+  <div class="meta-cell reveal d3">
     <p class="meta-label">Tools</p>
     <p class="meta-value">Figma</p>
   </div>
 </div>
 
-<!-- STORY 01: PROBLEM -->
-<div class="story-section">
-  <div class="story-sticky dark">
+<!-- CHAPTER 01 -->
+<div class="chapter-divider reveal">
+  <div>
+    <p class="chapter-label">Chapter 01</p>
+    <h2 class="chapter-heading">The Problem</h2>
+  </div>
+  <span class="chapter-num">01</span>
+</div>
+
+<div class="story">
+  <div class="story-media">
     <img src="images/Home_game 1 selection.png" alt="PS5 Home Screen" />
   </div>
-  <div class="story-content">
-    <p class="story-chapter reveal">01 — The Problem</p>
-    <h2 class="story-heading reveal reveal-delay-1">A dashboard built around Sony.<br />Not the player.</h2>
-    <p class="story-body reveal reveal-delay-2">The existing PS5 home screen buries games behind promotional content, Store ads, and PlayStation Plus upsells. Players who just want to play have to navigate noise before reaching what they came for.</p>
-    <p class="story-body reveal reveal-delay-2">The core question: what if the dashboard adapted to the player — surfacing their games, their friends, their activity — instead of Sony's marketing agenda?</p>
+  <div class="story-copy">
+    <p class="story-num reveal">01 — The Brief</p>
+    <h2 class="story-heading reveal d1">Cinematic feel,<br />quieter friction.</h2>
+    <p class="story-body reveal d2">The PS5 dashboard is gorgeous — large cinematic tiles, rich motion, immersive audio. But everyday tasks like reopening a specific game or navigating to the store often require more clicks and mental load than they should.</p>
+    <p class="story-body reveal d2">I set out to preserve what players love about the PS5's personality while tightening the interactions around the most common flows.</p>
   </div>
 </div>
 
-<!-- STORY 02: RESEARCH -->
-<div class="story-section reverse">
-  <div class="story-sticky light">
-    <img src="images/Home_lofi wireframe.png" alt="Home Lo-fi Wireframe" />
+<!-- CHAPTER 02 -->
+<div class="chapter-divider reveal">
+  <div>
+    <p class="chapter-label">Chapter 02</p>
+    <h2 class="chapter-heading">Research &amp;<br />Wireframes</h2>
   </div>
-  <div class="story-content">
-    <p class="story-chapter reveal">02 — Research & Wireframing</p>
-    <h2 class="story-heading reveal reveal-delay-1">Start with structure,<br />not aesthetics.</h2>
-    <p class="story-body reveal reveal-delay-2">Before touching color or style, the focus was on information architecture. Lo-fi wireframes mapped out every screen — Home, Mini Menu, Store, and item detail — with a clear hierarchy that puts games at the top.</p>
-    <div class="feature-list">
-      <div class="feature-item reveal reveal-delay-1">
-        <span class="feature-num">01</span>
-        <div class="feature-text">
-          <strong>Game-first home layout</strong>
-          <p>Hero game area above the fold, quick-launch tiles prominent, store content subordinate.</p>
+  <span class="chapter-num">02</span>
+</div>
+
+<div class="story flip">
+  <div class="story-media">
+    <img src="images/Home_lofi wireframe.png" alt="Home Wireframe" />
+  </div>
+  <div class="story-copy">
+    <p class="story-num reveal">02 — Structure First</p>
+    <h2 class="story-heading reveal d1">Low-fi before<br />high-fidelity.</h2>
+    <p class="story-body reveal d2">Before touching visual design, I mapped the core flows in low-fidelity wireframes. This let me test hierarchy and navigation patterns quickly without getting distracted by polish.</p>
+    <div class="process-list">
+      <div class="process-item reveal">
+        <span class="process-num">01</span>
+        <div class="process-text">
+          <strong>Flow Audit</strong>
+          Mapped the existing PS5 flows for home, game launch, store, and settings.
         </div>
       </div>
-      <div class="feature-item reveal reveal-delay-2">
-        <span class="feature-num">02</span>
-        <div class="feature-text">
-          <strong>Streamlined mini menu</strong>
-          <p>Consolidated navigation with friends, notifications, search and settings in a single overlay — no buried submenus.</p>
+      <div class="process-item reveal d1">
+        <span class="process-num">02</span>
+        <div class="process-text">
+          <strong>Wireframe Sketching</strong>
+          Paper and Figma sketches to explore new hierarchies and surface patterns.
         </div>
       </div>
-      <div class="feature-item reveal reveal-delay-3">
-        <span class="feature-num">03</span>
-        <div class="feature-text">
-          <strong>Cleaner store browsing</strong>
-          <p>Grid-first store layout with a dedicated item detail page that surfaces buy, stream, and description without scroll overload.</p>
+      <div class="process-item reveal d2">
+        <span class="process-num">03</span>
+        <div class="process-text">
+          <strong>Iteration</strong>
+          Refined wireframes against self-critique and core usability heuristics.
+        </div>
+      </div>
+      <div class="process-item reveal d3">
+        <span class="process-num">04</span>
+        <div class="process-text">
+          <strong>Hand-off to Visual</strong>
+          Locked structure before moving into color, type, and motion decisions.
         </div>
       </div>
     </div>
@@ -329,102 +330,96 @@
 </div>
 
 <!-- WIREFRAME GALLERY -->
-<div class="wf-section">
-  <p class="wf-label">Lo-fi Wireframes</p>
-  <h2 class="wf-heading">Every screen, mapped out.</h2>
-  <div class="wf-grid">
-    <div class="wf-item">
-      <img src="images/Home_lofi wireframe.png" alt="Home Wireframe" />
-      <div class="wf-item-label">Home Screen</div>
-    </div>
-    <div class="wf-item">
-      <img src="images/Mini Menu_lofi wireframe.png" alt="Mini Menu Wireframe" />
-      <div class="wf-item-label">Mini Menu</div>
-    </div>
-    <div class="wf-item">
-      <img src="images/Store_lofi wireframe.png" alt="Store Wireframe" />
-      <div class="wf-item-label">Store</div>
-    </div>
-    <div class="wf-item">
-      <img src="images/Store Item Selection_lofi wireframe.png" alt="Store Item Selection" />
-      <div class="wf-item-label">Store Item Detail</div>
-    </div>
-    <div class="wf-item">
-      <img src="images/Store Item Selection Scroll_lofi wireframe.png" alt="Store Item Scroll" />
-      <div class="wf-item-label">Store Item — Scroll State</div>
-    </div>
+<div class="gallery-4">
+  <div class="gallery-item reveal">
+    <img src="images/Home_lofi wireframe.png" alt="Home Wireframe" />
+  </div>
+  <div class="gallery-item reveal d1">
+    <img src="images/Mini Menu_lofi wireframe.png" alt="Mini Menu Wireframe" />
+  </div>
+  <div class="gallery-item reveal d2">
+    <img src="images/Store_lofi wireframe.png" alt="Store Wireframe" />
+  </div>
+  <div class="gallery-item reveal d3">
+    <img src="images/Store Item Selection_lofi wireframe.png" alt="Store Item Selection Wireframe" />
   </div>
 </div>
 
-<!-- STORY 03: DESIGN -->
-<div class="story-section">
-  <div class="story-sticky dark">
-    <img src="images/Mini Menu_Playstation Store_prototype-1.png" alt="PS5 Mini Menu Hi-fi" />
+<!-- CHAPTER 03 -->
+<div class="chapter-divider reveal">
+  <div>
+    <p class="chapter-label">Chapter 03</p>
+    <h2 class="chapter-heading">Visual Design</h2>
   </div>
-  <div class="story-content">
-    <p class="story-chapter reveal">03 — Visual Design</p>
-    <h2 class="story-heading reveal reveal-delay-1">The PS5 language,<br />elevated.</h2>
-    <p class="story-body reveal reveal-delay-2">The hi-fi designs kept PlayStation's visual DNA — deep blues, bold game art, the iconic controller button symbols — but reorganized everything with stronger hierarchy and breathing room.</p>
-    <p class="story-body reveal reveal-delay-2">Game art becomes the wallpaper. The mini menu becomes a focused overlay. The store becomes a gallery. Every screen communicates intent at a glance.</p>
+  <span class="chapter-num">03</span>
+</div>
+
+<div class="story">
+  <div class="story-media dark">
+    <img src="images/Home_prototype.png" alt="PS5 Home Prototype" />
+  </div>
+  <div class="story-copy">
+    <p class="story-num reveal">03 — High-Fidelity</p>
+    <h2 class="story-heading reveal d1">Signature PS5 energy,<br />tightened flows.</h2>
+    <p class="story-body reveal d2">With the structure locked, I moved into visual design — bringing the PS5's hallmark deep blues, translucent panels, and cinematic tile motion into every screen.</p>
+    <p class="story-body reveal d2">The goal was a dashboard that still feels unmistakably PlayStation, but gets players into their games faster and makes the store's depth easier to browse.</p>
   </div>
 </div>
 
-<!-- HI-FI SHOWCASE -->
-<div class="hifi-section">
-  <p class="hifi-label">Hi-fi Designs</p>
-  <h2 class="hifi-heading">The final screens.</h2>
-
-  <div class="hifi-hero">
-    <img src="images/Home_game 1 selection.png" alt="PS5 Home — God of War" />
+<!-- HI-FI GALLERY -->
+<div class="gallery-4">
+  <div class="gallery-item reveal">
+    <img src="images/Home_game 1 selection.png" alt="Game Selection 1" />
   </div>
-
-  <div class="hifi-grid">
-    <div class="hifi-item">
-      <img src="images/Home_game 2 selection.png" alt="Home — Ghost of Yotei" />
-    </div>
-    <div class="hifi-item">
-      <img src="images/Home_game 3 selection.png" alt="Home — Astro Bot" />
-    </div>
-    <div class="hifi-item">
-      <img src="images/Home_game 4 selection.png" alt="Home — Horizon" />
-    </div>
-    <div class="hifi-item">
-      <img src="images/Home_prototype.png" alt="Home — Featured" />
-    </div>
-    <div class="hifi-item">
-      <img src="images/Store_protoype.png" alt="Store" />
-    </div>
-    <div class="hifi-item">
-      <img src="images/Store Selected Item 1 Page 4.png" alt="Store Item Detail" />
-    </div>
+  <div class="gallery-item reveal d1">
+    <img src="images/Home_game 2 selection.png" alt="Game Selection 2" />
+  </div>
+  <div class="gallery-item reveal d2">
+    <img src="images/Home_game 3 selection.png" alt="Game Selection 3" />
+  </div>
+  <div class="gallery-item reveal d3">
+    <img src="images/Home_game 4 selection.png" alt="Game Selection 4" />
   </div>
 </div>
 
-<!-- PROTOTYPE -->
+<!-- Store screens full width -->
+<div class="img-full reveal">
+  <img src="images/Store_protoype.png" alt="Store Prototype" />
+</div>
+
+<div class="img-full reveal">
+  <img src="images/Store Selected Item 1 Page 4.png" alt="Store Selected Item" />
+</div>
+
+<!-- CHAPTER 04 -->
+<div class="chapter-divider reveal">
+  <div>
+    <p class="chapter-label">Chapter 04</p>
+    <h2 class="chapter-heading">Interactive<br />Prototype</h2>
+  </div>
+  <span class="chapter-num">04</span>
+</div>
+
 <div class="proto-section">
-  <p class="proto-label reveal">04 — Interactive Prototype</p>
-  <h2 class="proto-heading reveal reveal-delay-1">Try it yourself.</h2>
-  <p class="proto-sub reveal reveal-delay-2">The fully interactive Figma prototype lets you navigate the redesigned home, mini menu, and store — exactly as a player would on the console.</p>
-  <div class="proto-frame reveal reveal-delay-2">
-    <div class="proto-bar">
-      <div class="dot dot-r"></div>
-      <div class="dot dot-y"></div>
-      <div class="dot dot-g"></div>
-      <div class="proto-url">figma.com — PS5 Dashboard Redesign</div>
-    </div>
+  <div class="proto-header">
+    <p class="proto-label">Live Prototype</p>
+    <h2 class="proto-heading">Click through the full flow.</h2>
+  </div>
+  <div class="proto-embed">
     <iframe
       src="https://embed.figma.com/proto/2NKRVGqDpSYJLB5FWQWMmC/PS5-Dashboard-Redesign?node-id=301-412&p=f&viewport=1383%2C443%2C0.09&scaling=scale-down&content-scaling=fixed&starting-point-node-id=301%3A412&page-id=268%3A47&embed-host=share"
-      allowfullscreen
-      title="PS5 Dashboard Redesign Prototype"
-    ></iframe>
+      allowfullscreen>
+    </iframe>
   </div>
+  <p class="proto-footer">figma.com — PS5 Dashboard Redesign</p>
 </div>
 
-<!-- IMPACT -->
-<section class="impact-section">
-  <p class="impact-label reveal">05 — Takeaway</p>
-  <p class="impact-quote reveal reveal-delay-1">A console dashboard should feel like <em>yours</em> — not a storefront you have to navigate around to get to your games.</p>
-</section>
+<!-- CALLOUT -->
+<div class="callout">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg" alt="" class="callout-ps-bg" />
+  <p class="callout-label reveal">Takeaway</p>
+  <p class="callout-quote reveal d1">The best console dashboards feel <em>invisible at speed</em> and <em>immersive at rest</em> — cinematic when you want to browse, out of the way when you just want to play.</p>
+</div>
 
 <!-- PROJECT NAV -->
 <div class="project-nav">
@@ -432,13 +427,12 @@
     <span class="project-nav-dir">← Previous</span>
     <span class="project-nav-title">Xbox Dashboard</span>
   </a>
-  <a href="index.html#work" class="project-nav-item">
-    <span class="project-nav-dir">All Work →</span>
-    <span class="project-nav-title">Back to Projects</span>
+  <a href="samsung.html" class="project-nav-item">
+    <span class="project-nav-dir">Next Project →</span>
+    <span class="project-nav-title">Samsung Visual Design</span>
   </a>
 </div>
 
-<!-- FOOTER -->
 <div class="footer-mini">
   <a href="index.html">© 2025 Kevin Todd</a>
   <div style="display:flex; gap:2rem;">
@@ -449,29 +443,22 @@
 </div>
 
 <script>
-  // Cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
-  let cx = window.innerWidth/2, cy = window.innerHeight/2;
-  let rx = cx, ry = cy;
+  let cx = window.innerWidth/2, cy = window.innerHeight/2, rx = cx, ry = cy;
   document.addEventListener('mousemove', e => { cx = e.clientX; cy = e.clientY; cursor.style.left = cx+'px'; cursor.style.top = cy+'px'; });
-  (function animRing() { rx += (cx-rx)*0.12; ry += (cy-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(animRing); })();
-  document.querySelectorAll('a, .wf-item, .hifi-item, .project-nav-item').forEach(el => {
-    el.addEventListener('mouseenter', () => { cursor.classList.add('is-hovering'); ring.classList.add('is-hovering'); });
-    el.addEventListener('mouseleave', () => { cursor.classList.remove('is-hovering'); ring.classList.remove('is-hovering'); });
+  (function loop() { rx += (cx-rx)*0.12; ry += (cy-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(loop); })();
+  document.querySelectorAll('a, .img-full, .story-media, .gallery-item').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.classList.add('hovering'); ring.classList.add('hovering'); });
+    el.addEventListener('mouseleave', () => { cursor.classList.remove('hovering'); ring.classList.remove('hovering'); });
   });
-
-  // Nav light/dark switch
   const hero = document.getElementById('hero');
   const nav = document.getElementById('mainNav');
   new IntersectionObserver(entries => { nav.classList.toggle('light', !entries[0].isIntersecting); }, { threshold: 0.1 }).observe(hero);
-
-  // Scroll reveals
-  const revealObs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.reveal, .wf-item, .hifi-item, .hifi-hero').forEach(el => revealObs.observe(el));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
