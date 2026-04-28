@@ -209,6 +209,38 @@
     .project-nav-item:last-child { text-align: left; }
     .footer-mini { flex-direction: column; gap: 1rem; align-items: flex-start; padding: 1.5rem; }
   }
+
+  /* MOBILE NAV FIX */
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 201; position: relative; }
+  .nav-toggle span { display: block; width: 22px; height: 2px; background: #fff; margin: 4px 0; transition: transform 0.3s, opacity 0.3s; }
+  nav.light .nav-toggle span { background: var(--text); }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.25rem !important; }
+    .nav-logo { font-size: 11px; gap: 0.5rem; }
+    .nav-logo img { height: 20px; }
+    .nav-toggle { display: block; }
+    .nav-links {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: 75%; max-width: 320px;
+      background: rgba(20,17,21,0.97);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: flex-start; justify-content: center;
+      gap: 2rem;
+      padding: 5rem 2rem 2rem;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+      border-left: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-links.open { transform: translateX(0); }
+    .nav-links a { color: rgba(255,255,255,0.8) !important; font-size: 14px; }
+    .nav-links a:hover { color: #fff !important; }
+  }
+
 </style>
 </head>
 <body>
@@ -221,7 +253,8 @@
     <img src="logo.png" alt="Kevin Todd" />
     Kevin Todd<span>///</span>
   </a>
-  <ul class="nav-links">
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="index.html#work">Work</a></li>
     <li><a href="index.html#about">About</a></li>
     <li><a href="mailto:kevintoddjohnsonjr@gmail.com">Contact</a></li>
@@ -414,6 +447,23 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+  }
+
 </script>
 </body>
 </html>
