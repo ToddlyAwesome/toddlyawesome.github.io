@@ -879,6 +879,63 @@
     .footer-right { align-items: flex-start; }
   }
 
+  /* TODDLY ORBIT */
+  .orbit-outer {
+    width: 100%;
+    background: #0a0808;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+  }
+  .orbit-stage {
+    position: relative;
+    width: 100%;
+    height: clamp(420px, 65vh, 720px);
+    overflow: hidden;
+  }
+  .orbit-svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    display: block;
+  }
+  .orbit-wordmark {
+    position: absolute; left: 32px; bottom: 28px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    z-index: 2;
+  }
+  .orbit-wordmark-line1 { color: var(--accent); font-weight: 600; }
+  .orbit-wordmark-line2 { margin-top: 2px; }
+  .orbit-readout {
+    position: absolute; right: 32px; top: 28px;
+    text-align: right;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.55);
+    z-index: 2;
+  }
+  .orbit-readout div + div { margin-top: 2px; }
+  .orbit-scanlines {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(0deg,
+      rgba(255,255,255,0) 0 3px,
+      rgba(255,255,255,0.025) 3px 4px);
+    mix-blend-mode: overlay;
+    z-index: 3;
+  }
+
+  @media (max-width: 768px) {
+    .orbit-stage { height: 50vh; min-height: 360px; }
+    .orbit-wordmark { left: 16px; bottom: 16px; font-size: 9px; }
+    .orbit-readout { right: 16px; top: 16px; font-size: 9px; }
+  }
+
   /* MOBILE NAV FIX */
   .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 201; position: relative; }
   .nav-toggle span { display: block; width: 22px; height: 2px; background: #fff; margin: 4px 0; transition: transform 0.3s, opacity 0.3s; }
@@ -954,69 +1011,100 @@
   </div>
 </section>
 
-<!-- IMAGE MARQUEE -->
+<!-- TODDLY ORBIT LOOP -->
 <div id="work"></div>
 
-<div class="img-marquee-outer">
-  <div class="img-marquee-row">
-    <div class="img-marquee-track">
-      <div class="img-marquee-item logo-naked"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg" alt="NASA" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_c709aa72396740f8a453286432ca3fba~mv2.png/v1/fill/w_800,h_450,q_90,enc_avif,quality_auto/eb26e1_c709aa72396740f8a453286432ca3fba~mv2.png" alt="Xbox Research" /></div>
-      <div class="img-marquee-item tall"><img src="images/PS.png" alt="PlayStation Poster" /></div>
-      <div class="img-marquee-item logo-naked"><img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" alt="Samsung" /></div>
-      <div class="img-marquee-item wide"><img src="images/Rando Art_header-03.png" alt="Awesome" /></div>
-      <div class="img-marquee-item tall"><img src="images/Moon Kiss.png" alt="Moon Kiss" /></div>
-      <div class="img-marquee-item logo"><img src="https://upload.wikimedia.org/wikipedia/en/0/03/National_Basketball_Association_logo.svg" alt="NBA" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png" alt="NBA Rebrands" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_68dcd571597a49cfa726ab1d3fff6fcd~mv2.gif/v1/fill/w_400,h_225,q_90,enc_avif,quality_auto/eb26e1_68dcd571597a49cfa726ab1d3fff6fcd~mv2.gif" alt="Xbox Motion" /></div>
-      <div class="img-marquee-item logo-naked"><img src="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg" alt="PlayStation" /></div>
-      <div class="img-marquee-item tall"><img src="images/Atlantis.png" alt="Atlantis" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_176355cdc2d840f7b50dc5d0d86939fc~mv2.png/v1/fill/w_800,h_525,q_90,enc_avif,quality_auto/eb26e1_176355cdc2d840f7b50dc5d0d86939fc~mv2.png" alt="NASA Spread" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_710,h_959,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png" alt="Samsung" /></div>
-      <div class="img-marquee-item logo"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/U.S._Army_logo.svg" alt="U.S. Army" /></div>
-      <div class="img-marquee-item wide"><img src="images/Orange.png" alt="Orange" /></div>
-      <div class="img-marquee-item tall"><img src="images/Eckington Day 2023 1.png" alt="Eckington Day" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/Xbox_Annimation_2_gif.gif" alt="Xbox Animation" /></div>
-      <div class="img-marquee-item logo-naked"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Xbox_one_logo.svg" alt="Xbox" /></div>
-      <div class="img-marquee-item tall"><img src="images/Bron_Olympics 2024.png" alt="LeBron Olympics" /></div>
-      <div class="img-marquee-item wide"><img src="images/Juice-01.png" alt="Juice" /></div>
-      <div class="img-marquee-item tall"><img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_980,h_1198,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%208.png" alt="NASA Cover" /></div>
-      <div class="img-marquee-item wide"><img src="images/Azucar.png" alt="Azucar" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_25f84cbd2aa94d4a8c6fdc0795590559~mv2.png/v1/fill/w_800,h_450,q_90,enc_avif,quality_auto/eb26e1_25f84cbd2aa94d4a8c6fdc0795590559~mv2.png" alt="Xbox Spread" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_932f172ce94647d8aa8d32f2cee276ba~mv2.png/v1/fill/w_980,h_653,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Summer%20Strengthening%20Campaign%202022_mockup.png" alt="DPRR" /></div>
-      <div class="img-marquee-item wide"><img src="images/Rando Art-02.png" alt="Destiny" /></div>
-      <div class="img-marquee-item logo"><img src="https://upload.wikimedia.org/wikipedia/commons/8/85/Food_and_Drug_Administration_logo.svg" alt="FDA" /></div>
-      <div class="img-marquee-item wide"><img src="images/Pearlescent-texture.png" alt="Pearlescent" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_5531ce97f2e74ca38fb3c5a31708fd8b~mv2.png/v1/fill/w_980,h_637,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/FDA-Brand%20Guide_mockup.png" alt="FDA" /></div>
-      <div class="img-marquee-item logo-naked"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg" alt="NASA" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_c709aa72396740f8a453286432ca3fba~mv2.png/v1/fill/w_800,h_450,q_90,enc_avif,quality_auto/eb26e1_c709aa72396740f8a453286432ca3fba~mv2.png" alt="Xbox Research" /></div>
-      <div class="img-marquee-item tall"><img src="images/PS.png" alt="PlayStation Poster" /></div>
-      <div class="img-marquee-item logo-naked"><img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" alt="Samsung" /></div>
-      <div class="img-marquee-item wide"><img src="images/Rando Art_header-03.png" alt="Awesome" /></div>
-      <div class="img-marquee-item tall"><img src="images/Moon Kiss.png" alt="Moon Kiss" /></div>
-      <div class="img-marquee-item logo"><img src="https://upload.wikimedia.org/wikipedia/en/0/03/National_Basketball_Association_logo.svg" alt="NBA" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/eb26e1_c0a66133f4e54985bd94939fd9dd32c6~mv2.png" alt="NBA Rebrands" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_68dcd571597a49cfa726ab1d3fff6fcd~mv2.gif/v1/fill/w_400,h_225,q_90,enc_avif,quality_auto/eb26e1_68dcd571597a49cfa726ab1d3fff6fcd~mv2.gif" alt="Xbox Motion" /></div>
-      <div class="img-marquee-item logo-naked"><img src="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg" alt="PlayStation" /></div>
-      <div class="img-marquee-item tall"><img src="images/Atlantis.png" alt="Atlantis" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_176355cdc2d840f7b50dc5d0d86939fc~mv2.png/v1/fill/w_800,h_525,q_90,enc_avif,quality_auto/eb26e1_176355cdc2d840f7b50dc5d0d86939fc~mv2.png" alt="NASA Spread" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png/v1/fill/w_710,h_959,q_90,enc_avif,quality_auto/eb26e1_39dfccbda1d44340bde21a7acb6dc99c~mv2.png" alt="Samsung" /></div>
-      <div class="img-marquee-item logo"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/U.S._Army_logo.svg" alt="U.S. Army" /></div>
-      <div class="img-marquee-item wide"><img src="images/Orange.png" alt="Orange" /></div>
-      <div class="img-marquee-item tall"><img src="images/Eckington Day 2023 1.png" alt="Eckington Day" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_473fef7b3297406899f4ffdce5ac9d9b~mv2.gif/v1/fill/w_710,h_399,q_90,enc_avif,quality_auto/Xbox_Annimation_2_gif.gif" alt="Xbox Animation" /></div>
-      <div class="img-marquee-item logo-naked"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Xbox_one_logo.svg" alt="Xbox" /></div>
-      <div class="img-marquee-item tall"><img src="images/Bron_Olympics 2024.png" alt="LeBron Olympics" /></div>
-      <div class="img-marquee-item wide"><img src="images/Juice-01.png" alt="Juice" /></div>
-      <div class="img-marquee-item tall"><img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fill/w_980,h_1198,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%208.png" alt="NASA Cover" /></div>
-      <div class="img-marquee-item wide"><img src="images/Azucar.png" alt="Azucar" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_25f84cbd2aa94d4a8c6fdc0795590559~mv2.png/v1/fill/w_800,h_450,q_90,enc_avif,quality_auto/eb26e1_25f84cbd2aa94d4a8c6fdc0795590559~mv2.png" alt="Xbox Spread" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_932f172ce94647d8aa8d32f2cee276ba~mv2.png/v1/fill/w_980,h_653,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Summer%20Strengthening%20Campaign%202022_mockup.png" alt="DPRR" /></div>
-      <div class="img-marquee-item wide"><img src="images/Rando Art-02.png" alt="Destiny" /></div>
-      <div class="img-marquee-item logo"><img src="https://upload.wikimedia.org/wikipedia/commons/8/85/Food_and_Drug_Administration_logo.svg" alt="FDA" /></div>
-      <div class="img-marquee-item wide"><img src="images/Pearlescent-texture.png" alt="Pearlescent" /></div>
-      <div class="img-marquee-item wide"><img src="https://static.wixstatic.com/media/eb26e1_5531ce97f2e74ca38fb3c5a31708fd8b~mv2.png/v1/fill/w_980,h_637,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/FDA-Brand%20Guide_mockup.png" alt="FDA" /></div>
+<div class="orbit-outer">
+  <div class="orbit-stage">
+    <svg class="orbit-svg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="orbitBgGrad" cx="50%" cy="55%" r="70%">
+          <stop offset="0%" stop-color="#1a0f15"/>
+          <stop offset="70%" stop-color="#0a0808"/>
+          <stop offset="100%" stop-color="#000000"/>
+        </radialGradient>
+        <radialGradient id="orbitPlanet" cx="35%" cy="32%" r="80%">
+          <stop offset="0%" stop-color="#8d6346"/>
+          <stop offset="45%" stop-color="#4c2b36"/>
+          <stop offset="100%" stop-color="#0a0808"/>
+        </radialGradient>
+        <linearGradient id="orbitArc1" x1="0" x2="1">
+          <stop offset="0%" stop-color="#c6f91f" stop-opacity="0.2"/>
+          <stop offset="50%" stop-color="#c6f91f" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0.3"/>
+        </linearGradient>
+        <radialGradient id="orbitHalo" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(198,249,31,0.2)"/>
+          <stop offset="55%" stop-color="rgba(198,249,31,0)"/>
+        </radialGradient>
+        <filter id="orbitGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- bg -->
+      <rect width="800" height="800" fill="url(#orbitBgGrad)"/>
+
+      <!-- stars (rendered via JS) -->
+      <g id="orbitStars"></g>
+
+      <!-- halo glow behind planet -->
+      <circle cx="582" cy="400" r="350" fill="url(#orbitHalo)" opacity="0.55" style="mix-blend-mode:screen;filter:blur(20px);"/>
+
+      <!-- ghost orbits -->
+      <circle id="orbitGhost1" cx="0" cy="0" r="0" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1" stroke-dasharray="2 6"/>
+      <circle id="orbitGhost2" cx="0" cy="0" r="0" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1" stroke-dasharray="2 6"/>
+
+      <!-- planet -->
+      <g id="orbitPlanetGroup">
+        <circle id="orbitPlanetBody" r="0" fill="url(#orbitPlanet)"/>
+        <g id="orbitPlanetRings">
+          <ellipse id="orbitRing1" rx="0" ry="0" fill="none" stroke="#8d6346" stroke-opacity="0.35" stroke-width="1.5"/>
+          <ellipse id="orbitRing2" cy="0" rx="0" ry="0" fill="none" stroke="#8d6346" stroke-opacity="0.25" stroke-width="1"/>
+          <ellipse id="orbitRing3" cy="0" rx="0" ry="0" fill="none" stroke="#8d6346" stroke-opacity="0.25" stroke-width="1"/>
+        </g>
+        <ellipse id="orbitPlanetShine" cx="0" cy="0" rx="0" ry="0" fill="#ffffff" opacity="0.18"/>
+        <circle id="orbitPlanetEdge" r="0" fill="none" stroke="#000" stroke-opacity="0.45" stroke-width="2" style="filter:blur(2px);"/>
+      </g>
+
+      <!-- arc 180 -->
+      <g id="orbitArc2Group">
+        <path id="orbitArc2" fill="none" stroke="url(#orbitArc1)" stroke-width="6" stroke-linecap="round" filter="url(#orbitGlow)"/>
+        <path id="orbitArc2Dash" fill="none" stroke="#c6f91f" stroke-width="2" stroke-opacity="0.45" stroke-linecap="round" stroke-dasharray="2 10"/>
+      </g>
+
+      <!-- arc 90 -->
+      <g id="orbitArc3Group">
+        <path id="orbitArc3" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" filter="url(#orbitGlow)"/>
+        <path id="orbitArc3Dash" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.3" stroke-dasharray="1 7"/>
+      </g>
+
+      <!-- bodies -->
+      <g>
+        <circle id="orbitBody1Outer" cx="0" cy="0" r="9" fill="#c6f91f" filter="url(#orbitGlow)"/>
+        <circle id="orbitBody1Inner" cx="0" cy="0" r="3" fill="#ffffff"/>
+      </g>
+      <g>
+        <circle id="orbitBody2Outer" cx="0" cy="0" r="6" fill="#ffffff" filter="url(#orbitGlow)"/>
+        <circle id="orbitBody2Inner" cx="0" cy="0" r="2" fill="#ffffff"/>
+      </g>
+    </svg>
+
+    <!-- Wordmark -->
+    <div class="orbit-wordmark">
+      <div class="orbit-wordmark-line1">◐ TODDLY · ORBIT 04</div>
+      <div class="orbit-wordmark-line2">VISUAL · UX/UI · GRAPHIC</div>
     </div>
+
+    <!-- Tick readout -->
+    <div class="orbit-readout">
+      <div id="orbitTheta">θ 000°</div>
+      <div id="orbitPhi">φ 000°</div>
+    </div>
+
+    <!-- Scanlines -->
+    <div class="orbit-scanlines"></div>
   </div>
 </div>
 </div>
@@ -1260,6 +1348,143 @@
       });
     });
   }
+
+  // ─── TODDLY ORBIT ANIMATION ──────────────────────────────────
+  (function() {
+    const W = 800, H = 800;
+    const PALETTE = { tan: '#8d6346', plum: '#4c2b36', ink: '#0a0808', lime: '#c6f91f', bone: '#ffffff' };
+
+    // Logo geometry — match the SVG viewBox (148.83 × 90.5)
+    const scale = 600 / 148.83;
+    const cx = W/2 - (148.83 * scale)/2 + 45.25 * scale;
+    const cy = H/2;
+    const r1 = 45.25 * scale;
+    const arcR2 = 45.25 * scale;
+    const arcCx2 = cx + (90.41 - 45.25) * scale;
+    const arcR3 = (Math.sqrt(2) * 45.25 / 2) * scale;
+    const arc3StartX = 135.57 * scale;
+    const arc3CenterY = (13.25 + 76.74) / 2 * scale + (cy - (90.5 * scale)/2);
+    const arc3CenterX = (cx - 45.25 * scale) + arc3StartX - arcR3 * Math.cos(Math.PI/4);
+
+    // Polar arc helpers
+    function polarToCart(cx, cy, r, deg) {
+      const rad = (deg - 90) * Math.PI / 180;
+      return [cx + r * Math.cos(rad), cy + r * Math.sin(rad)];
+    }
+    function describeArc(cx, cy, r, startDeg, endDeg) {
+      const [sx, sy] = polarToCart(cx, cy, r, endDeg);
+      const [ex, ey] = polarToCart(cx, cy, r, startDeg);
+      const large = endDeg - startDeg <= 180 ? 0 : 1;
+      return `M ${sx} ${sy} A ${r} ${r} 0 ${large} 0 ${ex} ${ey}`;
+    }
+
+    // Static element setup
+    const ghost1 = document.getElementById('orbitGhost1');
+    ghost1.setAttribute('cx', arcCx2); ghost1.setAttribute('cy', cy); ghost1.setAttribute('r', arcR2);
+    const ghost2 = document.getElementById('orbitGhost2');
+    ghost2.setAttribute('cx', arc3CenterX); ghost2.setAttribute('cy', arc3CenterY); ghost2.setAttribute('r', arcR3);
+
+    const planetBody = document.getElementById('orbitPlanetBody');
+    planetBody.setAttribute('r', r1);
+    const planetEdge = document.getElementById('orbitPlanetEdge');
+    planetEdge.setAttribute('r', r1);
+    const ring1 = document.getElementById('orbitRing1');
+    ring1.setAttribute('rx', r1*0.95); ring1.setAttribute('ry', r1*0.18);
+    const ring2 = document.getElementById('orbitRing2');
+    ring2.setAttribute('rx', r1*0.7); ring2.setAttribute('ry', r1*0.1); ring2.setAttribute('cy', r1*0.45);
+    const ring3 = document.getElementById('orbitRing3');
+    ring3.setAttribute('rx', r1*0.7); ring3.setAttribute('ry', r1*0.1); ring3.setAttribute('cy', -r1*0.45);
+    const planetShine = document.getElementById('orbitPlanetShine');
+    planetShine.setAttribute('cx', -r1*0.32); planetShine.setAttribute('cy', -r1*0.4);
+    planetShine.setAttribute('rx', r1*0.28); planetShine.setAttribute('ry', r1*0.16);
+
+    const arc2 = document.getElementById('orbitArc2');
+    arc2.setAttribute('d', describeArc(arcCx2, cy, arcR2, -90, 90));
+    const arc2Dash = document.getElementById('orbitArc2Dash');
+    arc2Dash.setAttribute('d', describeArc(arcCx2, cy, arcR2, 90, 270));
+    const arc3 = document.getElementById('orbitArc3');
+    arc3.setAttribute('d', describeArc(arc3CenterX, arc3CenterY, arcR3, -45, 45));
+    const arc3Dash = document.getElementById('orbitArc3Dash');
+    arc3Dash.setAttribute('d', describeArc(arc3CenterX, arc3CenterY, arcR3, 45, 315));
+
+    // Stars
+    const starsGroup = document.getElementById('orbitStars');
+    const stars = [];
+    for (let i = 0; i < 90; i++) {
+      const s = {
+        x: ((i * 173.3) % W),
+        y: ((i * 91.7 + 50) % H),
+        s: (i % 11 === 0) ? 2 : 1,
+        ph: i * 0.5,
+        accent: i % 13 === 0,
+      };
+      stars.push(s);
+      const el = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      el.setAttribute('cx', s.x); el.setAttribute('cy', s.y); el.setAttribute('r', s.s/2);
+      el.setAttribute('fill', s.accent ? PALETTE.lime : PALETTE.bone);
+      starsGroup.appendChild(el);
+      s.el = el;
+    }
+
+    // Planet group / arc groups
+    const planetGroup = document.getElementById('orbitPlanetGroup');
+    const planetRings = document.getElementById('orbitPlanetRings');
+    const arc2Group = document.getElementById('orbitArc2Group');
+    const arc3Group = document.getElementById('orbitArc3Group');
+    const body1Outer = document.getElementById('orbitBody1Outer');
+    const body1Inner = document.getElementById('orbitBody1Inner');
+    const body2Outer = document.getElementById('orbitBody2Outer');
+    const body2Inner = document.getElementById('orbitBody2Inner');
+    const thetaEl = document.getElementById('orbitTheta');
+    const phiEl = document.getElementById('orbitPhi');
+
+    let t = 0, last = null;
+    function tick(ts) {
+      if (last == null) last = ts;
+      const dt = (ts - last) / 1000; last = ts;
+      t = (t + dt) % 12;
+
+      // Star pulse
+      stars.forEach(s => {
+        const o = 0.3 + 0.5 * (0.5 + 0.5 * Math.sin(t * 1.1 + s.ph));
+        s.el.setAttribute('opacity', s.accent ? o : o * 0.55);
+      });
+
+      const breathe = 1 + 0.012 * Math.sin(t * 0.7);
+      const arc2Rot = (t * 18) % 360;
+      const arc3Rot = (t * -28) % 360;
+      const planetSpin = (t * 6) % 360;
+
+      planetGroup.setAttribute('transform', `translate(${cx} ${cy}) scale(${breathe})`);
+      planetRings.setAttribute('transform', `rotate(${planetSpin})`);
+      arc2Group.setAttribute('transform', `rotate(${arc2Rot} ${arcCx2} ${cy})`);
+      arc3Group.setAttribute('transform', `rotate(${arc3Rot} ${arc3CenterX} ${arc3CenterY})`);
+
+      arc2Dash.setAttribute('stroke-dashoffset', -(t * 30) % 12);
+      arc3Dash.setAttribute('stroke-dashoffset', (t * 22) % 8);
+
+      // Body 1 orbit
+      const body1A = t * 0.6;
+      const body1X = arcCx2 + Math.cos(body1A) * arcR2;
+      const body1Y = cy + Math.sin(body1A) * arcR2;
+      body1Outer.setAttribute('cx', body1X); body1Outer.setAttribute('cy', body1Y);
+      body1Inner.setAttribute('cx', body1X); body1Inner.setAttribute('cy', body1Y);
+
+      // Body 2 orbit
+      const body2A = t * -0.85 + 1.2;
+      const body2X = arc3CenterX + Math.cos(body2A) * arcR3;
+      const body2Y = arc3CenterY + Math.sin(body2A) * arcR3;
+      body2Outer.setAttribute('cx', body2X); body2Outer.setAttribute('cy', body2Y);
+      body2Inner.setAttribute('cx', body2X); body2Inner.setAttribute('cy', body2Y);
+
+      // Readout
+      thetaEl.textContent = `θ ${Math.floor(arc2Rot).toString().padStart(3,'0')}°`;
+      phiEl.textContent = `φ ${Math.floor((arc3Rot + 360) % 360).toString().padStart(3,'0')}°`;
+
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
 
 </script>
 </body>
