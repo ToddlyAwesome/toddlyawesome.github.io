@@ -52,7 +52,7 @@
   .nav-links a { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: #fff; }
 
-  /* MOBILE NAV FIX */
+  /* MOBILE NAV */
   .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 201; position: relative; }
   .nav-toggle span { display: block; width: 22px; height: 2px; background: #fff; margin: 4px 0; transition: transform 0.3s, opacity 0.3s; }
   nav.light .nav-toggle span { background: var(--text); }
@@ -87,13 +87,11 @@
   .hero-title em { font-style: normal; color: var(--accent); display: block; }
   .hero-sub { margin-top: 1.75rem; font-size: 1rem; color: rgba(255,255,255,0.5); max-width: 540px; line-height: 1.7; opacity: 0; animation: fadeUp 0.7s ease 1.2s forwards; }
 
-  /* INTRO PARAGRAPH */
-  .intro { padding: 7rem 4rem; max-width: 880px; }
+  .intro { padding: 7rem 4rem; max-width: 900px; }
   .intro p { font-size: clamp(1.25rem, 2.2vw, 1.8rem); font-weight: 300; line-height: 1.55; }
   .intro p em { font-style: italic; color: var(--text); background: var(--accent); padding: 0 0.3em; }
   .intro p + p { margin-top: 2rem; }
 
-  /* META ROW */
   .meta-row { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
   .meta-cell { padding: 2.5rem 3rem; border-right: 1px solid var(--border); }
   .meta-cell:last-child { border-right: none; }
@@ -101,44 +99,81 @@
   .meta-label::before { content: '◆ '; color: var(--accent); }
   .meta-value { font-size: 0.9rem; font-weight: 500; }
 
-  /* CHAPTER DIVIDER */
   .chapter-divider { padding: 5rem 4rem 3rem; border-top: 1px solid var(--border); display: flex; align-items: flex-end; justify-content: space-between; }
   .chapter-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text); margin-bottom: 0.75rem; }
   .chapter-label::before { content: '◆ '; color: var(--accent); }
   .chapter-heading { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.0; }
   .chapter-num { font-family: var(--font-mono); font-size: clamp(4rem, 8vw, 7rem); font-weight: 700; color: rgba(20,17,21,0.06); line-height: 1; letter-spacing: -0.05em; }
 
-  /* STORY SECTION */
-  .story { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; border-bottom: 1px solid var(--border); }
-  .story.flip { direction: rtl; }
-  .story.flip > * { direction: ltr; }
-  .story-media { position: sticky; top: 0; height: 100vh; overflow: hidden; background: var(--about-soft); display: flex; align-items: center; justify-content: center; padding: 2rem; }
-  .story-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .story-media.dark { background: var(--about-dark); }
-  .story-copy { padding: 8rem 4rem; display: flex; flex-direction: column; justify-content: center; }
-  .story-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text); margin-bottom: 1.5rem; }
-  .story-num::before { content: '◆ '; color: var(--accent); }
-  .story-heading { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
-  .story-body { font-size: 1rem; color: rgba(20,17,21,0.7); line-height: 1.8; max-width: 420px; }
-  .story-body + .story-body { margin-top: 1rem; }
+  /* CAREER TIMELINE */
+  .timeline { padding: 0 4rem 4rem; max-width: 1100px; }
+  .timeline-item {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 0.5rem;
+    position: relative;
+  }
+  .timeline-date::before {
+    content: '';
+    position: absolute;
+    left: -3rem; top: 0.85rem;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .timeline-content { padding-left: 0; }
+  .timeline-role { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text); margin-bottom: 0.4rem; }
+  .timeline-company { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
+  .timeline-company span { color: var(--muted); font-weight: 400; font-size: 1rem; }
+  .timeline-desc { font-size: 0.95rem; color: rgba(20,17,21,0.7); line-height: 1.7; max-width: 640px; margin-bottom: 1.25rem; }
+  .timeline-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .timeline-tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); padding: 0.4rem 0.85rem; background: var(--about-soft); border-radius: 100px; }
 
-  /* SKILLS */
-  .skill-list { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
-  .skill-item { display: flex; gap: 1rem; align-items: flex-start; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
-  .skill-item:last-child { border-bottom: none; }
-  .skill-num { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--text); flex-shrink: 0; min-width: 26px; padding-top: 2px; }
-  .skill-num::before { content: '◆'; color: var(--accent); margin-right: 0.3em; }
-  .skill-text { font-size: 0.9rem; color: rgba(20,17,21,0.72); line-height: 1.6; }
-  .skill-text strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 0.2rem; }
+  /* AWARDS */
+  .awards-section { background: var(--about-soft); padding: 5rem 4rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .awards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; max-width: 1200px; margin: 0 auto; }
+  .award-card { padding: 2.5rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background 0.3s; }
+  .award-card:nth-child(3n) { border-right: none; }
+  .award-card:nth-last-child(-n+3) { border-bottom: none; }
+  .award-card:hover { background: #fff; }
+  .award-tier { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; padding: 0.3rem 0.7rem; background: var(--text); border-radius: 100px; display: inline-block; }
+  .award-tier.gold { background: #c9a961; color: #fff; }
+  .award-tier.platinum { background: var(--text); color: var(--accent); }
+  .award-tier.honor { background: var(--muted); color: #fff; }
+  .award-name { font-size: 1.1rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.4rem; }
+  .award-org { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.85rem; }
+  .award-desc { font-size: 0.9rem; color: rgba(20,17,21,0.7); line-height: 1.6; }
 
-  /* CLIENT LOGOS BAND */
-  .clients-band { padding: 5rem 4rem; background: var(--about-soft); border-bottom: 1px solid var(--border); }
+  /* CLIENT LOGOS */
+  .clients-band { padding: 5rem 4rem; border-bottom: 1px solid var(--border); }
   .clients-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text); margin-bottom: 2.5rem; text-align: center; }
   .clients-label::before { content: '◆ '; color: var(--accent); }
   .clients-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2rem; align-items: center; max-width: 1200px; margin: 0 auto; }
   .client-logo { height: 60px; display: flex; align-items: center; justify-content: center; opacity: 0.5; transition: opacity 0.3s, transform 0.3s; }
   .client-logo:hover { opacity: 1; transform: scale(1.06); }
   .client-logo img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+
+  /* TOOLS / SKILLS GRID */
+  .tools-section { padding: 5rem 4rem; background: var(--about-soft); border-bottom: 1px solid var(--border); }
+  .tools-header { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text); margin-bottom: 2.5rem; }
+  .tools-header::before { content: '◆ '; color: var(--accent); }
+  .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; max-width: 1100px; }
+  .tools-block { display: flex; flex-direction: column; gap: 1rem; }
+  .tools-block-title { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em; padding-bottom: 0.85rem; border-bottom: 2px solid var(--text); }
+  .tools-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tool-chip { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.5rem 0.9rem; background: #fff; border: 1px solid var(--border); border-radius: 100px; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+  .tool-chip:hover { background: var(--text); color: var(--accent); border-color: var(--text); }
 
   /* SIDE PASSIONS GRID */
   .passions-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border); }
@@ -147,7 +182,6 @@
   .passion-card:hover { background: var(--about-soft); }
   .passion-icon { width: 48px; height: 48px; margin-bottom: 1.5rem; color: var(--text); }
   .passion-icon svg { width: 100%; height: 100%; }
-  .passion-card:hover .passion-icon { color: var(--text); }
   .passion-title { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
   .passion-desc { font-size: 0.9rem; color: rgba(20,17,21,0.65); line-height: 1.6; margin-bottom: 1.5rem; flex: 1; }
   .passion-link { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text); transition: color 0.3s; }
@@ -167,17 +201,14 @@
   .callout-cta { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 2.5rem; padding: 1rem 2rem; background: var(--accent); color: var(--text); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: transform 0.3s; position: relative; z-index: 1; }
   .callout-cta:hover { transform: translateY(-2px); }
 
-  /* FOOTER */
   .footer-mini { padding: 2rem 3rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
   .footer-mini a { font-family: var(--font-mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
   .footer-mini a:hover { color: var(--text); }
 
-  /* REVEAL */
   .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
   .reveal.visible { opacity: 1; transform: translateY(0); }
   .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
 
-  /* CURSOR */
   .cursor { position: fixed; width: 10px; height: 10px; border-radius: 50%; background: #141115; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width 0.25s, height 0.25s, background 0.2s; }
   .cursor-ring { position: fixed; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(20,17,21,0.3); pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width 0.3s, height 0.3s, opacity 0.3s; }
   .cursor.hovering { width: 18px; height: 18px; background: var(--accent); }
@@ -204,14 +235,15 @@
     .nav-links.open { transform: translateX(0); }
     .nav-links a { color: rgba(255,255,255,0.8) !important; font-size: 14px; }
     .nav-links a:hover { color: #fff !important; }
-    .hero-content, .intro, .chapter-divider, .callout, .clients-band { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero-content, .intro, .chapter-divider, .callout, .clients-band, .timeline, .awards-section, .tools-section { padding-left: 1.5rem; padding-right: 1.5rem; }
     .meta-row { grid-template-columns: 1fr 1fr; }
     .meta-cell { padding: 1.5rem; border-bottom: 1px solid var(--border); }
-    .story { grid-template-columns: 1fr; min-height: auto; }
-    .story.flip { direction: ltr; }
-    .story-media { position: relative; height: 70vw; }
-    .story-copy { padding: 3rem 1.5rem; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.75rem; padding: 2rem 0; }
+    .timeline-date::before { display: none; }
     .clients-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .awards-grid { grid-template-columns: 1fr; }
+    .award-card { border-right: none !important; border-bottom: 1px solid var(--border) !important; }
+    .tools-grid { grid-template-columns: 1fr; }
     .passions-grid { grid-template-columns: 1fr; }
     .passion-card { border-right: none; border-bottom: 1px solid var(--border); }
     .footer-mini { flex-direction: column; gap: 1rem; align-items: flex-start; padding: 1.5rem; }
@@ -242,13 +274,13 @@
   <div class="hero-content">
     <p class="hero-eyebrow">About / Kevin Todd</p>
     <h1 class="hero-title">Designer with<br /><em>side passions.</em></h1>
-    <p class="hero-sub">Visual and UX designer based in Los Angeles — with seven years of experience shipping work for NASA, Samsung, Xbox, the NBA, and more.</p>
+    <p class="hero-sub">Visual and brand designer based in Los Angeles — seven years shipping work for NASA, Samsung, Xbox, the NBA, the FDA, and beyond.</p>
   </div>
 </section>
 
 <!-- INTRO -->
 <div class="intro reveal">
-  <p>I'm Kevin — a visual and UX designer with <em>seven years of experience</em> shipping brand systems, product interfaces, and campaigns for some of the most recognizable names in tech, sports, and government.</p>
+  <p>I'm Kevin — a creative and deadline-driven visual designer with <em>7+ years of experience</em> shipping user-centered digital and print work from initial concept to polished, on-brand deliverable.</p>
   <p>The work that gets the most attention pays the bills. The work that <em>recharges me</em> happens in the margins — making music as Todd0, hosting a live show with friends, sketching posters at 2am for the joy of it.</p>
 </div>
 
@@ -268,49 +300,224 @@
   </div>
   <div class="meta-cell reveal d3">
     <p class="meta-label">Disciplines</p>
-    <p class="meta-value">UX / Brand / Visual</p>
+    <p class="meta-value">Brand / UX / Visual</p>
   </div>
 </div>
 
-<!-- CHAPTER 01 -->
+<!-- CHAPTER 01: EXPERIENCE -->
 <div class="chapter-divider reveal">
   <div>
     <p class="chapter-label">Chapter 01</p>
-    <h2 class="chapter-heading">The Day Job</h2>
+    <h2 class="chapter-heading">Experience</h2>
   </div>
   <span class="chapter-num">01</span>
 </div>
 
-<div class="story">
-  <div class="story-media">
-    <img src="https://static.wixstatic.com/media/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png/v1/fit/w_1920,h_2347,q_95,enc_avif,quality_auto/eb26e1_3fba2ddd6e8045a0bf878dc358aa1bae~mv2.png" alt="Kevin's design work" />
+<div class="timeline">
+  <div class="timeline-item reveal">
+    <div class="timeline-date">Sep 2024 — Present</div>
+    <div class="timeline-content">
+      <p class="timeline-role">Brand &amp; Visual Designer</p>
+      <h3 class="timeline-company">Samsung <span>(via SCT)</span></h3>
+      <p class="timeline-desc">Designing brand-aligned visual assets and high-fidelity layouts across digital and print, translating Samsung's technical narratives into compelling stories. Building reusable templates and asset libraries that let teams produce on-brand collateral at scale.</p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Brand Systems</span>
+        <span class="timeline-tag">Campaign Design</span>
+        <span class="timeline-tag">Stakeholder Mgmt</span>
+      </div>
+    </div>
   </div>
-  <div class="story-copy">
-    <p class="story-num reveal">01 — What I Do</p>
-    <h2 class="story-heading reveal d1">From brand systems<br />to product interfaces.</h2>
-    <p class="story-body reveal d2">My work spans the spectrum — from polished brand identity systems for global tech companies to UX flows for internal tools that thousands of employees rely on every day.</p>
-    <p class="story-body reveal d2">I've been lucky to ship work alongside thoughtful teams at NASA, Samsung, Xbox, PlayStation, the NBA, the FDA, and the U.S. Army. The thread connecting them: design that respects the people on the other end.</p>
-    <div class="skill-list">
-      <div class="skill-item reveal">
-        <span class="skill-num">01</span>
-        <div class="skill-text">
-          <strong>Brand &amp; Identity</strong>
-          Logo systems, visual languages, brand guidelines, and the occasional rebrand.
-        </div>
+
+  <div class="timeline-item reveal d1">
+    <div class="timeline-date">Sep 2023 — Sep 2024</div>
+    <div class="timeline-content">
+      <p class="timeline-role">Brand &amp; Visual Designer</p>
+      <h3 class="timeline-company">NASA <span>(via SCT)</span></h3>
+      <p class="timeline-desc">Led visual design across digital and print for multiple NASA organizations. Translated complex scientific content into clear visuals — lifting engagement and content clarity by 30%. Built reusable visual systems that streamlined creative production agency-wide.</p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Data Viz</span>
+        <span class="timeline-tag">Brand Identity</span>
+        <span class="timeline-tag">UX/UI</span>
       </div>
-      <div class="skill-item reveal d1">
-        <span class="skill-num">02</span>
-        <div class="skill-text">
-          <strong>UX &amp; Product Design</strong>
-          User research, wireframes, prototypes, and shipped product interfaces.
-        </div>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-date">Jan 2023 — Sep 2023</div>
+    <div class="timeline-content">
+      <p class="timeline-role">Visual Designer</p>
+      <h3 class="timeline-company">Strategy Consulting Team</h3>
+      <p class="timeline-desc">Designed branded digital content and internal communication assets for cross-channel experiences. Produced presentation decks, marketing collateral, and event materials for high-stakes audience-facing initiatives.</p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Presentations</span>
+        <span class="timeline-tag">Event Design</span>
+        <span class="timeline-tag">Brand Strategy</span>
       </div>
-      <div class="skill-item reveal d2">
-        <span class="skill-num">03</span>
-        <div class="skill-text">
-          <strong>Visual &amp; Campaign Design</strong>
-          Marketing collateral, event graphics, presentations, and editorial work.
-        </div>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal d1">
+    <div class="timeline-date">Sep 2022 — Jan 2023</div>
+    <div class="timeline-content">
+      <p class="timeline-role">Graphic Designer</p>
+      <h3 class="timeline-company">System One</h3>
+      <p class="timeline-desc">Delivered digital and print design assets across diverse client brands and campaigns, executing to brand guidelines on tight production schedules.</p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Print</span>
+        <span class="timeline-tag">Digital</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-date">Oct 2019 — Sep 2022</div>
+    <div class="timeline-content">
+      <p class="timeline-role">Graphic Designer</p>
+      <h3 class="timeline-company">Gap Solutions <span>(U.S. Army DPRR / FDA)</span></h3>
+      <p class="timeline-desc">Award-winning brand and creative work for high-profile government clients. Designed sponsorship ads displayed at 57 military installations, led the FDA HR portal rebrand, and developed two viral graphics that produced 1.9M social reach with 167K+ impressions.</p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Government</span>
+        <span class="timeline-tag">Campaigns</span>
+        <span class="timeline-tag">Web Design</span>
+        <span class="timeline-tag">Social</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal d1">
+    <div class="timeline-date">Jan 2018 — Jan 2021</div>
+    <div class="timeline-content">
+      <p class="timeline-role">Digital Designer &amp; Content Specialist</p>
+      <h3 class="timeline-company">Outlogic <span>(formerly X-Mode)</span></h3>
+      <p class="timeline-desc">Drove a 52% lift in digital audience engagement through brand-forward content systems and visually compelling marketing assets. Hand-coded prototypes in HTML/CSS to bridge design and engineering handoff.</p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Brand</span>
+        <span class="timeline-tag">HTML/CSS</span>
+        <span class="timeline-tag">Content</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 02: AWARDS -->
+<div class="chapter-divider reveal">
+  <div>
+    <p class="chapter-label">Chapter 02</p>
+    <h2 class="chapter-heading">Awards &amp;<br />Recognition</h2>
+  </div>
+  <span class="chapter-num">02</span>
+</div>
+
+<div class="awards-section">
+  <div class="awards-grid">
+    <div class="award-card reveal">
+      <span class="award-tier platinum">Platinum</span>
+      <h3 class="award-name">Best Website Design</h3>
+      <p class="award-org">2021 AVA Digital Awards</p>
+      <p class="award-desc">Recognized for outstanding website design work for the U.S. Army Resilience Directorate.</p>
+    </div>
+    <div class="award-card reveal d1">
+      <span class="award-tier gold">Gold</span>
+      <h3 class="award-name">Twitter / Social Media</h3>
+      <p class="award-org">2021 AVA Digital Awards</p>
+      <p class="award-desc">Awarded for social media design driving viral campaign reach.</p>
+    </div>
+    <div class="award-card reveal d2">
+      <span class="award-tier honor">Honorable Mention</span>
+      <h3 class="award-name">Newsletter Design</h3>
+      <p class="award-org">2021 AVA Digital Awards</p>
+      <p class="award-desc">Newsletter design recognized for clarity and brand consistency.</p>
+    </div>
+
+    <div class="award-card reveal">
+      <span class="award-tier platinum">Platinum</span>
+      <h3 class="award-name">Best Website</h3>
+      <p class="award-org">2021 MARCOM Awards</p>
+      <p class="award-desc">International recognition for excellence in web design and user experience.</p>
+    </div>
+    <div class="award-card reveal d1">
+      <span class="award-tier gold">Gold</span>
+      <h3 class="award-name">Newsletter Excellence</h3>
+      <p class="award-org">2021 MARCOM Awards</p>
+      <p class="award-desc">Gold honors for the Directorate's monthly newsletter — drove 150% subscriber growth.</p>
+    </div>
+    <div class="award-card reveal d2">
+      <span class="award-tier honor">Honorable Mention</span>
+      <h3 class="award-name">Social Media Strategy</h3>
+      <p class="award-org">2021 MARCOM Awards</p>
+      <p class="award-desc">Honored for sustained engagement and visual storytelling on social.</p>
+    </div>
+
+    <div class="award-card reveal">
+      <span class="award-tier">Cert. of Achievement</span>
+      <h3 class="award-name">President's Recognition</h3>
+      <p class="award-org">Gap Solutions · 2020 — 2022</p>
+      <p class="award-desc">Three Certificates of Achievement awarded by the company president for exceptional creative work.</p>
+    </div>
+    <div class="award-card reveal d1">
+      <span class="award-tier">Viral Reach</span>
+      <h3 class="award-name">1.9M Social Reach</h3>
+      <p class="award-org">U.S. Army DPRR Campaign</p>
+      <p class="award-desc">Two viral graphics drove the Directorate's largest social media reach with 167K+ impressions.</p>
+    </div>
+    <div class="award-card reveal d2">
+      <span class="award-tier">Engagement</span>
+      <h3 class="award-name">52% Engagement Lift</h3>
+      <p class="award-org">Outlogic · 2018 — 2021</p>
+      <p class="award-desc">Brand-forward content systems and marketing assets drove sustained digital audience growth.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 03: TOOLS & EDUCATION -->
+<div class="chapter-divider reveal">
+  <div>
+    <p class="chapter-label">Chapter 03</p>
+    <h2 class="chapter-heading">Tools &amp; Training</h2>
+  </div>
+  <span class="chapter-num">03</span>
+</div>
+
+<div class="tools-section">
+  <div class="tools-grid">
+    <div class="tools-block reveal">
+      <h3 class="tools-block-title">Design</h3>
+      <div class="tools-list">
+        <span class="tool-chip">Figma</span>
+        <span class="tool-chip">Photoshop</span>
+        <span class="tool-chip">Illustrator</span>
+        <span class="tool-chip">InDesign</span>
+        <span class="tool-chip">After Effects</span>
+        <span class="tool-chip">Premiere</span>
+      </div>
+    </div>
+    <div class="tools-block reveal d1">
+      <h3 class="tools-block-title">Web &amp; Code</h3>
+      <div class="tools-list">
+        <span class="tool-chip">HTML</span>
+        <span class="tool-chip">CSS</span>
+        <span class="tool-chip">JavaScript</span>
+        <span class="tool-chip">Webflow</span>
+        <span class="tool-chip">Wix</span>
+        <span class="tool-chip">GitHub Pages</span>
+      </div>
+    </div>
+    <div class="tools-block reveal">
+      <h3 class="tools-block-title">Disciplines</h3>
+      <div class="tools-list">
+        <span class="tool-chip">Brand Identity</span>
+        <span class="tool-chip">UX / UI</span>
+        <span class="tool-chip">Design Systems</span>
+        <span class="tool-chip">Data Viz</span>
+        <span class="tool-chip">Print</span>
+        <span class="tool-chip">Motion</span>
+      </div>
+    </div>
+    <div class="tools-block reveal d1">
+      <h3 class="tools-block-title">Education</h3>
+      <div class="tools-list" style="flex-direction: column; align-items: flex-start; gap: 0.85rem;">
+        <span style="font-size: 0.95rem; font-weight: 600;">Arizona State University</span>
+        <span style="font-size: 0.85rem; color: var(--muted); font-family: var(--font-mono); letter-spacing: 0.05em;">B.A. Mass Communication / Media Studies</span>
       </div>
     </div>
   </div>
@@ -330,16 +537,15 @@
   </div>
 </div>
 
-<!-- CHAPTER 02 -->
+<!-- CHAPTER 04: SIDE PASSIONS -->
 <div class="chapter-divider reveal">
   <div>
-    <p class="chapter-label">Chapter 02</p>
+    <p class="chapter-label">Chapter 04</p>
     <h2 class="chapter-heading">Side Passions</h2>
   </div>
-  <span class="chapter-num">02</span>
+  <span class="chapter-num">04</span>
 </div>
 
-<!-- SIDE PASSIONS GRID -->
 <div class="passions-grid">
   <a href="music.html" class="passion-card reveal">
     <div class="passion-icon">
@@ -403,7 +609,7 @@
   let cx = window.innerWidth/2, cy = window.innerHeight/2, rx = cx, ry = cy;
   document.addEventListener('mousemove', e => { cx = e.clientX; cy = e.clientY; cursor.style.left = cx+'px'; cursor.style.top = cy+'px'; });
   (function loop() { rx += (cx-rx)*0.12; ry += (cy-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(loop); })();
-  document.querySelectorAll('a, .story-media, .client-logo, .passion-card').forEach(el => {
+  document.querySelectorAll('a, .client-logo, .passion-card, .award-card, .tool-chip').forEach(el => {
     el.addEventListener('mouseenter', () => { cursor.classList.add('hovering'); ring.classList.add('hovering'); });
     el.addEventListener('mouseleave', () => { cursor.classList.remove('hovering'); ring.classList.remove('hovering'); });
   });
@@ -417,7 +623,6 @@
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  // Mobile nav toggle
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
   if (navToggle && navLinks) {
