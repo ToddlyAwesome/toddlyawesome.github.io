@@ -187,6 +187,24 @@
   .nba-stripe-red { flex: 1; background: var(--nba-red); }
   .nba-stripe-blue { flex: 1; background: var(--nba-blue); }
 
+  /* SONICS FEATURE SECTION */
+  .sonics-stripe { height: 4px; display: flex; }
+  .sonics-stripe-green { flex: 1; background: #075F38; }
+  .sonics-stripe-yellow { flex: 1; background: #FEFF32; }
+
+  .gallery-2 { display: grid; grid-template-columns: repeat(2, 1fr); border-bottom: 1px solid var(--border); background: var(--nba-soft); }
+  .gallery-2 .gallery-item { overflow: hidden; border-right: 1px solid var(--border); padding: 2rem; display: flex; align-items: center; justify-content: center; }
+  .gallery-2 .gallery-item:last-child { border-right: none; }
+  .gallery-2 .gallery-item img { max-width: 100%; height: auto; display: block; transition: transform 0.4s ease; }
+  .gallery-2 .gallery-item:hover img { transform: scale(1.03); }
+
+  .pdf-cta { background: var(--nba-dark); padding: 4.5rem 4rem; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .pdf-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 3rem; max-width: 1400px; margin: 0 auto; flex-wrap: wrap; }
+  .pdf-cta-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #FEFF32; margin-bottom: 0.75rem; }
+  .pdf-cta-title { font-size: clamp(1.15rem, 1.7vw, 1.5rem); font-weight: 500; line-height: 1.4; color: #fff; letter-spacing: -0.01em; max-width: 640px; }
+  .pdf-cta-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 1.1rem 1.9rem; background: #075F38; color: #fff; text-decoration: none; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 2px; transition: background 0.3s, transform 0.3s; white-space: nowrap; border: 1px solid rgba(254,255,50,0.3); }
+  .pdf-cta-btn:hover { background: #FEFF32; color: #075F38; transform: translateY(-2px); }
+
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .hero-content, .intro, .chapter-divider, .callout { padding-left: 1.5rem; padding-right: 1.5rem; }
@@ -201,6 +219,10 @@
     .story-copy { padding: 3rem 1.5rem; }
     .gallery-3 { grid-template-columns: 1fr; }
     .gallery-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .gallery-2 { grid-template-columns: 1fr; }
+    .gallery-2 .gallery-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .pdf-cta { padding: 3rem 1.5rem; }
+    .pdf-cta-inner { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
     .project-nav { grid-template-columns: 1fr; }
     .project-nav-item { border-right: none; border-bottom: 1px solid var(--border); }
     .project-nav-item:last-child { text-align: left; }
@@ -413,6 +435,81 @@
 
 <div class="img-full reveal">
   <img src="https://static.wixstatic.com/media/eb26e1_009adca8cf4c47f48e3f3b7850000137~mv2.png/v1/fit/w_1920,h_1081,q_90,enc_avif,quality_auto/eb26e1_009adca8cf4c47f48e3f3b7850000137~mv2.png" alt="Jersey Detail" />
+</div>
+
+<!-- SONICS STRIPE -->
+<div class="sonics-stripe">
+  <div class="sonics-stripe-green"></div>
+  <div class="sonics-stripe-yellow"></div>
+</div>
+
+<!-- CHAPTER 04 - FEATURED CASE STUDY: SEATTLE SUPERSONICS -->
+<div class="chapter-divider reveal">
+  <div>
+    <p class="chapter-label">Featured Case Study</p>
+    <h2 class="chapter-heading">Seattle Supersonics</h2>
+  </div>
+  <span class="chapter-num">04</span>
+</div>
+
+<div class="story flip">
+  <div class="story-media">
+    <img src="images/sonics/Sonics-Rebrand_guide.png" alt="Seattle Supersonics Brand Guide Cover" />
+  </div>
+  <div class="story-copy">
+    <p class="story-num reveal">04, Expansion / Rebrand Guide</p>
+    <h2 class="story-heading reveal d1">Bringing the<br />Sonics home.</h2>
+    <p class="story-body reveal d2">Seattle lost the Sonics in 2008. For a franchise that defined an era of the NBA, they've spent more than a decade as an idea, a green-and-gold ghost in every Return to Seattle conversation. This is a full brand guide built for their imagined 2028 expansion return.</p>
+    <p class="story-body reveal d2">The identity fuses three Seattle icons, the supersonic jet, the Space Needle, and the basketball, into a single mark that <em>moves even when it's standing still</em>. Every application feels fast, green, and unmistakably Seattle.</p>
+  </div>
+</div>
+
+<!-- The Brand spread -->
+<div class="img-full reveal">
+  <img src="images/sonics/Sonics-Rebrand_guide-01.png" alt="Seattle Supersonics — The Brand" />
+</div>
+
+<!-- 2-up: Logo System + Logo System Pt 2 -->
+<div class="gallery-2">
+  <div class="gallery-item reveal">
+    <img src="images/sonics/Sonics-Rebrand_guide-02.png" alt="Sonics Logo System" />
+  </div>
+  <div class="gallery-item reveal d1">
+    <img src="images/sonics/Sonics-Rebrand_guide-03.png" alt="Sonics Logo System Pt 2" />
+  </div>
+</div>
+
+<!-- 2-up: Team Colors + Typography -->
+<div class="gallery-2">
+  <div class="gallery-item reveal">
+    <img src="images/sonics/Sonics-Rebrand_guide-04.png" alt="Sonics Team Colors" />
+  </div>
+  <div class="gallery-item reveal d1">
+    <img src="images/sonics/Sonics-Rebrand_guide-05.png" alt="Sonics Typography" />
+  </div>
+</div>
+
+<!-- Uniforms full width -->
+<div class="img-full reveal">
+  <img src="images/sonics/Sonics-Rebrand_guide-06.png" alt="Sonics Uniforms" />
+</div>
+
+<!-- Mockups full width -->
+<div class="img-full reveal">
+  <img src="images/sonics/Sonics-Rebrand_guide-07.png" alt="Sonics Uniform Mockups" />
+</div>
+
+<!-- PDF Download CTA -->
+<div class="pdf-cta reveal">
+  <div class="pdf-cta-inner">
+    <div>
+      <p class="pdf-cta-label">Full Brand Guide</p>
+      <h3 class="pdf-cta-title">Download the complete Seattle Supersonics rebrand guide.</h3>
+    </div>
+    <a href="images/sonics/Sonics-Rebrand_guide-compressed.pdf" class="pdf-cta-btn" target="_blank" rel="noopener">
+      Download PDF ↓
+    </a>
+  </div>
 </div>
 
 <!-- CALLOUT -->
