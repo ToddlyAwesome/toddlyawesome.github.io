@@ -256,6 +256,12 @@
   .cta-btn:hover{background:var(--ps-blue-bright);transform:translateY(-3px)}
   .cta-btn:focus-visible{outline:3px solid #fff;outline-offset:4px}
   @media (max-width:768px){.cta{padding:6rem 1.5rem}}
+
+  .story-media.app{display:flex;align-items:center;justify-content:center;padding:3rem 1rem;height:auto;min-height:940px}
+  .app-frame{width:390px;max-width:100%;height:min(800px,85vh);min-height:640px;border:8px solid #000;border-radius:38px;background:#fffbf1;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .cta-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .cta-btn.alt{background:transparent;color:#fff;border:2px solid #fffbf1}
+  .cta-btn.alt:hover{background:#fffbf1;color:var(--ps-blue)}
 </style>
 </head>
 <body>
@@ -294,7 +300,7 @@
 <div class="meta-row">
   <div class="meta-cell reveal"><p class="meta-label">Project</p><p class="meta-value">HEKKO Coffee</p></div>
   <div class="meta-cell reveal d1"><p class="meta-label">Role</p><p class="meta-value">Brand &amp; Visual Designer</p></div>
-  <div class="meta-cell reveal d2"><p class="meta-label">Scope</p><p class="meta-value">Identity / Packaging / Web</p></div>
+  <div class="meta-cell reveal d2"><p class="meta-label">Scope</p><p class="meta-value">Identity / Packaging / Web / App</p></div>
   <div class="meta-cell reveal d3"><p class="meta-label">Tools</p><p class="meta-value">Illustrator / HTML + CSS</p></div>
 </div>
 
@@ -346,18 +352,35 @@
 <div class="img-full reveal"><img src="images/hekko/collage.jpg" alt="Collage of HEKKO applications: sign, cup, shirt, bag, and menu" /></div>
 <div class="img-full reveal"><img src="images/hekko/bags-beans.jpg" alt="HEKKO pouches arranged around roasted coffee beans" /></div>
 
+<div class="chapter-divider reveal"><div><p class="chapter-label">Chapter 04</p><h2 class="chapter-heading">The<br />App</h2></div><span class="chapter-num">04</span></div>
+<div class="story">
+  <div class="story-media dark app"><iframe class="app-frame" src="hekko-app/" title="HEKKO Coffee order-ahead app prototype" loading="lazy"></iframe></div>
+  <div class="story-copy">
+    <p class="story-num reveal">04, Companion App</p>
+    <h2 class="story-heading reveal d1">Order ahead,<br />skip the line.</h2>
+    <p class="story-body reveal d2">A prototype for ordering ahead and picking up in store. Tap through it here: choose a drink, pick a size, set a pickup time, and get an order number to show at the counter.</p>
+    <div class="process-list">
+      <div class="process-item reveal"><span class="process-num">01</span><div class="process-text"><strong>Menu</strong>The drink photos and real prices, split into Coffee, Tea and Pastries.</div></div>
+      <div class="process-item reveal d1"><span class="process-num">02</span><div class="process-text"><strong>Customize</strong>Pick a size and add it to the order.</div></div>
+      <div class="process-item reveal d2"><span class="process-num">03</span><div class="process-text"><strong>Pickup Time</strong>ASAP, 15, 30 or 45 minutes.</div></div>
+      <div class="process-item reveal d3"><span class="process-num">04</span><div class="process-text"><strong>Track</strong>Follow the order from received to brewing to ready.</div></div>
+    </div>
+    <p class="story-body reveal d3"><a class="proto-cta" href="hekko-app/" target="_blank" rel="noopener">Open full screen</a></p>
+  </div>
+</div>
+
 <div class="callout">
   <img src="images/hekko/mark.svg" alt="" class="callout-ps-bg" />
   <p class="callout-label reveal">Takeaway</p>
   <p class="callout-quote reveal d1">A strong identity is a <em>system</em>, not a single logo: a pattern you can spot from across the street, a mark that holds up small, and a palette that never needs explaining.</p>
 </div>
 
-<div class="chapter-divider reveal"><div><p class="chapter-label">Chapter 04</p><h2 class="chapter-heading">The Live<br />Site</h2></div><span class="chapter-num">04</span></div>
+<div class="chapter-divider reveal"><div><p class="chapter-label">Chapter 05</p><h2 class="chapter-heading">The Live<br />Site</h2></div><span class="chapter-num">05</span></div>
 <section class="cta">
   <img class="cta-logo reveal" src="images/hekko/wordmark.svg" alt="" />
   <h2 class="cta-heading reveal d1">See it live.</h2>
-  <p class="cta-body reveal d2">The brand kit, built out as a working coffee website: menu, shop, and story.</p>
-  <a class="cta-btn reveal d3" href="hekko/" target="_blank" rel="noopener">View the live website</a>
+  <p class="cta-body reveal d2">The brand kit, built out as a working coffee website and an order-ahead app prototype.</p>
+  <div class="cta-row reveal d3"><a class="cta-btn" href="hekko/" target="_blank" rel="noopener">View the live website</a><a class="cta-btn alt" href="hekko-app/" target="_blank" rel="noopener">Try the app prototype</a></div>
 </section>
 
 <div class="project-nav">
