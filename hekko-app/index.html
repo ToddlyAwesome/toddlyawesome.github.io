@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HEKKO Coffee App | Order Ahead Prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Nunito+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#2e14bd;--cream:#fffbf1;--ink:#14102e;--lav:#8b78ff;--display:'Archivo Black','AM Augusta',Impact,sans-serif;--sans:'Avenir LT Pro','Avenir Next',Avenir,'Nunito Sans',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+body{font-family:var(--sans);background:#0d0826;color:var(--ink);min-height:100dvh;display:grid;place-items:center;padding:1rem}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+:focus-visible{outline:3px solid var(--lav);outline-offset:2px}
+.phone{position:relative;width:min(390px,100%);height:min(844px,calc(100dvh - 2rem));background:var(--cream);border-radius:38px;overflow:hidden;border:8px solid #000;box-shadow:0 30px 80px rgba(0,0,0,.6);display:flex;flex-direction:column}
+.screens{flex:1;position:relative;overflow:hidden}
+.screen{position:absolute;inset:0;overflow-y:auto;padding-bottom:1.5rem;display:none}
+.screen.on{display:block}
+.top{background:var(--blue);color:var(--cream);padding:1.1rem 1.2rem .9rem}
+.top img{height:26px;filter:brightness(0) invert(1);display:block}
+.loc{margin-top:.7rem;font-size:.8rem;font-weight:600;opacity:.85}
+.hero{position:relative;height:150px;background:#000 url(../images/hekko/cup.jpg) center 40%/cover}
+.hero p{position:absolute;left:0;right:0;bottom:0;background:var(--blue);color:var(--cream);padding:.5rem 1.2rem;font-size:.8rem;font-weight:800;letter-spacing:.04em}
+[role=tablist]{display:flex;gap:.5rem;padding:1rem 1.2rem .5rem}
+[role=tab]{padding:.45rem .95rem;border:2px solid var(--blue);font-weight:800;font-size:.85rem;color:var(--blue)}
+[role=tab][aria-selected=true]{background:var(--blue);color:var(--cream)}
+.item{display:flex;align-items:center;gap:.9rem;width:100%;text-align:left;padding:.8rem 1.2rem;border-bottom:2px solid rgba(46,20,189,.18)}
+.thumb{flex:none;width:54px;height:54px;object-fit:contain}
+.sph{display:block;height:130px;margin:0 auto .6rem;object-fit:contain}
+.bean{flex:none;margin:6px;width:42px;height:42px;border-radius:50%;background:radial-gradient(circle,var(--blue) 0 52%,transparent 54%),repeating-linear-gradient(0deg,var(--blue) 0 3px,transparent 3px 6px)}
+.item b{display:block;font-size:1rem}.item small{opacity:.7}
+.item .plus{margin-left:auto;font-weight:800;color:var(--blue);font-size:1.5rem;line-height:1}
+h2{font-family:var(--display);font-weight:400;font-size:1.9rem;color:var(--blue);padding:1.2rem 1.2rem .5rem;line-height:1}
+.line{display:flex;align-items:center;gap:.8rem;padding:.8rem 1.2rem;border-bottom:2px solid rgba(46,20,189,.18)}
+.line div:first-child{flex:1}.line small{display:block;opacity:.7}
+.qty{display:flex;align-items:center;gap:.6rem;font-weight:800}
+.qty button{width:30px;height:30px;border:2px solid var(--blue);color:var(--blue);font-weight:800}
+.chips{display:flex;gap:.5rem;flex-wrap:wrap;padding:.4rem 1.2rem 1rem}
+.chip{padding:.5rem .9rem;border:2px solid var(--blue);color:var(--blue);font-weight:800;font-size:.85rem}
+.chip[aria-pressed=true]{background:var(--blue);color:var(--cream)}
+.lbl{padding:1rem 1.2rem 0;font-weight:800;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em}
+.cta{display:block;width:calc(100% - 2.4rem);margin:1rem 1.2rem 0;padding:1rem;background:var(--blue);color:var(--cream);font-weight:800;font-size:1rem;text-align:center}
+.cta:disabled{opacity:.4;cursor:not-allowed}
+.empty{padding:2.5rem 1.2rem;text-align:center;opacity:.75}
+.tot{display:flex;justify-content:space-between;padding:1rem 1.2rem 0;font-weight:800}
+.note{padding:.6rem 1.2rem;font-size:.75rem;opacity:.65}
+.ticket{margin:1rem 1.2rem;background:var(--blue);color:var(--cream);padding:1.4rem;text-align:center;background-image:repeating-linear-gradient(90deg,rgba(255,251,241,.12) 0 3px,transparent 3px 8px)}
+.ticket.ready{background-color:#0b7a4b}
+.ticket small{font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:.75rem}
+.ticket .num{font-family:var(--display);font-size:3.6rem;line-height:1;margin:.4rem 0}
+.steps{list-style:none;padding:0 1.2rem}
+.steps li{display:flex;align-items:center;gap:.8rem;padding:.7rem 0;opacity:.4;font-weight:600}
+.steps li::before{content:"";width:18px;height:18px;border-radius:50%;border:3px solid var(--blue)}
+.steps li.done,.steps li.now{opacity:1}.steps li.done::before{background:var(--blue)}
+.steps li.now::before{background:var(--lav);animation:pulse 1s infinite alternate}
+@keyframes pulse{to{transform:scale(1.25)}}
+@media (prefers-reduced-motion:reduce){.steps li.now::before{animation:none}}
+.tabbar{display:flex;border-top:3px solid var(--blue);background:var(--cream)}
+.tabbar button{flex:1;padding:.8rem 0 .9rem;font-weight:800;font-size:.8rem;color:var(--ink);opacity:.55;position:relative}
+.tabbar button[aria-current=page]{opacity:1;color:var(--blue)}
+.badge{position:absolute;top:.4rem;margin-left:.35rem;background:var(--blue);color:var(--cream);border-radius:9px;min-width:18px;padding:0 5px;font-size:.7rem}
+.sheet{position:absolute;inset:0;background:rgba(13,8,38,.6);display:none;align-items:flex-end;z-index:5}
+.sheet.on{display:flex}
+.sheet>div{background:var(--cream);width:100%;padding:1.4rem 1.2rem 1.6rem;border-top:6px solid var(--blue)}
+.sheet h3{font-family:var(--display);font-weight:400;font-size:1.7rem;color:var(--blue)}
+.sheet .x{float:right;font-size:1.6rem;line-height:1;color:var(--blue);font-weight:800}
+@media (max-width:500px){body{padding:0}.phone{height:100dvh;border:0;border-radius:0}}
+</style>
+</head>
+<body>
+<div class="phone">
+<div class="screens">
+ <section class="screen on" id="s-menu" aria-label="Menu">
+  <div class="top"><img src="../images/hekko/wordmark.svg" alt="HEKKO Coffee"><p class="loc">Pickup at HEKKO Coffee, Los Angeles</p></div>
+  <div class="hero"><p>HAPPY HOUR MON-WED, 9AM-11AM</p></div>
+  <div role="tablist" id="tabs" aria-label="Categories"></div>
+  <div id="list"></div>
+ </section>
+ <section class="screen" id="s-cart" aria-label="Your order">
+  <h2>Your order</h2><div id="lines"></div>
+  <p class="lbl" id="pl">Pickup time</p><div class="chips" id="times" role="group" aria-labelledby="pl"></div>
+  <div class="tot"><span>Total</span><span id="total">$0.00</span></div>
+  <button class="cta" id="place" disabled>Place order</button>
+  <p class="note">Prototype only. No payment is taken.</p>
+ </section>
+ <section class="screen" id="s-status" aria-label="Pickup status">
+  <h2>Pickup</h2>
+  <div id="stat" aria-live="polite"></div>
+ </section>
+</div>
+<nav class="tabbar" aria-label="App">
+ <button data-go="s-menu" aria-current="page">Menu</button>
+ <button data-go="s-cart">Order<span class="badge" id="badge" hidden>0</span></button>
+ <button data-go="s-status">Pickup</button>
+</nav>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="st"><div>
+ <button class="x" id="close" aria-label="Close">&times;</button>
+ <img class="sph" id="sph" alt="" hidden><h3 id="st"></h3><p class="lbl">Size</p><div class="chips" id="sizes" role="group" aria-label="Size"></div>
+ <button class="cta" id="add" style="margin:0;width:100%"></button>
+</div></div>
+</div>
+<script>
+const MENU={Coffee:[['Espresso',3,4],['Americano',4,5.5],['Cappuccino',4,5.5],['Latte',5,6.5],['Flat White',3,4]],Tea:[['Matcha',4,5.5],['Green',4,5.5],['Black',4,5.5]],Pastries:[['Croissant',4],['Cinnamon roll',4],['Cake slice',4]]};
+const IMG={Espresso:'espresso',Cappuccino:'cappuccino',Latte:'latte','Flat White':'flat-white',Matcha:'matcha'};
+const pic=n=>`../images/hekko/drinks/${IMG[n]}.png`;
+const TIMES=['ASAP (10 min)','15 min','30 min','45 min'];
+const $=s=>document.querySelector(s),money=n=>'$'+n.toFixed(2);
+let cart=[],cat='Coffee',time=0,cur=null,size=0,order=null,timers=[];
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===id));
+ document.querySelectorAll('.tabbar button').forEach(b=>b.dataset.go===id?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current'))}
+document.querySelectorAll('.tabbar button').forEach(b=>b.onclick=()=>go(b.dataset.go));
+function tabs(){const t=$('#tabs');t.innerHTML='';Object.keys(MENU).forEach(c=>{const b=document.createElement('button');b.role='tab';b.textContent=c;b.setAttribute('aria-selected',c===cat);b.onclick=()=>{cat=c;tabs();list()};t.append(b)})}
+function list(){const l=$('#list');l.innerHTML='';MENU[cat].forEach(it=>{const b=document.createElement('button');b.className='item';
+ b.innerHTML=`${IMG[it[0]]?`<img class="thumb" src="${pic(it[0])}" alt="">`:'<span class="bean"></span>'}<span><b>${it[0]}</b><small>${it.length>2?'From '+money(it[1]):money(it[1])}</small></span><span class="plus" aria-hidden="true">+</span>`;
+ b.setAttribute('aria-label','Customize '+it[0]);b.onclick=()=>open(it);l.append(b)})}
+function open(it){cur=it;size=0;$('#st').textContent=it[0];const ph=$('#sph');ph.hidden=!IMG[it[0]];if(IMG[it[0]])ph.src=pic(it[0]);$('#sheet').classList.add('on');drawSizes();$('#close').focus()}
+function sizes(){return cur.length>2?[['M',cur[1]],['L',cur[2]]]:[['Regular',cur[1]]]}
+function drawSizes(){const s=$('#sizes');s.innerHTML='';sizes().forEach((z,i)=>{const b=document.createElement('button');b.className='chip';b.textContent=z[0]+' '+money(z[1]);b.setAttribute('aria-pressed',i===size);b.onclick=()=>{size=i;drawSizes()};s.append(b)});$('#add').textContent='Add to order, '+money(sizes()[size][1])}
+$('#close').onclick=()=>$('#sheet').classList.remove('on');
+$('#add').onclick=()=>{const z=sizes()[size],k=cur[0]+z[0],f=cart.find(c=>c.k===k);f?f.q++:cart.push({k,n:cur[0],z:z[0],p:z[1],q:1});$('#sheet').classList.remove('on');draw()};
+function draw(){const n=cart.reduce((a,c)=>a+c.q,0),b=$('#badge');b.hidden=!n;b.textContent=n;
+ const L=$('#lines');L.innerHTML=cart.length?'':'<p class="empty">Your order is empty. Add a drink from the menu.</p>';
+ cart.forEach(c=>{const d=document.createElement('div');d.className='line';d.innerHTML=`<div><b>${c.n}</b><small>${c.z} · ${money(c.p)}</small></div><div class="qty"><button aria-label="Remove one ${c.n}">-</button><span>${c.q}</span><button aria-label="Add one ${c.n}">+</button></div>`;
+  const [m,p]=d.querySelectorAll('button');m.onclick=()=>{c.q--;cart=cart.filter(x=>x.q>0);draw()};p.onclick=()=>{c.q++;draw()};L.append(d)});
+ $('#total').textContent=money(cart.reduce((a,c)=>a+c.p*c.q,0));$('#place').disabled=!n;
+ const t=$('#times');t.innerHTML='';TIMES.forEach((x,i)=>{const b=document.createElement('button');b.className='chip';b.textContent=x;b.setAttribute('aria-pressed',i===time);b.onclick=()=>{time=i;draw()};t.append(b)})}
+function stat(step){const s=$('#stat');
+ if(!order){s.innerHTML='<p class="empty">No active order yet. Pick something from the menu.</p>';return}
+ const names=['Order received','Brewing','Ready for pickup'];
+ s.innerHTML=`<div class="ticket ${step===2?'ready':''}"><small>${step===2?'Ready at the counter':'Pickup '+TIMES[order.t]}</small><div class="num">${order.id}</div><small>Show this number at the counter</small></div>
+ <ul class="steps">${names.map((n,i)=>`<li class="${i<step||step===2?'done':i===step?'now':''}">${n}</li>`).join('')}</ul>
+ ${step===2?'<button class="cta" id="again">Start a new order</button>':''}`;
+ const a=$('#again');if(a)a.onclick=()=>{order=null;stat();go('s-menu')}}
+$('#place').onclick=()=>{timers.forEach(clearTimeout);order={id:'H-'+(100+Math.floor(Math.random()*900)),t:time};cart=[];draw();stat(0);go('s-status');
+ timers=[setTimeout(()=>stat(1),3000),setTimeout(()=>stat(2),8000)]};
+tabs();list();draw();stat();
+</script>
+</body>
+</html>
