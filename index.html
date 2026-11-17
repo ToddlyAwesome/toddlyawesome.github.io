@@ -885,26 +885,6 @@
     .footer-right { align-items: flex-start; }
   }
 
-  /* Y2K ANIMATION BLOCK */
-  .y2k-outer {
-    width: 100%;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    overflow: hidden;
-    position: relative;
-    background: #141115;
-  }
-  .y2k-frame {
-    display: block;
-    width: 100%;
-    height: clamp(420px, 65vh, 720px);
-    border: none;
-  }
-
-  @media (max-width: 768px) {
-    .y2k-frame { height: 50vh; min-height: 360px; }
-  }
-
   /* MOBILE NAV FIX */
   .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 201; position: relative; }
   .nav-toggle span { display: block; width: 22px; height: 2px; background: #fff; margin: 4px 0; transition: transform 0.3s, opacity 0.3s; }
@@ -980,18 +960,7 @@
   </div>
 </section>
 
-<!-- Y2K ICON PARADE -->
 <div id="work"></div>
-
-<div class="y2k-outer">
-  <iframe
-    class="y2k-frame"
-    src="y2k-animation.html"
-    title="Y2K Icon Parade animation"
-    loading="lazy"
-    sandbox="allow-scripts"
-  ></iframe>
-</div>
 
 <!-- PROJECTS GRID -->
 <div class="section-header">
@@ -1249,5 +1218,6 @@
 
 
 </script>
+<script src="hero-animation.js" defer></script>
 </body>
 </html>
